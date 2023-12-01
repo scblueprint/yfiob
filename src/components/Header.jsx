@@ -1,4 +1,4 @@
-// Header.js
+// Header.jsx
 import React from 'react';
 import YFIOB_logo from './YFIOBlogo.svg';
 import './Header.css'; 

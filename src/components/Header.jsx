@@ -22,7 +22,7 @@ function Header() {
         </div>
         <body>
           <div className="whiteSquare">
-            <p>Let us help find how your interests can relate to different fields of work! Take this quiz to help give you ideas on what your career search can look like.</p>
+            <p className="text">Let us help find how your interests can relate to different fields of work! Take this quiz to help give you ideas on what your career search can look like.</p>
           </div>
         </body>
       </Router>

@@ -29,23 +29,5 @@ function Header() {
     </header>
   );
 }
-/*
-function Header() {
-  return (
-    <header className="header">
-      <nav className="navbar">
-        <div className="branding">
-          <img className="yfioblogo" src="image.png" alt="YFIOB Logo" /> 
-        </div>
-        <button id="takeQuiz">Take Quiz</button>
-        <button>Explore Careers</button>
-      </nav>
-      <div className="authentication">
-        <button>Sign In</button>
-        <button>Admin</button>
-      </div>
-    </header>
-  );
-}
-*/
+
 export default Header;

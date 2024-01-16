@@ -1,0 +1,49 @@
+body {
+  background-color: #e9e9e9;
+}
+
+.wrapper {
+  /* background-color: #e9e9e9; */
+  display: flex;
+  flex-direction: column;
+}
+
+.textHeader {
+  text-align: center;
+  font-family: Lazo, sans-serif;
+  margin: 3rem auto 2rem auto;
+}
+
+.questionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  margin: 0 50px;
+  padding: 24px 32px;
+  border-radius: 20px;
+}
+
+.questionGrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.questionLinks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 13px;
+}
+
+.questionNumSquare {
+  text-align: center;
+  font-family: Lazo, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  padding: 4px 11px;
+  background-color: #c5c5c5;
+  border-radius: 8.4px;
+}

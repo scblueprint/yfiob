@@ -1,9 +1,18 @@
 import React from "react";
 import styles from "./QuestionPage.module.css";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft, faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons'
+
+
 const questionArray = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 ];
+
+const answerArray = [
+  "strongly agree", "agree", "neutral", "disagree", "strongly disagree"
+]
+
 
 export default function QuestionPage() {
   return (
@@ -12,7 +21,7 @@ export default function QuestionPage() {
 
       <div className={styles.questionWrapper}>
         <div className={styles.questionGrid}>
-          <p>(Left Arrow Here)</p>
+        <FontAwesomeIcon icon={faChevronLeft}/>
 
           <div className={styles.questionLinks}>
             {questionArray.map((value) => {
@@ -20,13 +29,28 @@ export default function QuestionPage() {
             })}
           </div>
 
-          <p>(Right Arrow Here)</p>
+          <FontAwesomeIcon icon={faChevronRight}/>
         </div>
 
         <p className={styles.textHeader}>
           Don't worry about time, money, training, or education. Just think do
           you enjoy it?
         </p>
+      
+        <p className={styles.questionDisplay}>
+          I like to build cupboards.
+        </p>
+
+        <div className={styles.responseRow}>
+          {answerArray.map((value) => {
+            return <button className={styles.answerResponseSquare}>{value}</button>
+          })}
+        </div>
+
+      <div className={styles.arrowRow}>
+        <FontAwesomeIcon className={styles.leftArrow} icon={faArrowLeft}/>
+      </div>
+
       </div>
     </div>
   );

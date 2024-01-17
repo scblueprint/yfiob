@@ -50,25 +50,25 @@ body {
 
 .questionDisplay {
   /* padding: top px right bottom left; */
-  padding: 61px 310px 61px 310px;
-  background-color: #C5C5C5;
-  margin-bottom: 29px;
   text-align: center;
+  background-color: #c5c5c5;
+  margin-bottom: 1.81rem;
+  padding: 3.81rem 19.37rem;
   max-width: 51.8rem;
-  border-radius: 20px;
+  border-radius: 1.25rem;
 }
 
 .responseRow {
   display: inline-flex;
   justify-content: center;
-  gap: 11px;
-  margin-bottom: 32px; /* change later */
+  gap: 0.7rem;
+  margin-bottom: 2.56rem; /* change later */
 }
 
 .answerResponseSquare {
   background-color: #C5C5C5;
   border-radius: 20px;
-  padding: 17px 35px 17px 35px;
+  padding: 1.06rem 2.18rem;
   border: none;
 }
 

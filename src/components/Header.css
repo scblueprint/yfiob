@@ -1,8 +1,8 @@
 .header {
-    width: 100vw; /* Change from 100vh to 100vw */
-    height: 184px;
-    position: relative;
-    background-color: lightgrey;
+  width: 100vw;
+  height: 184px;
+  position: relative;
+  background-color: lightgrey;
 }
 
 .navbar {
@@ -13,7 +13,6 @@
   position: absolute;
   justify-content: flex-start;
   align-items: center;
-  display: inline-flex;
 }
 
 .yfioblogo {
@@ -23,27 +22,26 @@
 }
 
 .takeQuiz {
-    margin-top: 63px;
-    padding-left: 100px;
-    width: 118px;
-    font-size: 20px;
-    font-family: "Lato", sans-serif;
-    text-decoration: none;
-    color: #4C78E7;
-    transition: color 0.3s ease-in-out, text-decoration 1.5s ease-in-out 0.5s;
+  margin-top: 40px;
+  margin-left: 100px;
+  font-size: 20px;
+  font-family: "Lato", sans-serif;
+  text-decoration: none;
+  color: #4C78E7;
+  transition: color 0.3s ease-in-out, text-decoration 1.5s ease-in-out 0.5s;
 }
 
 .takeQuiz:hover {
-    color: #4C78E7;
-    text-decoration: underline;
-    text-decoration-thickness: 3.5px;
-    transition: text-decoration 0.3s ease-in-out;
+  color: #4C78E7;
+  text-decoration: underline;
+  text-decoration-thickness: 3.5px;
+  transition: text-decoration 0.3s ease-in-out;
 }
 
-.exploreCareers{
-  margin-top: 63px;
-  padding-left: 8px;
-  width: 155px;
+.exploreCareers {
+  margin-top: 40px;
+  margin-left: 50px;
+  width: 300px;
   font-size: 20px;
   font: "Lato", sans-serif;
   text-decoration: none;
@@ -51,15 +49,23 @@
 }
 
 .exploreCareers:hover {
-    color: #4C78E7;
-    text-decoration: underline;
-    text-decoration-thickness: 3.5px;
-    transition: text-decoration 0.3s ease-in-out;
+  color: #4C78E7;
+  text-decoration: underline;
+  text-decoration-thickness: 3.5px;
+  transition: text-decoration 0.3s ease-in-out;
+}
+
+.login-container {
+  display:flex;
+  flex-direction: row;
+  margin-left: 150px;
+  margin-right: 10px;
+  margin-bottom: 30px;
 }
 
 .signIn {
   margin-top: 55px;
-  margin-left: 60vw;
+  margin-left: 35vw;
   display: inline-block;
   width: 107px;
   height: 57px;
@@ -101,7 +107,7 @@
 }
 
 .lock {
-  margin-left: 15px;
+  margin-left: 5px;
   height: 33px;
   vertical-align: -9px;
 }

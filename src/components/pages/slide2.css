@@ -1,0 +1,123 @@
+.page {
+  width: 100vw;
+  height: 100vh;
+  background: #E9E9E9;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.titleText2{
+    color: #000;
+    text-align: center;
+    font-family: Lato;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 800px; 
+}
+
+.filledContainer2{
+  height: 400px; 
+  width: 770px;
+  padding-left: 116px; 
+  padding-right: 116px; 
+  padding-top: 76px; 
+  padding-bottom: 250px; 
+  position: absolute; 
+  background: white; 
+  border-radius: 20px; 
+  flex-direction: column; 
+  justify-content: flex-start; 
+  align-items: center;
+  gap: 53px; 
+  display: inline-flex
+}
+
+.innerBodyContainer2{
+  justify-content: center;
+  align-items: center;
+  gap: 194px; 
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 500px
+}
+
+.innerGreyBox1 {
+  height: 300px; 
+  width: 400px;
+  padding-left: 61px; 
+  padding-right: 61px; 
+  background: #C5C5C5; 
+  border-radius: 20px; 
+  justify-content: center; 
+  align-items: center; 
+  display: inline-flex;
+}
+
+.innerGreyBox2 {
+  height: 122px; 
+  width: 160px;
+  padding-left: 61px; 
+  padding-right: 61px; 
+  background: #C5C5C5; 
+  border-radius: 20px; 
+  justify-content: center; 
+  align-items: center; 
+  display: inline-flex;
+}
+
+.loginButton {
+  height: 300px; 
+  width: 400px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background: #C5C5C5;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+  text-align: center;
+  font-family: Lato;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  margin: 0 auto;
+}
+
+.assessButton {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 122px;
+  width: 600px;
+  background: #C5C5C5;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+  text-align: center;
+  font-family: Lato;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  margin: 0 auto;
+}
+
+
+.text{
+  text-decoration: none;
+  color: #000;
+  text-align: center;
+  font-family: Lato;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

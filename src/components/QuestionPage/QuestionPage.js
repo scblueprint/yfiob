@@ -6,11 +6,11 @@ import { faArrowLeft, faChevronLeft, faChevronRight} from '@fortawesome/free-sol
 
 
 const questionArray = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+  1, 2, 3, 4, 5, 6
 ];
 
 const answerArray = [
-  "strongly agree", "agree", "neutral", "disagree", "strongly disagree"
+  "strongly disagree", "disagree", "neutral", "agree", "strongly agree"
 ]
 
 

@@ -48,6 +48,10 @@ body {
   border-radius: 8.4px;
 }
 
+.questionNumSquare:nth-child(2) {
+  background-color: lightblue;
+}
+
 .questionDisplay {
   /* padding: top px right bottom left; */
   text-align: center;

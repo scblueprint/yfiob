@@ -1,0 +1,10 @@
+.page {
+    width: 100vw;
+    height: 100vh;
+    background: #E9E9E9;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+  

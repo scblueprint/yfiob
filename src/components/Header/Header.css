@@ -5,6 +5,7 @@
   justify-content: space-around;
   align-items: center;
   background-color: lightgrey;
+  box-shadow: 0 2px 13px grey;
 }
 
 .yfioblogo {

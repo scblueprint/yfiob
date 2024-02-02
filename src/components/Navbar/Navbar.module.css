@@ -1,11 +1,9 @@
 .navWrapper {
   display: flex;
-  justify-content: start;
 }
 
 ul {
   display: flex;
-  justify-content: start;
   gap: 20px;
 }
 

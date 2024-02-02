@@ -21,6 +21,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  font-family: "Lato", sans-serif;
 }
 /*
   5. Improve media defaults

@@ -1,11 +1,10 @@
 import "./App.css";
-import QuestionPage from "./components/QuestionPage/QuestionPage";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Slide1 from "./components/pages/slide1/slide1";
-import Slide2 from "./components/pages/slide2";
-import Slide3 from "./components/pages/slide3";
+import Slide2 from "./components/pages/slide2/slide2";
+import Slide3 from "./components/pages/slide3/slide3";
 import Login from "./components/login/login";
 
 function App() {

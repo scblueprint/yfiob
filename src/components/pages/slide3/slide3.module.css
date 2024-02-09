@@ -4,7 +4,6 @@ body {
 .wrapper {
   display: flex;
   flex-direction: column;
-  background-color: green;
 }
 
 .textHeading {
@@ -52,4 +51,3 @@ body {
   font-size: 1.25rem;
   margin-bottom: 3.87rem;
 }
-

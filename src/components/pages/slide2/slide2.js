@@ -10,7 +10,7 @@ export default function Slide2() {
     <div className={styles.wrapper}>
       <h1 className={styles.textHeading}>Before You Start Answering</h1>
 
-      <div class={styles.modalWrapper}>
+      <div className={styles.modalWrapper}>
         <p className={styles.modalSubheading}>
           Please sign in to make sure your progress and results are saved.{" "}
           <br></br>You will also be able to login after the quiz to save the
@@ -29,4 +29,3 @@ export default function Slide2() {
     </div>
   );
 }
-

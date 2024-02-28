@@ -1,20 +1,19 @@
-import {firestore} from './firebase';
+import {firestore} from './firebase'; 
+import firebase from 'firebase/app'; 
 
-const addUserToFirestore = async (email, password, name) => {
+const addUserToFirestore = async (userId, email, username) => {
     try {
-        //adding the user information to Firestore
-        const userID = await firestore.collection('users').add({
-            name: name,
+        await firestore.collection('users').doc(userId).set({
+            
             email: email,
-            password: password,
+            username: username,
+            accountCreationDate: firebase.firestore.FieldValue.serverTimestamp()
         });
-        console.log('User successfully added with ID: ', userID.id);
-    }
-    //If there's an error, rethrow error back to calling function for them to handle.
-    catch (error){
+        console.log('User successfully added with ID: ', userId);
+    } catch (error) {
         console.error('Error adding user: ', error.message);
         throw error;
     }
 };
-    
+
 export default addUserToFirestore;

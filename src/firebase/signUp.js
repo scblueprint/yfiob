@@ -27,7 +27,15 @@ function signUpUser(email, password) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Jamie and Akshitha Function
+            const userId = userCredential.user.uid;
+
+            addUserToFirestore(userId, email, username)
+                .then(() => {
+                    console.log("User added to Firestore successfully.");
+                })
+                .catch((error) => {
+                    console.error("Error adding user to Firestore:", error);
+                });
         })
         .catch((error) => {
             console.error(error);

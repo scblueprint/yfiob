@@ -2,7 +2,7 @@ import {firestore} from './firebase';
 
 const uploadResponsesToFirestore = async () => {
     try {
-        const assessmentID = await firestore.collection('/Users/User1/All Assessments').add({
+        const assessmentID = await firestore.collection('/users/user1/allAssessments').add({
             date: date,
 
             question1: {
@@ -16,7 +16,7 @@ const uploadResponsesToFirestore = async () => {
                 }
             }
         })
-        console.log('Respones successfully uploaded with assessmentID: ', assessmentID.id);
+        console.log('Responses successfully uploaded with assessmentID: ', assessmentID.id);
     }
 
     catch (error){

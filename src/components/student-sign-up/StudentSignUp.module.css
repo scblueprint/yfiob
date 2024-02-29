@@ -1,0 +1,218 @@
+.pageContainer{
+    width: 1512px;
+    height: 982px;
+    background: #E9E9E9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-family: Lato, sans-serif;
+    font-weight: 400;
+    font-size: 36px;
+    text-align: center;
+    margin-top: 110px;
+    margin-bottom: 30px;
+}
+
+.InputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: blue solid 1px;
+    max-width: 503px;
+}
+
+.InputNameContainer {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
+}
+
+input,label {
+    display: block;
+}
+
+input {
+    border-radius: 20px;
+    background: #FFF;
+    border: none;
+}
+
+button {
+    background-color: #4C78E7;
+    display: block;
+    border: none;
+    margin-top: 15px;
+    width: 107px;
+    border-radius: 30px;
+    color: white;
+    padding: 17px 17px;
+}
+
+.ExistingAccountLoginContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    gap: 11px;
+}
+/* .Background {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 75%;
+    background: radial-gradient(40.24% 35.4% at 93.65% 18.89%, rgba(255, 112, 35, 0.30) 0%, rgba(255, 112, 35, 0.00) 100%), radial-gradient(69.16% 22.87% at 0% 105.6%, rgba(76, 120, 231, 0.40) 0%, rgba(76, 120, 231, 0.00) 100%), #F3F6FE;
+}
+
+.StudentSignUp {
+    left: 624px;
+    top: 160px;
+    position: absolute;
+    text-align: center;
+    color: #000;
+    font-family: Lato;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Frame1 {
+    left: 505px;
+    top: 233px;
+    position: absolute;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.Frame2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.Frame3 {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.Group1 {
+    width: 244px;
+    height: 91px;
+    position: relative;
+}
+
+.InputTitle {
+    width: 220.52px;
+    left: 18.48px; 
+    top: 0px; 
+    position: absolute; 
+    color: #000;
+    font-family: Lato;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Frame4 {
+    left: 0px; 
+    top: 30px; 
+    position: absolute;
+    width: 244px; 
+    height: 61px;
+    flex-shrink: 0;
+}
+
+.ShortRectangle {
+    left: 0px; 
+    top: 0px;
+    position: absolute;
+    width: 243.5px;
+    height: 61px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+}
+
+.Input {
+    position: absolute;
+    left: 23px;
+    top: 18px;
+    color: #898989;
+    font-size: 20px;
+    font-family: Lato;
+    font-style: italic;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.Group2 {
+    width: 502px; 
+    height: 91px; 
+    position: relative;
+}
+
+.LongRectangle {
+    left: 0px; 
+    top: 0px;
+    position: absolute;
+    width: 502px;
+    height: 61px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+}
+
+.SignUpFrame {
+    padding-top: 17px;
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 17px;
+    background: #4C78E7;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+.SignUp {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-family: Lato;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.Group3 {
+    width: 350px; 
+    height: 24px; 
+    position: relative;
+}
+
+.AlreadyHaveAnAccount {
+    position: absolute;
+    left: 20px;
+    top: 0px;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: Lato;
+    font-weight: 300;
+}
+
+.LogIn {
+    position: absolute;
+    left: 250px;
+    top: 0px;
+    text-align: center;
+    color: #4C78E7;
+    font-size: 20px;
+    font-family: Lato;
+    font-weight: 400;
+} */

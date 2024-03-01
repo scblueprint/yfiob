@@ -1,0 +1,132 @@
+body {
+  background: radial-gradient(
+      40.24% 35.4% at 93.65% 18.89%,
+      rgba(255, 112, 35, 0.3) 0%,
+      rgba(255, 112, 35, 0) 100%
+    ),
+    radial-gradient(
+      69.16% 22.87% at 0% 105.6%,
+      rgba(76, 120, 231, 0.4) 0%,
+      rgba(76, 120, 231, 0) 100%
+    ),
+    #f3f6fe;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.login-container {
+  width: 300px;
+  height: 500px;
+  margin-top: 200px;
+  margin-left: 500px;
+  padding: 20px;
+  text-align: center;
+}
+
+.student {
+  margin-left: 125px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+
+h2 {
+  color: #000;
+  text-align: center;
+  font-family: Lato;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  padding: 10px 10px 10px 20px;
+  margin-bottom: 5px;
+  padding-right: 30px;
+  width: 502px;
+  height: 61px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #fff;
+  font-size: 20px;
+  box-sizing: border-box;
+  color: #000;
+  font-family: Lato;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.login-container label {
+  display: block;
+  margin-top: 15px; /* Space above label */
+  margin-bottom: 5px; /* Space below label */
+  margin-left: 21px;
+  color: #000;
+  text-align: left;
+  font-family: Lato;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.login-container button {
+  display: flex;
+  padding: 17px 24px 16px 24px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 30px;
+  background: #4c78e7;
+  margin-top: 20px;
+  cursor: pointer;
+  font-size: 0.9em;
+  width: 100px; /* Set a fixed width for the button */
+  align-self: center; /* Center the button */
+}
+
+button {
+  margin-left: 180px;
+  background-color: #5c6bc0;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #3f51b5;
+}
+
+p {
+  margin-left: 110px;
+  color: #000;
+  white-space: nowrap;
+  text-align: center;
+  font-family: Lato;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+a {
+  color: #4c78e7;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}

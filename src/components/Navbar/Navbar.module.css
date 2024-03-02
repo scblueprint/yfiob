@@ -2,12 +2,12 @@
   display: flex;
 }
 
-ul {
+.linkList {
   display: flex;
   gap: 20px;
 }
 
-li {
+.linkListItem {
   list-style: none;
 }
 
@@ -20,6 +20,5 @@ li {
 
 .linkOptions:hover {
   color: #4c78e7;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
+  text-decoration: none;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./StudentLogin.css";
+import styles from "./StudentLogin.module.css";
 
 function StudentLogin() {
   const [email, setEmail] = useState("");
@@ -19,9 +19,9 @@ function StudentLogin() {
   };
 
   return (
-    <div className="login-container">
-      <h2 className="student">Student Log In</h2>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.loginContainer}>
+      <h2 className={styles.studentHeader}>Student Log In</h2>
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
         <div>
           <label htmlFor="email">Email</label>
           <input
@@ -44,10 +44,15 @@ function StudentLogin() {
             required
           />
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit" className={styles.loginBtn}>
+          Log In!
+        </button>
       </form>
-      <p>
-        Don't have an account? <a href="/signup">Sign Up!</a>
+      <p className={styles.noAccountText}>
+        Don't have an account?{" "}
+        <a href="/signup" className={styles.signUpLink}>
+          Sign Up!
+        </a>
       </p>
     </div>
   );

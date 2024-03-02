@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./AdminLogin.css";
+import "./AdminLogin.module.css";
 
 function AdminLogin() {
   const [email, setEmail] = useState("");

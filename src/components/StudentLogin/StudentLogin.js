@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import './StudentLogin.css'; 
+import React, { useState } from "react";
+import styles from "./StudentLogin.module.css";
 
 function StudentLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -15,13 +15,13 @@ function StudentLogin() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Logging in with:', email, password);
+    console.log("Logging in with:", email, password);
   };
 
   return (
-    <div className="login-container">
-      <h2 className="student">Student Log In</h2>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.loginContainer}>
+      <h2 className={styles.studentHeader}>Student Log In</h2>
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
         <div>
           <label htmlFor="email">Email</label>
           <input
@@ -44,10 +44,15 @@ function StudentLogin() {
             required
           />
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit" className={styles.loginBtn}>
+          Log In!
+        </button>
       </form>
-      <p>
-        Don't have an account? <a href="/signup">Sign Up!</a>
+      <p className={styles.noAccountText}>
+        Don't have an account?{" "}
+        <a href="/signup" className={styles.signUpLink}>
+          Sign Up!
+        </a>
       </p>
     </div>
   );

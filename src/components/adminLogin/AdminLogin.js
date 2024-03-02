@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import './StudentLogin.css'; 
+import React, { useState } from "react";
+import "./AdminLogin.module.css";
 
 function AdminLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -15,7 +15,7 @@ function AdminLogin() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Logging in with:', email, password);
+    console.log("Logging in with:", email, password);
   };
 
   return (

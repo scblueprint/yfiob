@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./StudentLogin.module.css";
 
 function StudentLogin() {
@@ -15,7 +16,9 @@ function StudentLogin() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Logging in with:", email, password);
+    console.log(`Logged in with Email: ${email} and Password: ${password}`);
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -50,9 +53,9 @@ function StudentLogin() {
       </form>
       <p className={styles.noAccountText}>
         Don't have an account?{" "}
-        <a href="/signup" className={styles.signUpLink}>
+        <Link to="/signup" className={styles.signUpLink}>
           Sign Up!
-        </a>
+        </Link>
       </p>
     </div>
   );

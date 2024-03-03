@@ -100,6 +100,6 @@
   font-weight: bold;
 }
 
-a:hover {
+.signUpLink:hover {
   text-decoration: underline;
 }

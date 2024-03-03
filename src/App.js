@@ -7,6 +7,7 @@ import Slide2 from "./components/pages/slide2/slide2";
 import Slide3 from "./components/pages/slide3/slide3";
 import StudentLogin from "./components/StudentLogin/StudentLogin";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
+import StudentSignUp from "./components/StudentSignup/StudentSignUp";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/slide3" element={<Slide3 />} />
         <Route path="/login" element={<StudentLogin />} />
         <Route path="/questionPage" element={<QuestionPage />} />
+        <Route path="/signup" element={<StudentSignUp />} />
       </Routes>
     </Router>
   );

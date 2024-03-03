@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./slide3.module.css";
 
 function Slide3() {
@@ -18,13 +19,12 @@ function Slide3() {
           about whether you enjoy it? Ready?
         </p>
 
-        <button className={styles.modalStartButton}>
+        <Link to="/questionPage" className={styles.modalStartButton}>
           Yes, I'm ready to start
-        </button>
+        </Link>
       </div>
     </div>
   );
 }
 
 export default Slide3;
-

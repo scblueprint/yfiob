@@ -2,13 +2,9 @@ import React from "react";
 import styles from "./QuestionPage.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  // faChevronLeft,
-  // faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-// const questionArray = [1, 2, 3, 4, 5, 6];
+const questionArray = [1, 2, 3, 4, 5, 6];
 
 const answerArray = [
   "strongly disagree",
@@ -23,25 +19,35 @@ export default function QuestionPage() {
     <div className={styles.wrapper}>
       <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
 
-      <div className={styles.questionWrapper}>
-        <p className={styles.textHeader}>
-          Don't worry about time, money, training, or education. Just think do
-          you enjoy it?
-        </p>
+      <div className={styles.questionModalContainer}>
+        <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} />
 
-        <p className={styles.questionDisplay}>I like to build cupboards.</p>
+        <div className={styles.questionWrapper}>
+          <p className={styles.textHeader}>
+            Don't worry about time, money, training, or education. Just think do
+            you enjoy it?
+          </p>
 
-        <div className={styles.responseRow}>
-          {answerArray.map((value) => {
-            return (
-              <button className={styles.answerResponseSquare}>{value}</button>
-            );
-          })}
+          <p className={styles.questionPrompt}>
+            “I am passionate about working with nature and the environment.”
+          </p>
+
+          <div className={styles.responseRow}>
+            {answerArray.map((value) => {
+              return (
+                <button className={styles.answerResponseSquare}>{value}</button>
+              );
+            })}
+          </div>
         </div>
 
-        <div className={styles.arrowRow}>
-          <FontAwesomeIcon className={styles.leftArrow} icon={faArrowLeft} />
-        </div>
+        <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} />
+      </div>
+
+      <div className={styles.questionGrid}>
+        {questionArray.map((value) => {
+          return <button className={styles.questionLinks}>{value}</button>;
+        })}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { firestore } from "./firebase";
+import { firestore } from "./firebaseConfig";
 import firebase from "firebase/app";
 
 const addUserToFirestore = async (userId, email, username) => {

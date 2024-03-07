@@ -1,5 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebaseConfig";
 import styles from "./StudentSignUp.module.css";
 
 export default function StudentSignUp() {
@@ -12,6 +14,8 @@ export default function StudentSignUp() {
   });
   const [errors, setErrors] = React.useState({});
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -20,7 +24,7 @@ export default function StudentSignUp() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Form validation
     const errors = {};
@@ -38,14 +42,36 @@ export default function StudentSignUp() {
     if (!formData.password.trim()) {
       errors.password = "Password is required";
     }
+    if (formData.password.length < 6) {
+      errors.password = "Password must be greater than 5 characters";
+    }
     if (formData.password !== formData.confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
     }
     setErrors(errors);
 
+    // If not errors were present on sign in, process information
     if (Object.keys(errors).length === 0) {
       // Form submission logic goes here, e.g., send data to Firebase
-      console.log("Form submitted:", formData);
+      await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password,
+      )
+        .then((userCredentials) => {
+          // If successful, user account created and user is logged in
+          // TODO: Implement UI update once user creates an account
+          const user = userCredentials.user;
+          navigate("/login");
+          console.log(user);
+        })
+        .catch((error) => {
+          // TODO: Handle logic if unable to complete account creation
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        });
+
       //Clear Form data after submission
       setFormData({
         firstName: "",
@@ -120,7 +146,7 @@ export default function StudentSignUp() {
               onChange={handleChange}
             />
             {errors.password && (
-              <span className={styles.errorMessage}>{errors.email}</span>
+              <span className={styles.errorMessage}>{errors.password}</span>
             )}
           </div>
 
@@ -156,4 +182,3 @@ export default function StudentSignUp() {
     </div>
   );
 }
-

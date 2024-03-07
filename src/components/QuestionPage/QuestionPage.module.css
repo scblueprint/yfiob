@@ -1,194 +1,86 @@
-
-.Q3 {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  padding-bottom: 75%;
-  background: radial-gradient(40.24% 35.4% at 93.65% 18.89%, rgba(255, 112, 35, 0.30) 0%, rgba(255, 112, 35, 0.00) 100%), radial-gradient(69.16% 22.87% at 0% 105.6%, rgba(76, 120, 231, 0.40) 0%, rgba(76, 120, 231, 0.00) 100%), #F3F6FE;
-}
-.Frame74 {
-    left: 185px;
-    top: 312px;
-    position: absolute;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
-    display: inline-flex;
-    
+.wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
-.Frame73 {
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
-    display: inline-flex;
-}
-
-.Arrowleft {
-    width: 50px;
-    height: 50px;
-    position: relative;
-}
-
-.Vector {
-    width: 43.75px;
-    height: 28.13px;
-    left: 3.12px;
-    top: 10.94px;
-    position: absolute;
-    background: black;
-}
-
-.Frame22 {
-    padding-top: 76px;
-    padding-bottom: 76px;
-    padding-left: 87px;
-    padding-right: 86px;
-    background: white;
-    box-shadow: 0px 4px 9.399999618530273px rgba(0, 0, 0, 0.12);
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-
-.Frame32 {
-    align-self: stretch;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 55px;
-    display: inline-flex;
-}
-
-.DonTWorry {
-    width: 770px;
-    text-align: center;
-    color: black;
-    font-size: 20px;
-    font-family: Lato;
-    font-style: italic;
-    font-weight: 400;
-    word-wrap: break-word;
-}
-
-.Frame17 {
-    width: 829px;
-    height: 146px;
-    padding-top: 35px;
-    padding-bottom: 35px;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    display: inline-flex;
-}
-
-.IEnjoy {
-    width: 829px;
-    text-align: center;
-    color: black;
-    font-size: 32px;
-    font-family: Lato;
-    font-weight: 700;
-    word-wrap: break-word;
-}
-
-.AssessmentOptions {
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 11px;
-    display: inline-flex;
-}
-
-.Frame29 {
-    width: 167px;
-    height: 57px;
-    padding-top: 17px;
-    padding-bottom: 16px;
-    padding-left: 7px;
-    padding-right: 6px;
-    background: rgba(71, 183, 73, 0.34);
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-
-.Disagree {
+.textHeader {
   text-align: center;
-  color: #47B749;
-  font-size: 20px;
-  font-family: 'Lato';
-  font-weight: 400;
-  word-wrap: break-word;
+  font-family: Lazo, sans-serif;
+  font-weight: 300;
+  margin: 3rem auto 2rem auto;
+}
+.questionModalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.Frame30 {
-    width: 167px;
-    height: 57px;
-    padding-top: 17px;
-    padding-bottom: 16px;
-    padding-left: 20px;
-    padding-right: 18px;
-    background: rgba(71, 183, 73, 0.34);
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+.arrows {
+  width: 50px;
+  height: 30px;
 }
 
-.Frame44 {
-    justify-content: center;
-    align-items: center;
-    gap: 13px;
-    display: inline-flex;
+.questionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  margin: 0 25px;
+  padding: 24px 32px;
+  border-radius: 20px;
 }
 
-.Frame23 {
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 9.24px;
-    display: flex;
+.questionNumSquare {
+  text-align: center;
+  font-family: Lazo, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  padding: 4px 11px;
+  background-color: #c5c5c5;
+  border-radius: 8.4px;
 }
 
-.Frame65 {
-    width: 127px;
-    height: 32px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border-radius: 8.40px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    background: rgba(76.07, 119.54, 231.33, 0.30)
+.questionNumSquare:nth-child(2) {
+  background-color: lightblue;
 }
 
-.Frame66 {
-    width: 127px;
-    height: 32px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    background: #4C78E7;
-    border-radius: 8.40px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+.questionPrompt {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 35px 0;
+  margin-bottom: 55px;
+  max-width: 51.8rem;
 }
 
-.WhatCareers {
-    left: 506px;
-    top: 248px;
-    position: absolute;
-    text-align: center;
-    color: black;
-    font-size: 36px;
-    font-family: Lato;
-    font-weight: 400;
-    word-wrap: break-word;
-    
+.responseRow {
+  display: inline-flex;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 2.56rem; /* change later */
 }
 
+.answerResponseSquare {
+  background-color: #47b74957;
+  color: #47b749;
+  border-radius: 20px;
+  padding: 1.06rem 2.18rem;
+  border: none;
+}
 
-  
-  
+.questionGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 1rem;
+}
+
+.questionLinks {
+  background-color: #4c78e74d;
+  color: #4c78e7;
+  padding: 5px 57px;
+  border: none;
+  border-radius: 8.4px;
+}
+

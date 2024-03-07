@@ -6,20 +6,20 @@ export default function Navbar() {
   return (
     <div className={styles.navWrapper}>
       <nav>
-        <ul>
-          <li>
+        <ul className={styles.linkList}>
+          <li className={styles.linkListItem}>
             <Link to="/" className={styles.linkOptions}>
               Home
             </Link>
           </li>
 
-          <li>
-            <Link to="/" className={styles.linkOptions}>
+          <li className={styles.linkListItem}>
+            <Link to="/slide2" className={styles.linkOptions}>
               Take Quiz!
             </Link>
           </li>
 
-          <li>
+          <li className={styles.linkListItem}>
             <Link to="/" className={styles.linkOptions}>
               Explore Careers
             </Link>

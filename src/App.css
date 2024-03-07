@@ -22,6 +22,9 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   font-family: "Lato", sans-serif;
+  background-image: url("./assets/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 /*
   5. Improve media defaults

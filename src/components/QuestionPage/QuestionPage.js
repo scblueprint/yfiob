@@ -4,8 +4,6 @@ import styles from "./QuestionPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-//const questionArray = [1, 2, 3, 4, 5, 6];
-
 const answerArray = [
   "strongly disagree",
   "disagree",
@@ -24,7 +22,6 @@ const questions = [
 ];
 
 export default function QuestionPage() {
-  
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const handlePrevious = () => {
@@ -32,15 +29,19 @@ export default function QuestionPage() {
   };
 
   const handleNext = () => {
-    setCurrentQuestionIndex((prevIndex) => Math.min(questions.length - 1, prevIndex + 1));
+    setCurrentQuestionIndex((prevIndex) =>
+      Math.min(questions.length - 1, prevIndex + 1),
+    );
   };
-  
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
 
       <div className={styles.questionModalContainer}>
-        <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} onClick = {handlePrevious}/>
+        <button className={styles.arrowBtn} onClick={handlePrevious}>
+          <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} />
+        </button>
 
         <div className={styles.questionWrapper}>
           <p className={styles.textHeader}>
@@ -49,7 +50,7 @@ export default function QuestionPage() {
           </p>
 
           <p className={styles.questionPrompt}>
-            {questions[currentQuestionIndex]} 
+            {questions[currentQuestionIndex]}
           </p>
 
           <div className={styles.responseRow}>
@@ -61,12 +62,22 @@ export default function QuestionPage() {
           </div>
         </div>
 
-        <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} onClick = {handleNext} />
+        <button className={styles.arrowBtn} onClick={handleNext}>
+          <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} />
+        </button>
       </div>
 
       <div className={styles.questionGrid}>
         {questions.map((question, index) => {
-          return <button key={index} className={styles.questionLinks} onClick={() => setCurrentQuestionIndex(index)}>{index + 1}</button>;
+          return (
+            <button
+              key={index}
+              className={`${styles.questionLinks} `}
+              onClick={() => setCurrentQuestionIndex(index)}
+            >
+              {index + 1}
+            </button>
+          );
         })}
       </div>
     </div>

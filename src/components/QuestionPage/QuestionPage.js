@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./QuestionPage.module.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const questionArray = [1, 2, 3, 4, 5, 6];
+//const questionArray = [1, 2, 3, 4, 5, 6];
 
 const answerArray = [
   "strongly disagree",
@@ -14,13 +14,33 @@ const answerArray = [
   "strongly agree",
 ];
 
+const questions = [
+  "I am passionate about working with nature and the environment.",
+  "I find joy in creating and designing visual content, such as art or multimedia projects.",
+  "I enjoy hands-on work and take satisfaction in building or constructing things.",
+  "Promoting health and wellness is important to me, and I am interested in medical advancements.",
+  "I am fascinated by technology and enjoy staying updated on the latest innovations.",
+  "Providing excellent customer service and creating positive experiences for others is a priority for me.",
+];
+
 export default function QuestionPage() {
+  
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const handlePrevious = () => {
+    setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentQuestionIndex((prevIndex) => Math.min(questions.length - 1, prevIndex + 1));
+  };
+  
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
 
       <div className={styles.questionModalContainer}>
-        <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} />
+        <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} onClick = {handlePrevious}/>
 
         <div className={styles.questionWrapper}>
           <p className={styles.textHeader}>
@@ -29,7 +49,7 @@ export default function QuestionPage() {
           </p>
 
           <p className={styles.questionPrompt}>
-            “I am passionate about working with nature and the environment.”
+            {questions[currentQuestionIndex]} 
           </p>
 
           <div className={styles.responseRow}>
@@ -41,12 +61,12 @@ export default function QuestionPage() {
           </div>
         </div>
 
-        <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} />
+        <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} onClick = {handleNext} />
       </div>
 
       <div className={styles.questionGrid}>
-        {questionArray.map((value) => {
-          return <button className={styles.questionLinks}>{value}</button>;
+        {questions.map((question, index) => {
+          return <button key={index} className={styles.questionLinks} onClick={() => setCurrentQuestionIndex(index)}>{index + 1}</button>;
         })}
       </div>
     </div>

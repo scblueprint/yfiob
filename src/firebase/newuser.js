@@ -1,16 +1,15 @@
-import { firestore } from "./firebaseConfig";
-import firebase from "firebase/app";
+import { db } from "./firebaseConfig";
 
 const addUserToFirestore = async (userId, email, username) => {
   try {
-    await firestore.collection("users").doc(userId).set({
+    await db.collection("users").doc(userId).set({
       email: email,
       username: username,
-      accountCreationDate: firebase.firestore.FieldValue.serverTimestamp(),
+      accountCreationDate: db.firestore.FieldValue.serverTimestamp(),
     });
     console.log("User successfully added with ID: ", userId);
 
-    const adminPanelRef = firestore.collection("admin_panel").doc("user_list");
+    const adminPanelRef = db.collection("admin_panel").doc("user_list");
     const adminPanelSnapshot = await adminPanelRef.get();
 
     let userList = [];

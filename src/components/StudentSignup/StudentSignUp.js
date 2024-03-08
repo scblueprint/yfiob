@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebaseConfig";
+import { auth, db } from "../../firebase/firebaseConfig";
 import styles from "./StudentSignUp.module.css";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function StudentSignUp() {
   const [formData, setFormData] = React.useState({
@@ -52,25 +53,32 @@ export default function StudentSignUp() {
 
     // If not errors were present on sign in, process information
     if (Object.keys(errors).length === 0) {
-      // Form submission logic goes here, e.g., send data to Firebase
-      await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password,
-      )
-        .then((userCredentials) => {
-          // If successful, user account created and user is logged in
-          // TODO: Implement UI update once user creates an account
-          const user = userCredentials.user;
-          navigate("/login");
-          console.log(user);
-        })
-        .catch((error) => {
-          // TODO: Handle logic if unable to complete account creation
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+      try {
+        // Create user account using Firebase Auth
+        const userCredentials = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password,
+        );
+        // If successful, user account created and user is logged in
+        const user = userCredentials.user;
+
+        // Add user information to Firestore
+        await setDoc(doc(db, "Users", user.uid), {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
         });
+
+        // Redirect to login page after successful account creation
+        navigate("/login");
+        console.log("User account created:", user);
+      } catch (error) {
+        // Handle error if unable to complete account creation
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error("Error creating user account:", errorCode, errorMessage);
+      }
 
       //Clear Form data after submission
       setFormData({

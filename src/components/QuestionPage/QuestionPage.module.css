@@ -15,6 +15,16 @@
   align-items: center;
 }
 
+.arrowBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.arrowBtn:hover {
+  color: red;
+}
+
 .arrows {
   width: 50px;
   height: 30px;
@@ -40,10 +50,6 @@
   border-radius: 8.4px;
 }
 
-.questionNumSquare:nth-child(2) {
-  background-color: lightblue;
-}
-
 .questionPrompt {
   font-size: 2rem;
   font-weight: 700;
@@ -66,6 +72,11 @@
   border-radius: 20px;
   padding: 1.06rem 2.18rem;
   border: none;
+  cursor: pointer;
+}
+
+.answerResponseSquare:hover {
+  background-color: darkgreen;
 }
 
 .questionGrid {
@@ -82,5 +93,9 @@
   padding: 5px 57px;
   border: none;
   border-radius: 8.4px;
+  cursor: pointer;
 }
 
+.questionLinks:hover {
+  box-shadow: 0px 1px 1px black;
+}

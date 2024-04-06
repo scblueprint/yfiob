@@ -1,31 +1,36 @@
-import { firestore } from "./firebaseConfig";
-import firebase from "firebase/app";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
-const addUserToFirestore = async (userId, email, username) => {
+const addUserToFirestore = async (userId, email, firstName) => {
   try {
-    await firestore.collection("users").doc(userId).set({
+    //This line creates a documents in firebase with user information
+    await setDoc(doc(db, "Users", userId), {
       email: email,
-      username: username,
-      accountCreationDate: firebase.firestore.FieldValue.serverTimestamp(),
+      firstName: firstName,
+      accountCreationDate: serverTimestamp(),
     });
     console.log("User successfully added with ID: ", userId);
 
-    const adminPanelRef = firestore.collection("admin_panel").doc("user_list");
-    const adminPanelSnapshot = await adminPanelRef.get();
+    // TODO: This code below is causing an error
+    // Dev tools states that "db.collection is not a function"
+    // May need to look into
 
-    let userList = [];
-    if (adminPanelSnapshot.exists) {
-      userList = adminPanelSnapshot.data().userList || [];
-    }
-
-    userList.push({
-      userId: userId,
-      username: username,
-      email: email,
-    });
-
-    await adminPanelRef.set({ userList });
-    console.log("User data added to admin panel");
+    // const adminPanelRef = db.collection("admin_panel").doc("user_list");
+    // const adminPanelSnapshot = await adminPanelRef.get();
+    //
+    // let userList = [];
+    // if (adminPanelSnapshot.exists) {
+    //   userList = adminPanelSnapshot.data().userList || [];
+    // }
+    //
+    // userList.push({
+    //   userId: userId,
+    //   firstName: firstName,
+    //   email: email,
+    // });
+    //
+    // await adminPanelRef.set({ userList });
+    // console.log("User data added to admin panel");
   } catch (error) {
     console.error("Error adding user: ", error.message);
     throw error;

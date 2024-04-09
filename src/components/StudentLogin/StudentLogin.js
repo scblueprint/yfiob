@@ -1,25 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
 import styles from "./StudentLogin.module.css";
 
-
-export const fetchUserData = async (userId) => {
-  const userRef = doc(auth, "users", userId); 
-  const userSnap = await getDoc(userRef);
-  if (userSnap.exists()) {
-    console.log("found user data");
-    return userSnap.data(); // Return user data
-  } else {
-    // Handle case where user data does not exist
-    console.log("No such document!");
-    return null;
-  }
-};
-
-function StudentLogin() {
+function StudentLogin({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,30 +18,39 @@ function StudentLogin() {
     setPassword(event.target.value);
   };
 
+  // Add a useEffect hook to listen for authentication state changes
+  React.useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        console.log(user);
+        setUser(user);
+        navigate("/questionPage");
+      } else {
+        // User is signed out
+        setUser(null);
+      }
+    });
+
+    // Clean up the subscription
+    return unsubscribe;
+  }, [setUser, navigate]); // Empty dependency array ensures that this effect runs only once
+
   const handleSubmit = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then(async(userCredentials) => {
+      .then(async (userCredentials) => {
         // If successful, user is signed in
         const user = userCredentials.user;
-
-        // fetch user data 
-        const userData = await fetchUserData(user.uid);
-        if (userData) {
-          // setLoggedIn(true) state variable somewhere??
-          console.log("User data:", userData); // Log or manage user data as needed
-        }
-        
+        console.log(`${user.email} is users email`);
         navigate("/questionPage");
-        console.log(user);
-        // TODO: We still need to implement UI changes if user is logged in
       })
       .catch((error) => {
-        // TODO: Handle Logic if user account doesn't exist and other errors
+        // Handle errors
         console.log(error);
       });
 
-    //Clear Form Data after submission
+    // Clear Form Data after submission
     setEmail("");
     setPassword("");
   };

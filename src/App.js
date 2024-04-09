@@ -8,16 +8,19 @@ import Slide3 from "./components/pages/slide3/slide3";
 import StudentLogin from "./components/StudentLogin/StudentLogin";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
 import StudentSignUp from "./components/StudentSignup/StudentSignUp";
+import React from "react";
 
 function App() {
+  const [user, setUser] = React.useState(null);
+
   return (
     <Router>
-      <Header />
+      <Header user={user} />
       <Routes>
         <Route path="/" element={<Slide1 />} />
         <Route path="/slide2" element={<Slide2 />} />
         <Route path="/slide3" element={<Slide3 />} />
-        <Route path="/login" element={<StudentLogin />} />
+        <Route path="/login" element={<StudentLogin setUser={setUser} />} />
         <Route path="/questionPage" element={<QuestionPage />} />
         <Route path="/signup" element={<StudentSignUp />} />
       </Routes>

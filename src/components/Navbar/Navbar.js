@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
-export default function Navbar() {
+export default function Navbar({ user }) {
   return (
     <div className={styles.navWrapper}>
       <nav>

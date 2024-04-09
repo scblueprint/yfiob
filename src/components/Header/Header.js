@@ -4,7 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import yfiobLogo from "../../assets/image.png";
 import styles from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
     <div className={styles.headerWrapper}>
       <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
@@ -13,9 +13,13 @@ const Header = () => {
 
       <div className={styles.navContainer}>
         <div className={styles.loginContainer}>
-          <Link to="/login" className={styles.signIn}>
-            Sign In
-          </Link>
+          {user ? (
+            <p>{`User, ${user.displayName}`}</p>
+          ) : (
+            <Link to="/login" className={styles.signIn}>
+              Sign In
+            </Link>
+          )}
 
           <div className={styles.adminBtnContainer}>
             <Link to="/login" className={styles.admin}>

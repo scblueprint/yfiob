@@ -54,9 +54,11 @@ export default function QuestionPage() {
           </p>
 
           <div className={styles.responseRow}>
-            {answerArray.map((value) => {
+            {answerArray.map((value, idx) => {
               return (
-                <button className={styles.answerResponseSquare}>{value}</button>
+                <button className={styles.answerResponseSquare} key={idx}>
+                  {value}
+                </button>
               );
             })}
           </div>

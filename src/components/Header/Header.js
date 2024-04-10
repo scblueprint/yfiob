@@ -14,7 +14,7 @@ const Header = ({ user }) => {
       <div className={styles.navContainer}>
         <div className={styles.loginContainer}>
           {user ? (
-            <p>{`User, ${user.displayName}`}</p>
+            <p className={styles.signIn}>{`Hello, ${user.displayName}`}</p>
           ) : (
             <Link to="/login" className={styles.signIn}>
               Sign In

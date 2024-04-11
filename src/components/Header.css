@@ -130,7 +130,6 @@ body {
   background: white;
   border-radius: 20px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 

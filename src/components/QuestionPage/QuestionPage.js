@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styles from "./QuestionPage.module.css";
 
-import { db } from "../../firebase/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
+import getQuestions from "../../firebase/pullQuestions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -14,18 +13,12 @@ const answerArray = [
   "agree",
   "strongly agree",
 ];
-
-const docRef = doc(db, "assessment data", "questions");
-const docSnap = await getDoc(docRef);
-
-if (docSnap.exists()) {
-  const questions = Object.keys(docSnap.data().allQuestions);
-} else {
-  console.log("No such document!");
-}
+// TO DO
+// Make questions an array
+const questions = getQuestions();
 
 
-
+/*
 const questions = [
   "I am passionate about working with nature and the environment.",
   "I find joy in creating and designing visual content, such as art or multimedia projects.",

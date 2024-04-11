@@ -23,6 +23,15 @@ const questions = [
 
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState(Array(questions.length).fill(null));
+
+  const handleSelect = (questionIndex, answerIndex) => {
+    console.log("handle selected")
+    const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
+    newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
+    setSelectedAnswers(newSelectedAnswers); // update original selected answers array
+    console.log(selectedAnswers)
+  };
 
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
@@ -55,13 +64,18 @@ export default function QuestionPage() {
 
           <div className={styles.responseRow}>
             {answerArray.map((value, idx) => {
+              
+              const isSelected = selectedAnswers[currentQuestionIndex] === idx; // Determine if this answer is the selected one
               return (
-                <button className={styles.answerResponseSquare} key={idx}>
+                <button 
+                  className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ''}`} 
+                  key={idx} 
+                  onClick={() => handleSelect(currentQuestionIndex, idx)}>
                   {value}
                 </button>
               );
             })}
-          </div>
+            </div>
         </div>
 
         <button className={styles.arrowBtn} onClick={handleNext}>

@@ -79,6 +79,10 @@
   background-color: darkgreen;
 }
 
+.isSelected{
+  background-color: darkgreen;
+}
+
 .questionGrid {
   display: flex;
   justify-content: center;

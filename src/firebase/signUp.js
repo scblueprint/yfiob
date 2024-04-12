@@ -1,30 +1,47 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "./firebaseConfig";
 import addUserToFirestore from "./newuser";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-async function signUpUser(email, password, firstName) {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password,
-    );
+// email validation
+function isValidEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailRegex.test(email);
+}
 
-    //If successfully, user account created and user is logged in
-    const user = userCredential.user;
-    const userDisplayname = firstName;
-    updateProfile(auth.currentUser, {
-      displayName: userDisplayname,
-    });
-    console.log(user.displayName);
+// password validation
+function isValidPassword(password) {
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{12,}$/;
+  return passwordRegex.test(password);
+}
 
-    // Add user information into firebase
-    // We can add/take away any fields we want be adding
-    // or removing function parameters
-    await addUserToFirestore(user.uid, email, firstName);
-  } catch (error) {
-    console.log(`Error adding user to firestore: ${error}`);
+function signUpUser(email, password) {
+  // validate fields
+  if (!isValidEmail(email)) {
+    console.error("Invalid email");
+    return;
   }
+
+  if (!isValidPassword(password)) {
+    console.error("Invalid password");
+    return;
+  }
+
+  const auth = getAuth();
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const userId = userCredential.user.uid;
+
+      addUserToFirestore(userId, email, username)
+        .then(() => {
+          console.log("User added to Firestore successfully.");
+        })
+        .catch((error) => {
+          console.error("Error adding user to Firestore:", error);
+        });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 export default signUpUser;

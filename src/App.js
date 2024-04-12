@@ -6,6 +6,7 @@ import Slide1 from "./components/pages/slide1/slide1";
 import Slide2 from "./components/pages/slide2/slide2";
 import Slide3 from "./components/pages/slide3/slide3";
 import StudentLogin from "./components/StudentLogin/StudentLogin";
+import AdminLogin from "./components/adminLogin/AdminLogin";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
 import StudentSignUp from "./components/StudentSignup/StudentSignUp";
 import React from "react";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/slide2" element={<Slide2 />} />
         <Route path="/slide3" element={<Slide3 />} />
         <Route path="/login" element={<StudentLogin setUser={setUser} />} />
+        <Route path="/admin" element={<AdminLogin />} />
         <Route path="/questionPage" element={<QuestionPage />} />
         <Route path="/signup" element={<StudentSignUp />} />
       </Routes>

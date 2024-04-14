@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./QuestionPage.module.css";
 
+import getQuestions from "../../firebase/pullQuestions";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,26 +14,29 @@ const answerArray = [
   "strongly agree",
 ];
 
-const questions = [
-  "I am passionate about working with nature and the environment.",
-  "I find joy in creating and designing visual content, such as art or multimedia projects.",
-  "I enjoy hands-on work and take satisfaction in building or constructing things.",
-  "Promoting health and wellness is important to me, and I am interested in medical advancements.",
-  "I am fascinated by technology and enjoy staying updated on the latest innovations.",
-  "Providing excellent customer service and creating positive experiences for others is a priority for me.",
-];
-
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState(Array(questions.length).fill(null));
+  const [selectedAnswers, setSelectedAnswers] = useState(
+    Array(questions.length).fill(null),
+  );
 
   const handleSelect = (questionIndex, answerIndex) => {
-    console.log("handle selected")
+    console.log("handle selected");
     const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
     newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
     setSelectedAnswers(newSelectedAnswers); // update original selected answers array
-    console.log(selectedAnswers)
+    console.log(selectedAnswers);
   };
+
+  const [questions, setQuestions] = useState([]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const questionsData = await getQuestions();
+      setQuestions(questionsData);
+    };
+    fetchData();
+  }, []);
 
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
@@ -64,18 +69,18 @@ export default function QuestionPage() {
 
           <div className={styles.responseRow}>
             {answerArray.map((value, idx) => {
-              
               const isSelected = selectedAnswers[currentQuestionIndex] === idx; // Determine if this answer is the selected one
               return (
-                <button 
-                  className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ''}`} 
-                  key={idx} 
-                  onClick={() => handleSelect(currentQuestionIndex, idx)}>
+                <button
+                  className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ""}`}
+                  key={idx}
+                  onClick={() => handleSelect(currentQuestionIndex, idx)}
+                >
                   {value}
                 </button>
               );
             })}
-            </div>
+          </div>
         </div>
 
         <button className={styles.arrowBtn} onClick={handleNext}>
@@ -84,7 +89,7 @@ export default function QuestionPage() {
       </div>
 
       <div className={styles.questionGrid}>
-        {questions.map((question, index) => {
+        {questions.map((_, index) => {
           return (
             <button
               key={index}
@@ -99,3 +104,4 @@ export default function QuestionPage() {
     </div>
   );
 }
+

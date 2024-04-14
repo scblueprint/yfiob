@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../firebase/firebaseConfig";
 import styles from "./StudentSignUp.module.css";
-import signUpUser from "../../firebase/signUp";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function StudentSignUp() {
   const [formData, setFormData] = React.useState({
@@ -52,10 +54,25 @@ export default function StudentSignUp() {
     // If not errors were present on sign in, process information
     if (Object.keys(errors).length === 0) {
       try {
-        await signUpUser(formData.email, formData.password, formData.firstName);
+        // Create user account using Firebase Auth
+        const userCredentials = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password,
+        );
+        // If successful, user account created and user is logged in
+        const user = userCredentials.user;
 
-        // Redirect to question page after successful account creation
-        navigate("/questionPage");
+        // Add user information to Firestore
+        await setDoc(doc(db, "Users", user.uid), {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+        });
+
+        // Redirect to login page after successful account creation
+        navigate("/login");
+        console.log("User account created:", user);
       } catch (error) {
         // Handle error if unable to complete account creation
         const errorCode = error.code;

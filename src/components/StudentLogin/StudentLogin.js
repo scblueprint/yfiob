@@ -18,7 +18,7 @@ function StudentLogin({ setUser }) {
     setPassword(event.target.value);
   };
 
-  // Add a useEffect hook to listen for authentication state changes
+  // Listen for authentication state changes
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -34,7 +34,7 @@ function StudentLogin({ setUser }) {
 
     // Clean up the subscription
     return unsubscribe;
-  }, [setUser, navigate]); // Empty dependency array ensures that this effect runs only once
+  }, [setUser, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

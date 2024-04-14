@@ -16,6 +16,7 @@ const answerArray = [
 
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [questions, setQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState(
     Array(questions.length).fill(null),
   );
@@ -27,8 +28,6 @@ export default function QuestionPage() {
     setSelectedAnswers(newSelectedAnswers); // update original selected answers array
     console.log(selectedAnswers);
   };
-
-  const [questions, setQuestions] = useState([]);
 
   React.useEffect(() => {
     const fetchData = async () => {

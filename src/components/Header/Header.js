@@ -1,10 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import yfiobLogo from "../../assets/image.png";
 import styles from "./Header.module.css";
+import { auth } from "../../firebase/firebaseConfig";
 
 const Header = ({ user }) => {
+  const navigate = useNavigate();
+  // Function to handle sign-out
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        // Sign-out successful.
+        console.log("User signed out successfully");
+        navigate("/login");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.error("Error signing out:", error);
+      });
+  };
+
   return (
     <div className={styles.headerWrapper}>
       <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
@@ -14,23 +31,30 @@ const Header = ({ user }) => {
       <div className={styles.navContainer}>
         <div className={styles.loginContainer}>
           {user ? (
-            <p>{`User, ${user.displayName}`}</p>
+            <p className={styles.signIn}>{`Hello, ${user.displayName}`}</p>
           ) : (
             <Link to="/login" className={styles.signIn}>
               Sign In
             </Link>
           )}
 
-          <div className={styles.adminBtnContainer}>
-            <Link to="/adminLogin" className={styles.admin}>
-              Admin
-            </Link>
-            <img
-              className={styles.lock}
-              src="https://icongr.am/entypo/lock.svg?size=43&color=000000"
-              alt="Lock"
-            />
-          </div>
+          {user ? (
+            <button className={styles.signOutBtn} onClick={handleSignOut}>
+              {" "}
+              Sign Out
+            </button>
+          ) : (
+            <div className={styles.adminBtnContainer}>
+              <Link to="/adminLogin" className={styles.admin}>
+                Admin
+              </Link>
+              <img
+                className={styles.lock}
+                src="https://icongr.am/entypo/lock.svg?size=43&color=000000"
+                alt="Lock"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

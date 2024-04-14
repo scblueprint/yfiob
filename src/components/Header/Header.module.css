@@ -42,6 +42,27 @@
   text-decoration: none;
 }
 
+.signOutBtn {
+  display: inline-block;
+  cursor: pointer;
+  width: 107px;
+  height: 57px;
+  margin-right: 9px;
+  font-size: 20px;
+  font: "Lato", sans-serif;
+  border-radius: 30px;
+  border: none;
+  background-color: #4c78e757;
+  text-decoration: none;
+  text-align: center;
+  line-height: 57px;
+  color: black;
+}
+
+.signOutBtn:hover {
+  color: gray;
+}
+
 .adminBtnContainer {
   display: flex;
   flex-direction: row;

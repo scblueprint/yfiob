@@ -17,6 +17,17 @@ const answerArray = [
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const [selectedAnswers, setSelectedAnswers] = useState(
+    Array(questions.length).fill(null),
+  );
+
+  const handleSelect = (questionIndex, answerIndex) => {
+    console.log("handle selected");
+    const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
+    newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
+    setSelectedAnswers(newSelectedAnswers); // update original selected answers array
+    console.log(selectedAnswers);
+  };
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -57,8 +68,13 @@ export default function QuestionPage() {
 
           <div className={styles.responseRow}>
             {answerArray.map((value, idx) => {
+              const isSelected = selectedAnswers[currentQuestionIndex] === idx; // Determine if this answer is the selected one
               return (
-                <button className={styles.answerResponseSquare} key={idx}>
+                <button
+                  className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ""}`}
+                  key={idx}
+                  onClick={() => handleSelect(currentQuestionIndex, idx)}
+                >
                   {value}
                 </button>
               );
@@ -72,7 +88,7 @@ export default function QuestionPage() {
       </div>
 
       <div className={styles.questionGrid}>
-        {questions.map((question, index) => {
+        {questions.map((_, index) => {
           return (
             <button
               key={index}
@@ -87,3 +103,4 @@ export default function QuestionPage() {
     </div>
   );
 }
+

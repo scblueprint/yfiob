@@ -13,6 +13,7 @@ import React from "react";
 
 function App() {
   const [user, setUser] = React.useState(null);
+
   return (
     <Router>
       <Header user={user} />

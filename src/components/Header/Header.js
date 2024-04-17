@@ -45,7 +45,7 @@ const Header = ({ user }) => {
             </button>
           ) : (
             <div className={styles.adminBtnContainer}>
-              <Link to="/adminLogin" className={styles.admin}>
+              <Link to="/admin" className={styles.admin}>
                 Admin
               </Link>
               <img

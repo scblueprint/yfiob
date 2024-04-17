@@ -23,7 +23,7 @@ export default function StudentSignUp() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleNext = async (e) => {
     e.preventDefault();
     // Form validation
     const errors = {};
@@ -56,7 +56,7 @@ export default function StudentSignUp() {
         await signUpUser(formData.email, formData.password, formData.firstName);
 
         // Redirect to login page after successful account creation
-        navigate("/login");
+        navigate("/signup2");
       } catch (error) {
         // Handle error if unable to complete account creation
         const errorCode = error.code;
@@ -79,10 +79,9 @@ export default function StudentSignUp() {
     <div className={styles.pageContainer}>
       <h1 className={styles.signupHeader}>Student Signup!</h1>
 
-      <form className={styles.inputContainer} onSubmit={handleSubmit}>
+      <form className={styles.inputContainer} onSubmit={handleNext}>
         <div className={styles.nameFields}>
           <div>
-            <label className={styles.inputFieldLabels}>First Name:</label>
             <input
               type="text"
               name="firstName"
@@ -96,7 +95,6 @@ export default function StudentSignUp() {
             )}
           </div>
           <div>
-            <label className={styles.inputFieldLabels}>Last Name:</label>
             <input
               type="text"
               name="lastName"
@@ -112,8 +110,7 @@ export default function StudentSignUp() {
         </div>
 
         <div className={styles.emailpasswordFields}>
-          <div>
-            <label className={styles.inputFieldLabels}>Email:</label>
+          <div className={styles.inputshift}>
             <input
               type="email"
               name="email"
@@ -127,8 +124,7 @@ export default function StudentSignUp() {
             )}
           </div>
 
-          <div>
-            <label className={styles.inputFieldLabels}>Password:</label>
+          <div className={styles.inputshift}>
             <input
               type="password"
               name="password"
@@ -142,8 +138,7 @@ export default function StudentSignUp() {
             )}
           </div>
 
-          <div>
-            <label className={styles.inputFieldLabels}>Confirm Password:</label>
+          <div className={styles.inputshift}>
             <input
               type="password"
               name="confirmPassword"
@@ -160,8 +155,8 @@ export default function StudentSignUp() {
           </div>
         </div>
 
-        <button type="submit" className={styles.signupBtn}>
-          Sign Up
+        <button type="submit" className={styles.NextBtn}>
+          Next
         </button>
       </form>
 

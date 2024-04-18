@@ -7,7 +7,9 @@ import styles from "./Header.module.css";
 const Header = () => {
   return (
     <div className={styles.headerWrapper}>
-      <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
+      <Link to="/">
+        <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
+      </Link>
 
       <Navbar />
 

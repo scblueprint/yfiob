@@ -4,6 +4,8 @@ import styles from "./QuestionPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
+import { useNavigate } from "react-router-dom";
+
 const answerArray = [
   "strongly disagree",
   "disagree",
@@ -21,7 +23,8 @@ const questions = [
   "Providing excellent customer service and creating positive experiences for others is a priority for me.",
 ];
 
-export default function QuestionPage() {
+const QuestionPage = () => {
+  const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const handlePrevious = () => {
@@ -29,9 +32,13 @@ export default function QuestionPage() {
   };
 
   const handleNext = () => {
-    setCurrentQuestionIndex((prevIndex) =>
-      Math.min(questions.length - 1, prevIndex + 1),
-    );
+    if (currentQuestionIndex === questions.length - 1) {
+      navigate('/resultsPage'); // Navigate to the results page
+    } else {
+      setCurrentQuestionIndex((prevIndex) =>
+        Math.min(questions.length - 1, prevIndex + 1)
+      );
+    }
   };
 
   return (
@@ -45,7 +52,7 @@ export default function QuestionPage() {
 
         <div className={styles.questionWrapper}>
           <p className={styles.textHeader}>
-            Don't worry about time, money, training, or education. Just think do
+            Don't worry about time, money, training, or education. Just think, do
             you enjoy it?
           </p>
 
@@ -54,11 +61,14 @@ export default function QuestionPage() {
           </p>
 
           <div className={styles.responseRow}>
-            {answerArray.map((value) => {
-              return (
-                <button className={styles.answerResponseSquare}>{value}</button>
-              );
-            })}
+            {answerArray.map((value, index) => (
+              <button
+                key={index}
+                className={styles.answerResponseSquare}
+              >
+                {value}
+              </button>
+            ))}
           </div>
         </div>
 
@@ -68,18 +78,20 @@ export default function QuestionPage() {
       </div>
 
       <div className={styles.questionGrid}>
-        {questions.map((question, index) => {
-          return (
-            <button
-              key={index}
-              className={`${styles.questionLinks} `}
-              onClick={() => setCurrentQuestionIndex(index)}
-            >
-              {index + 1}
-            </button>
-          );
-        })}
+        {questions.map((question, index) => (
+          <button
+            key={index}
+            className={`${styles.questionLinks} ${
+              index === currentQuestionIndex ? styles.active : ""
+            }`}
+            onClick={() => setCurrentQuestionIndex(index)}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
-}
+};
+
+export default QuestionPage;

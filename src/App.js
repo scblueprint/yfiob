@@ -9,6 +9,7 @@ import StudentLogin from "./components/StudentLogin/StudentLogin";
 import AdminLogin from "./components/adminLogin/AdminLogin";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
 import StudentSignUp from "./components/StudentSignup/StudentSignUp";
+import AdminHome from "./components/AdminPages/AdminHome";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/adminLogin" element={<AdminLogin />} />
         <Route path="/questionPage" element={<QuestionPage />} />
         <Route path="/signup" element={<StudentSignUp />} />
+        <Route path="/admin" element={<AdminHome />} />
       </Routes>
     </Router>
   );

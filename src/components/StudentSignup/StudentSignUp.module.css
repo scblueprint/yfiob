@@ -25,6 +25,7 @@
   display: flex;
   justify-content: space-between;
   gap: 15px;
+  margin-bottom: 10px;
 }
 
 .emailpasswordFields {
@@ -37,6 +38,10 @@
 .InputNameContainer {
   display: flex;
   flex-direction: row;
+}
+
+.inputshift {
+  margin-bottom: 10px;
 }
 
 .inputField,
@@ -61,7 +66,7 @@
   color: red;
 }
 
-.signupBtn {
+.NextBtn {
   background-color: #4c78e7;
   display: block;
   border: none;

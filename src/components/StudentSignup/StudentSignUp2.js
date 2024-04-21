@@ -12,8 +12,6 @@ export default function StudentSignUp2() {
   const [errors, setErrors] = React.useState({});
 
   const navigate = useNavigate();
- 
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,8 +32,8 @@ export default function StudentSignUp2() {
       errors.lastName = "Grade is required";
     }
     if (!formData.zipcode.trim()) {
-        errors.lastName = "Zipcode is required";
-      }
+      errors.lastName = "Zipcode is required";
+    }
     if (formData.zipcode.length > 5) {
       errors.password = "Zipcode must be equal to 5 characters";
     }
@@ -71,20 +69,17 @@ export default function StudentSignUp2() {
 
       <form className={styles.inputContainer} onSubmit={handleSubmit}>
         <div className={styles.inputshift}>
-            
-          <div>
-            <input
-              type="text"
-              name="School"
-              placeholder="School"
-              className={styles.inputField}
-              value={formData.school}
-              onChange={handleChange}
-            />
-            {errors.school && (
-              <span className={styles.errorMessage}>{errors.firstName}</span>
-            )}
-          </div>
+          <input
+            type="text"
+            name="school"
+            placeholder="School"
+            className={styles.inputField}
+            value={formData.school}
+            onChange={handleChange}
+          />
+          {errors.school && (
+            <span className={styles.errorMessage}>{errors.firstName}</span>
+          )}
         </div>
 
         <div className={styles.emailpasswordFields}>

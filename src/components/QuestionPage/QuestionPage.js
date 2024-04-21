@@ -17,9 +17,8 @@ const answerArray = [
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
-  const [selectedAnswers, setSelectedAnswers] = useState(
-    Array(questions.length).fill(null),
-  );
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
+
 
   const handleSelect = (questionIndex, answerIndex) => {
     console.log("handle selected");
@@ -33,6 +32,7 @@ export default function QuestionPage() {
     const fetchData = async () => {
       const questionsData = await getQuestions();
       setQuestions(questionsData);
+      setSelectedAnswers(Array.from({ length: questionsData.length }, () => null)); // Initialize selectedAnswers
     };
     fetchData();
   }, []);
@@ -50,7 +50,6 @@ export default function QuestionPage() {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
-
       <div className={styles.questionModalContainer}>
         <button className={styles.arrowBtn} onClick={handlePrevious}>
           <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} />
@@ -67,13 +66,13 @@ export default function QuestionPage() {
           </p>
 
           <div className={styles.responseRow}>
-            {answerArray.map((value, idx) => {
-              const isSelected = selectedAnswers[currentQuestionIndex] === idx; // Determine if this answer is the selected one
+            {answerArray.map((value, index) => {
+              const isSelected = selectedAnswers[currentQuestionIndex] === index; // Determine if this answer is the selected one
               return (
                 <button
                   className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ""}`}
-                  key={idx}
-                  onClick={() => handleSelect(currentQuestionIndex, idx)}
+                  key={index}
+                  onClick={() => handleSelect(currentQuestionIndex, index)}
                 >
                   {value}
                 </button>
@@ -89,10 +88,11 @@ export default function QuestionPage() {
 
       <div className={styles.questionGrid}>
         {questions.map((_, index) => {
+          const isSelected = selectedAnswers[index] !== null;
           return (
             <button
               key={index}
-              className={`${styles.questionLinks} `}
+              className={`${styles.questionLinks} ${isSelected ? styles.isAnswered : ""}`}
               onClick={() => setCurrentQuestionIndex(index)}
             >
               {index + 1}

@@ -1,5 +1,5 @@
 import "./App.css";
-
+  
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Slide1 from "./components/pages/slide1/slide1";

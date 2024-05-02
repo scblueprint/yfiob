@@ -10,7 +10,7 @@ import QuestionPage from "./components/QuestionPage/QuestionPage";
 import StudentSignUp from "./components/StudentSignup/StudentSignUp";
 import StudentSignUp2 from "./components/StudentSignup/StudentSignUp2";
 import React from "react";
-
+ 
 function App() {
   const [user, setUser] = React.useState(null);
 

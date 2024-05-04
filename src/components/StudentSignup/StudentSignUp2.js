@@ -1,9 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./StudentSignUp2.module.css";
-import signUpUser from "../../firebase/signUp";
-import addUserToFirestore from "../../firebase/newuser";
 import { auth } from "../../firebase/firebaseConfig";
+import updateUserDoc from "../../firebase/updateUser";
 
 export default function StudentSignUp2() {
   const [formData, setFormData] = React.useState({
@@ -71,16 +70,15 @@ export default function StudentSignUp2() {
     if (Object.keys(errors).length === 0) {
       try {
         // Add user information to Firestore
-        //await signUpUser(formData.school, formData.grade, formData.zipcode);
 
         const currentUser = auth.currentUser;
-        addUserToFirestore(currentUser.uid, currentUser.email , currentUser.displayName, formData.zipcode, formData.school, formData.grade);
-        // Redirect to login page after successful account creation
+        updateUserDoc(currentUser.uid, formData.zipcode, formData.school, formData.grade);
         navigate("/login");
       } catch (error) {
         // Handle error if unable to complete account creation
         const errorCode = error.code;
         const errorMessage = error.message;
+
         console.error("Error creating user account:", errorCode, errorMessage);
       }
 

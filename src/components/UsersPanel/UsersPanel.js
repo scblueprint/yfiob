@@ -12,7 +12,8 @@ function UsersPanel() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const userData = await pullUsers('Bob', 'bob@bob.com');
+                //enter constraints here
+                const userData = await pullUsers();
                 setUsers(userData);
             } catch (error) {
                 console.error("Error fetching user data: ", error.message);

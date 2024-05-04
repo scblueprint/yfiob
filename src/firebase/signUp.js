@@ -4,6 +4,7 @@ import addUserToFirestore from "./newuser";
 
 async function signUpUser(email, password, firstName) {
   try {
+    
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,

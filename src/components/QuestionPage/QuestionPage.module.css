@@ -79,6 +79,10 @@
   background-color: darkgreen;
 }
 
+.isSelected{
+  background-color: darkgreen;
+}
+
 .questionGrid {
   display: flex;
   justify-content: center;
@@ -98,4 +102,9 @@
 
 .questionLinks:hover {
   box-shadow: 0px 1px 1px black;
+}
+
+.isAnswered{
+  color: #ffffff;
+  background-color: #4c78e7;
 }

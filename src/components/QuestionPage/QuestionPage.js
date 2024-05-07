@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./QuestionPage.module.css";
 
+import getQuestions from "../../firebase/pullQuestions";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,18 +16,29 @@ const answerArray = [
   "strongly agree",
 ];
 
-const questions = [
-  "I am passionate about working with nature and the environment.",
-  "I find joy in creating and designing visual content, such as art or multimedia projects.",
-  "I enjoy hands-on work and take satisfaction in building or constructing things.",
-  "Promoting health and wellness is important to me, and I am interested in medical advancements.",
-  "I am fascinated by technology and enjoy staying updated on the latest innovations.",
-  "Providing excellent customer service and creating positive experiences for others is a priority for me.",
-];
 
-const QuestionPage = () => {
-  const navigate = useNavigate();
+export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [questions, setQuestions] = useState([]);
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
+
+
+  const handleSelect = (questionIndex, answerIndex) => {
+    console.log("handle selected");
+    const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
+    newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
+    setSelectedAnswers(newSelectedAnswers); // update original selected answers array
+    console.log(selectedAnswers);
+  };
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const questionsData = await getQuestions();
+      setQuestions(questionsData);
+      setSelectedAnswers(Array.from({ length: questionsData.length }, () => null)); // Initialize selectedAnswers
+    };
+    fetchData();
+  }, []);
 
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
@@ -44,7 +57,6 @@ const QuestionPage = () => {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
-
       <div className={styles.questionModalContainer}>
         <button className={styles.arrowBtn} onClick={handlePrevious}>
           <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} />
@@ -61,14 +73,18 @@ const QuestionPage = () => {
           </p>
 
           <div className={styles.responseRow}>
-            {answerArray.map((value, index) => (
-              <button
-                key={index}
-                className={styles.answerResponseSquare}
-              >
-                {value}
-              </button>
-            ))}
+            {answerArray.map((value, index) => {
+              const isSelected = selectedAnswers[currentQuestionIndex] === index; // Determine if this answer is the selected one
+              return (
+                <button
+                  className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ""}`}
+                  key={index}
+                  onClick={() => handleSelect(currentQuestionIndex, index)}
+                >
+                  {value}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -78,20 +94,20 @@ const QuestionPage = () => {
       </div>
 
       <div className={styles.questionGrid}>
-        {questions.map((question, index) => (
-          <button
-            key={index}
-            className={`${styles.questionLinks} ${
-              index === currentQuestionIndex ? styles.active : ""
-            }`}
-            onClick={() => setCurrentQuestionIndex(index)}
-          >
-            {index + 1}
-          </button>
-        ))}
+
+        {questions.map((_, index) => {
+          const isSelected = selectedAnswers[index] !== null;
+          return (
+            <button
+              key={index}
+              className={`${styles.questionLinks} ${isSelected ? styles.isAnswered : ""}`}
+              onClick={() => setCurrentQuestionIndex(index)}
+            >
+              {index + 1}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
-};
-
-export default QuestionPage;
+}

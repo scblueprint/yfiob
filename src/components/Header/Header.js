@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import yfiobLogo from "../../assets/image.png";
 import styles from "./Header.module.css";
+// import { updateUserAssessment } from '../../firebase/uploadResponses'
 import { auth } from "../../firebase/firebaseConfig";
 
 const Header = ({ user }) => {
@@ -27,6 +28,9 @@ const Header = ({ user }) => {
       <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
 
       <Navbar />
+      {/* <button className={styles.signOutBtn} onClick={() => updateUserAssessment(user.uid)}>
+        Test Upload
+      </button> */}
 
       <div className={styles.navContainer}>
         <div className={styles.loginContainer}>

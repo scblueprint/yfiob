@@ -1,5 +1,4 @@
 import "./App.css";
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Slide1 from "./components/pages/slide1/slide1";
@@ -14,7 +13,7 @@ import AdminPanel from "./components/AdminPanel/AdminPanel";
 import UsersPanel from "./components/UsersPanel/UsersPanel";
 import DataPage from "./components/DataPage/DataPage";
 import React from "react";
-
+ 
 function App() {
   const [user, setUser] = React.useState(null);
 

@@ -6,7 +6,6 @@ import pullUsers from "../../firebase/pullUsers";
 function UsersPanel() {
     const [users, setUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const [searchValue, setSearchValue] = useState("");
     const [showPopout, setShowPopout] = useState(false);
 
     useEffect(() => {
@@ -27,11 +26,6 @@ function UsersPanel() {
     };
 
     const selectedUser = users.find(user => user.id === selectedUserId);
-
-    const handleSearchChange = (event) => {
-        setSearchValue(event.target.value);
-        // You can add filtering logic here based on the search input
-    };
 
     const handlePopoutButtonClick = () => {
         setShowPopout(!showPopout); // Toggle pop-out visibility

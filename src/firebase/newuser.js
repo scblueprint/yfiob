@@ -1,12 +1,13 @@
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-const addUserToFirestore = async (userId, email, firstName) => {
+const addUserToFirestore = async (userId, email, firstName, lastName) => {
   try {
     //This line creates a documents in firebase with user information
     await setDoc(doc(db, "Users", userId), {
       email: email,
       firstName: firstName,
+      lastName: lastName,
       accountCreationDate: serverTimestamp(),
     });
     console.log("User successfully added with ID: ", userId);

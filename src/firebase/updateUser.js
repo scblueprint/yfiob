@@ -1,19 +1,18 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-const updateUserDoc = async (userId, zipcode, school, grade) => {
-    try {
-        const userDocRef = doc(db, "Users", userId);
-        const updatedFields = {};
-        if (zipcode !== null) updatedFields.zipcode = zipcode;
-        if (school !== null) updatedFields.school = school;
-        if (grade !== null) updatedFields.grade = grade;
+const updateUserToFirestore = async (userId, school, grade, zipcode) => {
+  try {
+    await updateDoc(doc(db, "Users", userId), {
+      schoolName: school,
+      grade: grade,
+      zipcode: zipcode,
+    });
+    console.log("User successfully updated with ID: ", userId);
+  } catch (error) {
+    console.error("Error updating user: ", error.message);
+    throw error;
+  }
+};
 
-        await updateDoc(userDocRef, updatedFields);
-    } catch (error) {
-      console.error("Error adding user: ", error.message);
-      throw error;
-    }
-  };
-
-export default updateUserDoc;
+export default updateUserToFirestore;

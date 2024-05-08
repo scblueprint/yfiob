@@ -53,9 +53,14 @@ export default function StudentSignUp() {
     if (Object.keys(errors).length === 0) {
       try {
         // Add user information to Firestore
-        await signUpUser(formData.email, formData.password, formData.firstName);
-        navigate("/signup2");
+        await signUpUser(formData.email, formData.password, formData.firstName, formData.lastName).then(userID => {
+          navigate("/signup2", { state: { userID: userID } });
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
 
+        // Redirect to login page after successful account creation
       } catch (error) {
         // Handle error if unable to complete account creation
         const errorCode = error.code;

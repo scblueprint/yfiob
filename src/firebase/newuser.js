@@ -1,13 +1,14 @@
 import { doc, serverTimestamp, setDoc, collection } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-const addUserToFirestore = async (userId, email, firstName) => {
+const addUserToFirestore = async (userId, email, firstName, lastName) => {
   try {
     //This line creates a documents in firebase with user information
     const userDocRef = doc(db, "Users", userId);
     await setDoc(userDocRef, {
       email: email,
       firstName: firstName,
+      lastName: lastName,
       accountCreationDate: serverTimestamp(),
       school: null,
       zipcode: null,

@@ -1,10 +1,11 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "./StudentSignUp2.module.css";
-import { auth } from "../../firebase/firebaseConfig";
-import updateUserDoc from "../../firebase/updateUser";
+import updateUserToFirestore from "../../firebase/updateUser";
 
 export default function StudentSignUp2() {
+  const location = useLocation();
+  const userID = location.state && location.state.userID;
   const [formData, setFormData] = React.useState({
     school: "",
     grade: "",
@@ -70,9 +71,7 @@ export default function StudentSignUp2() {
     if (Object.keys(errors).length === 0) {
       try {
         // Add user information to Firestore
-
-        const currentUser = auth.currentUser;
-        updateUserDoc(currentUser.uid, formData.zipcode, formData.school, formData.grade);
+        await updateUserToFirestore(userID, formData.school, formData.grade, formData.zipcode); 
         navigate("/login");
       } catch (error) {
         // Handle error if unable to complete account creation

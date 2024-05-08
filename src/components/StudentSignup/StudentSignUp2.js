@@ -12,15 +12,41 @@ export default function StudentSignUp2() {
     zipcode: "",
   });
   const [errors, setErrors] = React.useState({});
+  const [submitDisabled, setSubmitDisabled] = React.useState(true);
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    if (name === "school") {
+      if (!/^[A-Za-z\s]*$/.test(value)) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          school: "School is not valid",
+        }));
+        setSubmitDisabled(true); // Disable submit button if there's an error
+      } else {
+        // Clear the error if the input is valid
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          school: "",
+        }));
+        setSubmitDisabled(false); // Enable submit button if there's no error
+      }
+    }
+
+    if (name === "zipcode" && !/^\d{0,5}$/.test(value)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        zipcode: "Zip code must be 5 digits",
+      }));
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -28,35 +54,34 @@ export default function StudentSignUp2() {
     // Form validation
     const errors = {};
     if (!formData.school.trim()) {
-      errors.firstName = "School name is required";
+      errors.school = "School name is required";
     }
     if (!formData.grade.trim()) {
-      errors.lastName = "Grade is required";
+      errors.grade = "Grade is required";
     }
     if (!formData.zipcode.trim()) {
-      errors.lastName = "Zipcode is required";
+      errors.zipcode = "Zipcode is required";
     }
-    if (formData.zipcode.length > 5) {
-      errors.password = "Zipcode must be equal to 5 characters";
+    if (formData.zipcode.length !== 5) {
+      errors.zipcode = "Zipcode must be equal to 5 characters";
     }
     setErrors(errors);
 
-    // If not errors were present on sign in, process information
+    // If no errors were present on sign in, process information
     if (Object.keys(errors).length === 0) {
       try {
         // Add user information to Firestore
-        await updateUserToFirestore(userID, formData.school, formData.grade, formData.zipcode);
-
-        // Redirect to login page after successful account creation
+        await updateUserToFirestore(userID, formData.school, formData.grade, formData.zipcode); 
         navigate("/login");
       } catch (error) {
         // Handle error if unable to complete account creation
         const errorCode = error.code;
         const errorMessage = error.message;
+
         console.error("Error creating user account:", errorCode, errorMessage);
       }
 
-      //Clear Form data after submission
+      // Clear Form data after submission
       setFormData({
         school: "",
         grade: "",
@@ -80,41 +105,44 @@ export default function StudentSignUp2() {
             onChange={handleChange}
           />
           {errors.school && (
-            <span className={styles.errorMessage}>{errors.firstName}</span>
+            <span className={styles.errorMessage}>{errors.school}</span>
           )}
         </div>
 
         <div className={styles.emailpasswordFields}>
           <div className={styles.inputshift}>
-            <input
-              type="text"
+            <select
               name="grade"
-              placeholder="Grade"
               className={styles.inputField}
               value={formData.grade}
               onChange={handleChange}
-            />
+            >
+              <option value="">Select Grade</option>
+              <option value="9th">9th</option>
+              <option value="10th">10th</option>
+              <option value="11th">11th</option>
+              <option value="12th">12th</option>
+            </select>
             {errors.grade && (
-              <span className={styles.errorMessage}>{errors.email}</span>
+              <span className={styles.errorMessage}>{errors.grade}</span>
             )}
           </div>
-
           <div className={styles.inputshift}>
             <input
-              type="zipcode"
+              type="text"
               name="zipcode"
-              placeholder="x x x x x"
+              placeholder="Zipcode"
               className={styles.inputField}
               value={formData.zipcode}
               onChange={handleChange}
             />
             {errors.zipcode && (
-              <span className={styles.errorMessage}>{errors.password}</span>
+              <span className={styles.errorMessage}>{errors.zipcode}</span>
             )}
           </div>
         </div>
 
-        <button type="submit" className={styles.NextBtn}>
+        <button type="submit" className={styles.NextBtn} disabled={submitDisabled}>
           Submit
         </button>
       </form>

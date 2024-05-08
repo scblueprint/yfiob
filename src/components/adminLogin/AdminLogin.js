@@ -46,6 +46,7 @@ function AdminLogin({ setUser }) {
       .then((userCredentials) => {
         // If successful, admin is signed in
         const admin = userCredentials.user;
+        navigate("/adminPanel");
         console.log(`${admin.email} is admins email`);
         // ***************************************
         // Implement once adminPanel is functional

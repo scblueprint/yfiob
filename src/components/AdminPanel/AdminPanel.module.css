@@ -1,0 +1,26 @@
+.buttonStack {
+    width: 20%;
+    height: 100%;
+  }
+  
+  .buttonWithIcon {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Adjust as needed */
+  }
+  
+  .buttonWithIcon button {
+    margin-left: 10px; /* Adjust as needed */
+  }
+  
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.dataContainer {
+    width: 80%;
+    height: 100%;
+    background-color: white;
+}

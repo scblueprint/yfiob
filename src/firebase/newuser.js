@@ -10,6 +10,9 @@ const addUserToFirestore = async (userId, email, firstName, lastName) => {
       firstName: firstName,
       lastName: lastName,
       accountCreationDate: serverTimestamp(),
+      school: null,
+      zipcode: null,
+      grade: null
     });
 
     const assessmentsCollectionRef = collection(userDocRef, "assessments");

@@ -1,9 +1,11 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "./StudentSignUp2.module.css";
-import signUpUser from "../../firebase/signUp";
+import updateUserToFirestore from "../../firebase/updateUser";
 
 export default function StudentSignUp2() {
+  const location = useLocation();
+  const userID = location.state && location.state.userID;
   const [formData, setFormData] = React.useState({
     school: "",
     grade: "",
@@ -43,7 +45,7 @@ export default function StudentSignUp2() {
     if (Object.keys(errors).length === 0) {
       try {
         // Add user information to Firestore
-        await signUpUser(formData.school, formData.grade, formData.zipcode);
+        await updateUserToFirestore(userID, formData.school, formData.grade, formData.zipcode);
 
         // Redirect to login page after successful account creation
         navigate("/login");

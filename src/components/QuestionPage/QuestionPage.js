@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./QuestionPage.module.css";
 
 import getQuestions from "../../firebase/pullQuestions";
+import uploadResponses from "../../firebase/uploadResponses";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +19,7 @@ export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [isComplete, setComplete] = useState(false);
 
 
   const handleSelect = (questionIndex, answerIndex) => {
@@ -29,7 +31,7 @@ export default function QuestionPage() {
     // Quiz state set to complete if no question unanswered
     setComplete(areAllNotNull);
     console.log(selectedAnswers);
-    console.log(complete);
+    console.log(isComplete);
   };
 
   React.useEffect(() => {
@@ -51,9 +53,31 @@ export default function QuestionPage() {
     );
   };
 
+  const handleSubmit = () => {
+    if (isComplete) {
+      console.log("Submitted")
+      
+      // if user logged in
+      // uploadResponses(selectedAnswers)
+    } else {
+      console.log("Quiz not finished.")
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
+      <div>
+        <button 
+          className={`${styles.submitButton} ${isComplete ? styles.submittable : styles.notSubmittable}`}
+          onClick={handleSubmit}>
+        Submit
+        </button>
+      </div>
+
+      <div>
+        <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
+      </div>
+
       <div className={styles.questionModalContainer}>
         <button className={styles.arrowBtn} onClick={handlePrevious}>
           <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} />

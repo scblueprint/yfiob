@@ -108,3 +108,28 @@
   color: #ffffff;
   background-color: #4c78e7;
 }
+
+.submitButton {
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 20px;
+  padding: 1.06rem 2.18rem;
+  border: none;
+  cursor: pointer;
+}
+
+.notSubmittable {
+  background-color: #ababab4d;
+  color: #545454;
+}
+
+.submittable {
+  background-color: #4c78e74d;
+  color: #4752b7;
+}
+
+.submitButton:hover {
+  background-color: #1542b54d;
+  color: #1e2db8;
+}

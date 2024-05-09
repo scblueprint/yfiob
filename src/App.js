@@ -7,6 +7,7 @@ import Slide3 from "./components/pages/slide3/slide3";
 import StudentLogin from "./components/StudentLogin/StudentLogin";
 import AdminLogin from "./components/adminLogin/AdminLogin";
 import QuestionPage from "./components/QuestionPage/QuestionPage";
+import ResultsPage from "./components/ResultsPage/ResultsPage";
 import StudentSignUp from "./components/StudentSignup/StudentSignUp";
 import StudentSignUp2 from "./components/StudentSignup/StudentSignUp2";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/slide3" element={<Slide3 />} />
         <Route path="/login" element={<StudentLogin setUser={setUser} />} />
         <Route path="/admin" element={<AdminLogin setUser={setUser} />} />
+        <Route path="/resultsPage" element={<ResultsPage />} />
         <Route path="/questionPage" element={<QuestionPage />} />
         <Route path="/signup" element={<StudentSignUp />} />
         <Route path="/signup2" element={<StudentSignUp2 />} />  

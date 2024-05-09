@@ -22,14 +22,19 @@ const Header = ({ user }) => {
         console.error("Error signing out:", error);
       });
   };
+  // const handleTestButtonClick = () => {
+    
+  //   navigate('/resultsPage'); 
+  // };
 
   return (
     <div className={styles.headerWrapper}>
       <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
 
       <Navbar />
-      {/* <button className={styles.signOutBtn} onClick={() => updateUserAssessment(user.uid)}>
-        Test Upload
+      {/* <button className={styles.signOutBtn} onClick={handleTestButtonClick}>
+        {}
+        Test Results
       </button> */}
 
       <div className={styles.navContainer}>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SideNavbar from "../SideNavbar/SideNavbar";
 import Dashboard from "../Dashboard/Dashboard";
+import UsersPanel from "../UsersPanel/UsersPanel";
 
 function AdminPanel() {
   const [currentPage, setCurrentPage] = useState("Data");
@@ -26,7 +27,7 @@ function AdminPanel() {
           subtitle={"Breakdown of students account information."}
         >
           {/* Dashboard content goes in here */}
-          This is the user content
+          <UsersPanel />
         </Dashboard>
       ) : (
         ""
@@ -36,18 +37,3 @@ function AdminPanel() {
 }
 
 export default AdminPanel;
-
-// {/* <div className={styles.buttonStack}> */}
-// {/*     <div className={styles.buttonWithIcon}> */}
-// {/*         <FontAwesomeIcon icon={faChartLine} /> */}
-// {/*         <button onClick={() => handleButtonClick("data")}>Data</button> */}
-// {/*     </div> */}
-// {/*     <div className={styles.buttonWithIcon}> */}
-// {/*         <FontAwesomeIcon icon={faUserGroup} /> */}
-// {/*         <button onClick={() => handleButtonClick("users")}>Student Accounts</button> */}
-// {/*     </div> */}
-// {/* </div> */}
-// {/* <div className={styles.dataContainer}> */}
-// {/*     {currentPage === "data" && <DataPage />} */}
-// {/*     {currentPage === "users" && <UsersPanel />} */}
-// {/* </div> */}

@@ -27,11 +27,11 @@ export default function QuestionPage() {
     const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
     newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
     setSelectedAnswers(newSelectedAnswers); // update original selected answers array
+
+    // check all questions have been answered
     var areAllNotNull = newSelectedAnswers.every(function(i) { return i !== null; });
     // Quiz state set to complete if no question unanswered
     setComplete(areAllNotNull);
-    console.log(selectedAnswers);
-    console.log(isComplete);
   };
 
   React.useEffect(() => {

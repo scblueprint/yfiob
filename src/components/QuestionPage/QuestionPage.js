@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import styles from "./QuestionPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 import getQuestions from "../../firebase/pullQuestions";
-import uploadResponses from "../../firebase/uploadResponses";
+//import uploadResponses from "../../firebase/uploadResponses";
 
+import styles from "./QuestionPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
 
 const answerArray = [
   "strongly disagree",
@@ -20,6 +22,7 @@ export default function QuestionPage() {
   const [questions, setQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [isComplete, setComplete] = useState(false);
+  const navigate = useNavigate();
 
 
   const handleSelect = (questionIndex, answerIndex) => {
@@ -56,9 +59,9 @@ export default function QuestionPage() {
   const handleSubmit = () => {
     if (isComplete) {
       console.log("Submitted")
-      
       // if user logged in
       // uploadResponses(selectedAnswers)
+      navigate('/resultsPage');
     } else {
       console.log("Quiz not finished.")
     }

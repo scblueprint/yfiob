@@ -1,0 +1,24 @@
+.dashboard {
+  background-color: #fff;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  margin: 16px 35px 35px 240px;
+  margin-right: 35px;
+  border-radius: 6px;
+  height: 80dvh;
+  margin-bottom: 35px;
+  position: fixed;
+  padding: 30px;
+  overflow: hidden;
+  margin-left: 240px;
+}
+
+.dashboard h1 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.dashboard h3 {
+  font-size: 1.25rem;
+  font-weight: 400;
+}

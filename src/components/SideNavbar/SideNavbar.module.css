@@ -1,0 +1,20 @@
+/* SideNav.module.css */
+
+/* Style for the side navigation bar */
+.sidenav {
+  font-weight: 500;
+  height: 100%;
+  width: 210px;
+  margin-top: 130px;
+  position: fixed;
+  background-color: #e9ecf5;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  padding-right: 10px;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+}

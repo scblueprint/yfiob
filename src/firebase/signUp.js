@@ -2,8 +2,9 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "./firebaseConfig";
 import addUserToFirestore from "./newuser";
 
-async function signUpUser(email, password, firstName) {
+async function signUpUser(email, password, firstName, lastName) {
   try {
+    
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -21,7 +22,8 @@ async function signUpUser(email, password, firstName) {
     // Add user information into firebase
     // We can add/take away any fields we want be adding
     // or removing function parameters
-    await addUserToFirestore(user.uid, email, firstName);
+    await addUserToFirestore(user.uid, email, firstName, lastName);
+    return user.uid;
   } catch (error) {
     console.log(`Error adding user to firestore: ${error}`);
   }

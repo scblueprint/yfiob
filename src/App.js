@@ -10,6 +10,9 @@ import QuestionPage from "./components/QuestionPage/QuestionPage";
 import ResultsPage from "./components/ResultsPage/ResultsPage";
 import StudentSignUp from "./components/StudentSignup/StudentSignUp";
 import StudentSignUp2 from "./components/StudentSignup/StudentSignUp2";
+import AdminPanel from "./components/AdminPanel/AdminPanel";
+import UsersPanel from "./components/UsersPanel/UsersPanel";
+import DataPage from "./components/DataPage/DataPage";
 import React from "react";
  
 function App() {
@@ -27,7 +30,10 @@ function App() {
         <Route path="/questionPage" element={<QuestionPage />} />
         <Route path="/resultsPage" element={<ResultsPage />} />
         <Route path="/signup" element={<StudentSignUp />} />
-        <Route path="/signup2" element={<StudentSignUp2 />} />
+        <Route path="/signup2" element={<StudentSignUp2 />} />  
+        <Route path="/adminPanel" element={<AdminPanel />} />
+        <Route path="/usersPanel" element={<UsersPanel />} />
+        <Route path="/dataPage" element={<DataPage />} />
       </Routes>
     </Router>   
   );

@@ -25,7 +25,9 @@ const Header = ({ user }) => {
 
   return (
     <div className={styles.headerWrapper}>
-      <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
+      <Link to="/">
+        <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
+      </Link>
 
       <Navbar />
       {/* <button className={styles.signOutBtn} onClick={() => updateUserAssessment(user.uid)}>

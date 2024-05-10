@@ -79,7 +79,7 @@
   background-color: darkgreen;
 }
 
-.isSelected{
+.isSelected {
   background-color: darkgreen;
 }
 
@@ -89,6 +89,7 @@
   align-items: center;
   margin-top: 20px;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .questionLinks {
@@ -104,7 +105,7 @@
   box-shadow: 0px 1px 1px black;
 }
 
-.isAnswered{
+.isAnswered {
   color: #ffffff;
   background-color: #4c78e7;
 }

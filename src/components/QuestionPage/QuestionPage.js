@@ -16,12 +16,11 @@ const answerArray = [
   "strongly agree",
 ];
 
-
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
-
+  const navigate = useNavigate();
 
   const handleSelect = (questionIndex, answerIndex) => {
     console.log("handle selected");
@@ -35,7 +34,9 @@ export default function QuestionPage() {
     const fetchData = async () => {
       const questionsData = await getQuestions();
       setQuestions(questionsData);
-      setSelectedAnswers(Array.from({ length: questionsData.length }, () => null)); // Initialize selectedAnswers
+      setSelectedAnswers(
+        Array.from({ length: questionsData.length }, () => null),
+      ); // Initialize selectedAnswers
     };
     fetchData();
   }, []);
@@ -46,10 +47,10 @@ export default function QuestionPage() {
 
   const handleNext = () => {
     if (currentQuestionIndex === questions.length - 1) {
-      navigate('/resultsPage'); // Navigate to the results page
+      navigate("/resultsPage"); // Navigate to the results page
     } else {
       setCurrentQuestionIndex((prevIndex) =>
-        Math.min(questions.length - 1, prevIndex + 1)
+        Math.min(questions.length - 1, prevIndex + 1),
       );
     }
   };
@@ -64,8 +65,8 @@ export default function QuestionPage() {
 
         <div className={styles.questionWrapper}>
           <p className={styles.textHeader}>
-            Don't worry about time, money, training, or education. Just think, do
-            you enjoy it?
+            Don't worry about time, money, training, or education. Just think,
+            do you enjoy it?
           </p>
 
           <p className={styles.questionPrompt}>
@@ -74,7 +75,8 @@ export default function QuestionPage() {
 
           <div className={styles.responseRow}>
             {answerArray.map((value, index) => {
-              const isSelected = selectedAnswers[currentQuestionIndex] === index; // Determine if this answer is the selected one
+              const isSelected =
+                selectedAnswers[currentQuestionIndex] === index; // Determine if this answer is the selected one
               return (
                 <button
                   className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ""}`}
@@ -94,7 +96,6 @@ export default function QuestionPage() {
       </div>
 
       <div className={styles.questionGrid}>
-
         {questions.map((_, index) => {
           const isSelected = selectedAnswers[index] !== null;
           return (

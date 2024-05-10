@@ -5,7 +5,7 @@ const ResultsPage = () => {
   // Logic to calculate and display results
   return (
     <div>
-      <h1>Results</h1>
+      <h1 className={styles.header}>Results</h1>
     </div>
   );
 };

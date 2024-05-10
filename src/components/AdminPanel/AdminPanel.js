@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SideNavbar from "../SideNavbar/SideNavbar";
 import Dashboard from "../Dashboard/Dashboard";
 import UsersPanel from "../UsersPanel/UsersPanel";
+import AssessmentEditor from "../AssessmentEditor/AssessmentEditor";
 
 function AdminPanel() {
   const [currentPage, setCurrentPage] = useState("Data");
@@ -28,6 +29,18 @@ function AdminPanel() {
         >
           {/* Dashboard content goes in here */}
           <UsersPanel />
+        </Dashboard>
+      ) : (
+        ""
+      )}
+
+      {currentPage === "Survey Questions" ? (
+        <Dashboard
+          title={"Survey Questions"}
+        >
+          {/* Dashboard content goes in here */}
+          Here you can add/edit all the survey questions.
+          <AssessmentEditor />
         </Dashboard>
       ) : (
         ""

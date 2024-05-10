@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import styles from "./QuestionPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 import getQuestions from "../../firebase/pullQuestions";
+//import uploadResponses from "../../firebase/uploadResponses";
 
+import styles from "./QuestionPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
-import { useNavigate } from "react-router-dom";
 
 const answerArray = [
   "strongly disagree",
@@ -20,6 +20,7 @@ export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [isComplete, setComplete] = useState(false);
   const navigate = useNavigate();
 
   const handleSelect = (questionIndex, answerIndex) => {
@@ -27,7 +28,13 @@ export default function QuestionPage() {
     const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
     newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
     setSelectedAnswers(newSelectedAnswers); // update original selected answers array
-    console.log(selectedAnswers);
+
+    // check all questions have been answered
+    var areAllNotNull = newSelectedAnswers.every(function (i) {
+      return i !== null;
+    });
+    // Quiz state set to complete if no question unanswered
+    setComplete(areAllNotNull);
   };
 
   React.useEffect(() => {
@@ -55,9 +62,23 @@ export default function QuestionPage() {
     }
   };
 
+  const handleSubmit = () => {
+    if (isComplete) {
+      console.log("Submitted");
+      // if user logged in
+      // uploadResponses(selectedAnswers)
+      navigate("/resultsPage");
+    } else {
+      console.log("Quiz not finished.");
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
+      <div>
+        <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
+      </div>
+
       <div className={styles.questionModalContainer}>
         <button className={styles.arrowBtn} onClick={handlePrevious}>
           <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} />
@@ -108,6 +129,15 @@ export default function QuestionPage() {
             </button>
           );
         })}
+
+        <div>
+          <button
+            className={`${styles.submitButton} ${isComplete ? styles.submittable : styles.notSubmittable}`}
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );

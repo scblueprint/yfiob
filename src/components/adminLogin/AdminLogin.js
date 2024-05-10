@@ -25,11 +25,7 @@ function AdminLogin({ setUser }) {
         // Admin is signed in
         console.log(admin);
         setUser(admin);
-        // ***************************************
-        // Implement once adminPanel is functional
-        //
-        // navigate("/adminPanel")
-        // ***************************************
+        navigate("/adminPanel");
       } else {
         // Admin is signed out
         setUser(null);
@@ -48,20 +44,16 @@ function AdminLogin({ setUser }) {
         const admin = userCredentials.user;
         navigate("/adminPanel");
         console.log(`${admin.email} is admins email`);
-        // ***************************************
-        // Implement once adminPanel is functional
-        //
-        // navigate("/adminPanel")
-        // ***************************************
+        navigate("/adminPanel");
       })
       .catch((error) => {
         // Handle errors
         console.log(error);
       });
 
-      // Clear form data after submission
-      setEmail("");
-      setPassword("");
+    // Clear form data after submission
+    setEmail("");
+    setPassword("");
   };
 
   return (

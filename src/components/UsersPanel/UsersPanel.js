@@ -34,11 +34,13 @@ function UsersPanel() {
 
         <Modal defaultOpen={false}>
           <Modal.Button asChild>
-            <img
-              src={filterIcon}
-              alt={"Filter Icon"}
-              className={styles.filterIcon}
-            />
+            <button style={{ border: "none", backgroundColor: "transparent" }}>
+              <img
+                src={filterIcon}
+                alt={"Filter Icon"}
+                className={styles.filterIcon}
+              />
+            </button>
           </Modal.Button>
 
           <Modal.Content title={"Filter"}>

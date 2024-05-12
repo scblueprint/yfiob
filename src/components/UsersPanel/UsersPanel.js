@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./UsersPanel.module.css";
-
+import filterIcon from "../../assets/FilterCircle.svg";
 import pullUsers from "../../firebase/pullUsers";
 import Modal from "../Modal/Modal";
 
@@ -33,7 +33,13 @@ function UsersPanel() {
         <input type="text" id="student" className={styles.search} />
 
         <Modal defaultOpen={false}>
-          <Modal.Button>Pop Out Button</Modal.Button>
+          <Modal.Button asChild>
+            <img
+              src={filterIcon}
+              alt={"Filter Icon"}
+              className={styles.filterIcon}
+            />
+          </Modal.Button>
 
           <Modal.Content title={"Filter"}>
             Content of the modal goes in here! In this case, filtering UI would

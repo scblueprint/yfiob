@@ -6,7 +6,6 @@ import { doc, getDoc } from "firebase/firestore";
 
 function Slide_1() {
   const [questions, setQuestions] = useState(0);
-  
   useEffect(() => {
       async function getSize() {
           try {

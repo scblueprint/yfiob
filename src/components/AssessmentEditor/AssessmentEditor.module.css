@@ -1,5 +1,10 @@
+.page {
+    overflow: auto;
+    height: 100%;
+    padding: 2%;
+}
 
-.btn-group{
+.allQuestionRows{
 
     width: 1158px;
     height: 62px;
@@ -12,12 +17,12 @@
 }
 
 .questionRow{
-width: 1158px;
-height: 62px;
-left: 20px;
-top: 20px;
+    width: 1158px;
+    height: 62px;
+    left: 20px;
+    top: 20px;
 
-background: rgba(76, 120, 231, 0.3);
+    background: rgba(76, 120, 231, 0.3);
 
 }
 

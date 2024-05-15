@@ -18,11 +18,11 @@ function AssessmentEditor() {
     console.log(questions);
 
     return (
-        <div className={styles.questionBox}>
+        <div className={styles.page}>
             {questions.map((questionText, index) => {
               const isSelected = false;
               return (
-                <div class="btn-group">
+                <div className={styles.allQuestionRows}>
                   <button
                     className={`${styles.questionRow} ${isSelected ? styles.isSelected : ""}`}
                     key={index}

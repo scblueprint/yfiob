@@ -15,7 +15,10 @@ function AssessmentEditor() {
         fetchData();
       }, []);
     
-    console.log(questions);
+    const [selectedQuestion, setSelectedQuestion] = Array.from(Array(questions.length).keys())
+    const handleClick = (questionIndex) => {
+      return 0;
+    }
 
     return (
         <div className={styles.page}>
@@ -26,7 +29,7 @@ function AssessmentEditor() {
                   <button
                     className={`${styles.questionRow} ${isSelected ? styles.isSelected : ""}`}
                     key={index}
-                    onClick={() => console.log("handleSelect(currentQuestionIndex, index)")}
+                    onClick={() => handleClick(index)}
                   >
                     {questionText}
                   </button>

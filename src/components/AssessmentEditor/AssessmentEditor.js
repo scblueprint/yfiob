@@ -22,13 +22,15 @@ function AssessmentEditor() {
             {questions.map((questionText, index) => {
               const isSelected = false;
               return (
-                <button
-                  className={`${styles.questionRow} ${isSelected ? styles.isSelected : ""}`}
-                  key={index}
-                  onClick={() => console.log("handleSelect(currentQuestionIndex, index)")}
-                >
-                  {questionText}
-                </button>
+                <div class="btn-group">
+                  <button
+                    className={`${styles.questionRow} ${isSelected ? styles.isSelected : ""}`}
+                    key={index}
+                    onClick={() => console.log("handleSelect(currentQuestionIndex, index)")}
+                  >
+                    {questionText}
+                  </button>
+                </div>
               );
             })}
         </div>

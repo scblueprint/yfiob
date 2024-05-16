@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import styles from "./ResultsPage.module.css";
-
 // import getQuestions from "../../firebase/pullQuestions";
+// import getQuestionsWeights from "../../firebase/pullQuestionsWeights";
+
+
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -15,9 +17,9 @@ import styles from "./ResultsPage.module.css";
 // ];
 
 export default function ResultsPage() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [questions, setQuestions] = useState([]);
-  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  // const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  // const [questions, setQuestions] = useState([]);
+  // const [selectedAnswers, setSelectedAnswers] = useState([]);
 
 
 //   const handleSelect = (questionIndex, answerIndex) => {

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import styles from "./QuestionPage.module.css";
 
 import getQuestions from "../../firebase/pullQuestions";
+import getQuestionsWeights from "../../firebase/pullQuestionsWeights";
+import calculateUserScores from "../../firebase/uploadResponses";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -11,12 +15,13 @@ const answerArray = [
   "disagree",
   "neutral",
   "agree",
-  "strongly agree",
+  "strongly agree"
 ];
 
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const [questionsWeights, setQuestionsWeights] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
 
 
@@ -28,14 +33,39 @@ export default function QuestionPage() {
     console.log(selectedAnswers);
   };
 
+
+
   React.useEffect(() => {
     const fetchData = async () => {
       const questionsData = await getQuestions();
       setQuestions(questionsData);
+      console.log("Questions" + questionsData);
+
+      const questionsWeightsData = await getQuestionsWeights();
+      setQuestionsWeights(questionsWeightsData);
+      console.log("Question Weights" + JSON.stringify(questionsWeightsData));
+
       setSelectedAnswers(Array.from({ length: questionsData.length }, () => null)); // Initialize selectedAnswers
     };
     fetchData();
   }, []);
+
+  // new stuff
+  const navigate = useNavigate();
+
+  const checkFinish = () => {
+    return selectedAnswers.every(answer => answer !== null);
+  };
+
+  const goToResults = () => {
+    if (checkFinish()) {
+      const final_scores = calculateUserScores(selectedAnswers, questionsWeights);
+      console.log("Final Scores: " + final_scores)
+      navigate('/resultsPage');
+    } else {
+      alert('Please answer all questions before proceeding.');
+    }
+  };
 
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
@@ -60,6 +90,11 @@ export default function QuestionPage() {
             Don't worry about time, money, training, or education. Just think do
             you enjoy it?
           </p>
+          {checkFinish() && (
+        <button className={styles.submitButton} onClick={goToResults}>
+          Go to Results
+        </button>
+      )}
 
           <p className={styles.questionPrompt}>
             {questions[currentQuestionIndex]}

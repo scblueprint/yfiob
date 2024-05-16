@@ -38,6 +38,8 @@
   margin: 0 25px;
   padding: 24px 32px;
   border-radius: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .questionNumSquare {
@@ -83,28 +85,13 @@
   background-color: darkgreen;
 }
 
-.questionGrid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
 .questionLinks {
+  flex: 1;
   background-color: #4c78e74d;
   color: #4c78e7;
-  padding: 5px 57px;
-  border: none;
-  border-radius: 8.4px;
-  cursor: pointer;
+  padding: 5px 5px;
+  height: 100%;
 }
-
-.questionLinks:hover {
-  box-shadow: 0px 1px 1px black;
-}
-
 .isAnswered {
   color: #ffffff;
   background-color: #4c78e7;
@@ -136,3 +123,17 @@
   color: #1e2db8;
 }
 
+.progressIndicator {
+  width: 100%;
+  position: absolute;
+  border-radius: 20px;
+  top: 0;
+}
+
+.questionBar {
+  display: flex;
+  flex-direction: row;
+  height: 48px;
+  border-radius: 20px;
+  width: 100%;
+}

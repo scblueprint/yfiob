@@ -20,7 +20,7 @@ export default function Navbar() {
           </li>
 
           <li className={styles.linkListItem}>
-            <Link to="/" className={styles.linkOptions}>
+            <Link to="/exploreCareers" className={styles.linkOptions}>
               Explore Careers
             </Link>
           </li>

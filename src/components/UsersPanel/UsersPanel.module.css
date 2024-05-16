@@ -1,25 +1,97 @@
 .container {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center items vertically */
-  align-items: center; /* Center items horizontally */
+  height: 100vh; /* Adjust the height as needed */
 }
 
 .filterContainer {
-  width: 100%;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px; /* Reduce margin bottom */
+  border-bottom: 1px solid #ccc;
 }
 
-.filterIcon {
-  cursor: pointer;
-  width: 33px;
-  height: 33px;
+.searchContainer {
+  flex: 0 0 auto;
+  padding: 5px 10px; 
 }
 
 .search {
-  width: fit-content;
+  flex: 1; /* Take up remaining space */
+  margin-right: 10px; /* Add margin to separate from the filter icon */
+  border: none; /* Remove border from all sides */
+  border-bottom: 1px solid #ccc; /* Add border only to the bottom */
 }
 
+.searchButton {
+  border: none; /* Remove border */
+  background-color: transparent; /* Remove background */
+}
+
+.tableContainer {
+  flex: 1;
+  margin: 10px 10px;
+}
+
+.tableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableContainer tbody {
+  max-height: calc(100vh - 200px); /* Adjust the max height as needed */
+  overflow-y: auto; /* Make the tbody scrollable */
+}
+
+.tableContainer tr {
+  margin-bottom: 10px; /* Adjust the margin to increase spacing between rows */
+}
+
+.tableContainer th,
+.tableContainer td {
+  padding: 0; /* Remove padding from table cells */
+}
+
+.tableContainer .cellContent {
+  padding: 10px; /* Add padding around the content */
+}
+
+.tableContainer th {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Adjusted padding for individual cells */
+.name, .grade, .school, .zipcode, .email {
+  padding: 15px; /* Adjust padding as needed */
+  margin: 5px 0; /* Adjust margin for space above and below */
+  background-color: #4C78E721; /* Light blue background color */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.index {
+  width: 5%; /* Adjust width as needed */
+}
+
+.name {
+  width: 20%;
+}
+
+.grade, .school, .zipcode {
+  width: 15%; /* Adjust width as needed */
+}
+
+.email {
+  width: 25%; /* Adjust width as needed */
+}

@@ -5,7 +5,6 @@
 
 .textHeader {
   text-align: center;
-  font-family: Lazo, sans-serif;
   font-weight: 300;
   margin: 3rem auto 2rem auto;
 }
@@ -42,7 +41,6 @@
 
 .questionNumSquare {
   text-align: center;
-  font-family: Lazo, sans-serif;
   font-size: 1.25rem;
   line-height: 1.5rem;
   padding: 4px 11px;
@@ -135,4 +133,3 @@
   background-color: #1542b54d;
   color: #1e2db8;
 }
-

@@ -14,74 +14,33 @@ export const fetchUserAssessmentRef = async (userId) => {
   return assessmentDocRef;
 };
 
-// filled with dummy data
-// when Lipitha's function is done:
-//  - make the map output public
-//  - make helper function to extract values
-//  - call updateUserAssesment with the output
 
-//  calculateUserScores()
-// - returns a map called industries with the key being the industry name and the value being a float 
-export const calculateUserScores = async (selectedAnswers, questionWeights) => {
-  // Mapping of answer indexes to their respective weights
-  const answerWeights = [-1.0, -0.5, 0, 0.5, 1.0];
-
-  // Initialize an object to keep track of the industry scores
-  let industryScores = {};
-
-  // Iterate through each question's weights
-  Object.entries(questionWeights).forEach(([question, industries], index) => {
-      // Get the weight of the user's answer for this question
-      const answerWeight = answerWeights[selectedAnswers[index]];
-
-      // Calculate the score for each industry related to this question
-      Object.entries(industries).forEach(([industryName, industryWeight]) => {
-          // If the industry hasn't been added to industryScores, initialize it
-          if (!industryScores[industryName]) {
-              industryScores[industryName] = 0;
-          }
-
-          // Add the product of the answer weight and the industry weight to the total score for this industry
-          industryScores[industryName] += industryWeight * answerWeight;
-      });
-  });
-
-  // Find the maximum score to use for normalization
-  const maxScore = Math.max(...Object.values(industryScores));
-
-  // Normalize the scores
-  Object.keys(industryScores).forEach(industry => {
-      industryScores[industry] = industryScores[industry] / maxScore;
-  });
-  console.log(JSON.stringify(industryScores));
-  return industryScores;
-};
-
-export default calculateUserScores;
-
-export const updateUserAssessment = async (userId) => {
+export const updateUserAssessment = async (userId, industryScores) => {
     try {
       const assessmentDocRef = await fetchUserAssessmentRef(userId);
+      console.log("industryScores" + JSON.stringify(industryScores));
+      
       await updateDoc(assessmentDocRef, {
         Industries: {
-            'Agriculture & Natural Resources': 1.0,
-            'Energy': 2.0,
-            'Arts, Media, and Entertainment': 5.6,
-            'Skilled Trades': 6.9,
-            'Engineering': 2.0,
-            'Education & Child Development': 10.0,
-            'Psychology': 12.1,
-            'Ecology & Environmental': 5.6,
-            'Health Science and Medical Technology': 6.7,
-            'Research & Academia': 7.2,
-            'Hospitality, Tourism, and Recreation': 8.9,
-            'IT, Software and Hardware Engineering': 7.4,
-            'Manufacturing and Product Development': 0.0,
-            'Marketing, Sales, Communications': 0.0,
-            'Aviation': 1.0,
-            'Supply Chain': 0.0,
-            'Law, Law Enforcement': 0.0,
-            'Business Management & Development': 0.0
+          'Agriculture & Natural Resources': industryScores['Agriculture & Natural Resources'] || 0,
+          'Energy': industryScores['Energy'] || 0,
+          'Arts, Media, and Entertainment': industryScores['Arts, Media, and Entertainment'] || 0,
+          'Skilled Trades': industryScores['Skilled Trades'] || 0,
+          'Engineering': industryScores['Engineering'] || 0,
+          'Education & Child Development': industryScores['Education & Child Development'] || 0,
+          'Psychology': industryScores['Psychology'] || 0,
+          'Ecology & Environmental': industryScores['Ecology & Environmental'] || 0,
+          'Health Science and Medical Technology': industryScores['Health Science and Medical Technology'] || 0,
+          'Research & Academia': industryScores['Research & Academia'] || 0,
+          'Hospitality, Tourism, and Recreation': industryScores['Hospitality, Tourism, and Recreation'] || 0,
+          'IT, Software and Hardware Engineering': industryScores['IT, Software and Hardware Engineering'] || 0,
+          'Manufacturing and Product Development': industryScores['Manufacturing and Product Development'] || 0,
+          'Marketing, Sales, Communications': industryScores['Marketing, Sales, Communications'] || 0,
+          'Aviation': industryScores['Aviation'] || 0,
+          'Supply Chain': industryScores['Supply Chain'] || 0,
+          'Law, Law Enforcement': industryScores['Law, Law Enforcement'] || 0,
+          'Business Management & Development': industryScores['Business Management & Development'] || 0
+        
         }
       });
       console.log("Assessment updated successfully.");
@@ -89,6 +48,8 @@ export const updateUserAssessment = async (userId) => {
       console.error("Error updating assessment: ", error.message);
     }
   };
+
+  export default updateUserAssessment;
   
 
 // if i then wanted to upload the assesment data to be all 1s for these fields would i 

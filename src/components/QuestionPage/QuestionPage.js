@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase/firebaseConfig";
 
 import styles from "./QuestionPage.module.css";
 
 import getQuestions from "../../firebase/pullQuestions";
 import getQuestionsWeights from "../../firebase/pullQuestionsWeights";
-import calculateUserScores from "../../firebase/uploadResponses";
+import updateUserAssessment from "../../firebase/uploadResponses";
+import calculateUserScores from "./resultsCalculation";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -23,6 +25,11 @@ export default function QuestionPage() {
   const [questions, setQuestions] = useState([]);
   const [questionsWeights, setQuestionsWeights] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+  
+  const user = auth.currentUser;
+  console.log("User Display Name: " + user.displayName);
+  console.log("User ID: " + auth.currentUser.uid);
+
 
 
   const handleSelect = (questionIndex, answerIndex) => {
@@ -57,15 +64,24 @@ export default function QuestionPage() {
     return selectedAnswers.every(answer => answer !== null);
   };
 
-  const goToResults = () => {
+  const goToResults = async () => {
     if (checkFinish()) {
-      const final_scores = calculateUserScores(selectedAnswers, questionsWeights);
-      console.log("Final Scores: " + final_scores)
-      navigate('/resultsPage');
+      try {
+        const industryScores = await calculateUserScores(selectedAnswers, questionsWeights);
+        console.log("industryScores Call:" + JSON.stringify(industryScores));
+        
+        await updateUserAssessment(auth.currentUser.uid, industryScores);
+        
+        navigate('/resultsPage');
+      } catch (error) {
+        console.error("Error in goToResults:", error);
+        alert('An error occurred while calculating or updating the scores.');
+      }
     } else {
       alert('Please answer all questions before proceeding.');
     }
   };
+  
 
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));

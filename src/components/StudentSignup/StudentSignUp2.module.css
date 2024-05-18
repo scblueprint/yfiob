@@ -1,101 +1,98 @@
 .pageContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .signupHeader {
-    font-family: Lato, sans-serif;
-    font-weight: 400;
-    font-size: 36px;
-    text-align: center;
-    margin-top: 70px;
-    margin-bottom: 30px;
-  }
-  
-  .inputContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .nameFields {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 10px;
-  }
-  
-  .emailpasswordFields {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-  }
-  
-  .InputNameContainer {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .inputshift {
-    margin-bottom: 10px;
-    width: 450px;
-  }
-  
-  .inputField,
-  .inputFieldLabel {
-    display: block;
-  }
-  
-  .inputFieldLabel {
-    text-align: left;
-  }
-  
-  .inputField {
-    border-radius: 20px;
-    background: #fff;
-    border: none;
-    padding: 18px 23px;
-    width: 100%;
-    margin-bottom: 5px;
-  }
-  
-  .errorMessage {
-    color: red;
-  }
-  
-  .NextBtn {
-    background-color: #4c78e7;
-    display: block;
-    border: none;
-    margin-top: 15px;
-    width: 107px;
-    border-radius: 30px;
-    color: white;
-    padding: 17px 17px;
-    cursor: pointer;
-  }
-  
-  .signupBtn:hover {
-    background-color: #4c78e757;
-  }
-  
-  .existingAccountLoginContainer {
-    display: flex;
-    flex-direction: row;
-    margin-top: 15px;
-    gap: 11px;
-  }
-  
-  .loginLink {
-    text-decoration: none;
-  }
-  
-  .loginLink:hover {
-    text-decoration: underline;
-  }
-  
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupHeader {
+  font-weight: 400;
+  font-size: 36px;
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nameFields {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.emailpasswordFields {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.InputNameContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.inputshift {
+  margin-bottom: 10px;
+  width: 450px;
+}
+
+.inputField,
+.inputFieldLabel {
+  display: block;
+}
+
+.inputFieldLabel {
+  text-align: left;
+}
+
+.inputField {
+  border-radius: 20px;
+  background: #fff;
+  border: none;
+  padding: 18px 23px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.NextBtn {
+  background-color: #4c78e7;
+  display: block;
+  border: none;
+  margin-top: 15px;
+  width: 107px;
+  border-radius: 30px;
+  color: white;
+  padding: 17px 17px;
+  cursor: pointer;
+}
+
+.signupBtn:hover {
+  background-color: #4c78e757;
+}
+
+.existingAccountLoginContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  gap: 11px;
+}
+
+.loginLink {
+  text-decoration: none;
+}
+
+.loginLink:hover {
+  text-decoration: underline;
+}

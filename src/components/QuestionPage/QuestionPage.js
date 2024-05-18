@@ -85,6 +85,20 @@ export default function QuestionPage() {
         </button>
 
         <div className={styles.questionWrapper}>
+          <div className={styles.progressIndicator}>
+            <div className={styles.questionBar}>
+              {questions.map((_, index) => {
+                const isSelected = selectedAnswers[index] !== null;
+                return (
+                  <div
+                    key={index}
+                    className={`${styles.questionLinks} ${isSelected ? styles.isAnswered : ""}`}
+                  >
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           <p className={styles.textHeader}>
             Don't worry about time, money, training, or education. Just think,
             do you enjoy it?
@@ -115,21 +129,6 @@ export default function QuestionPage() {
           <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} />
         </button>
       </div>
-
-      <div className={styles.questionGrid}>
-        {questions.map((_, index) => {
-          const isSelected = selectedAnswers[index] !== null;
-          return (
-            <button
-              key={index}
-              className={`${styles.questionLinks} ${isSelected ? styles.isAnswered : ""}`}
-              onClick={() => setCurrentQuestionIndex(index)}
-            >
-              {index + 1}
-            </button>
-          );
-        })}
-
         <div>
           <button
             className={`${styles.submitButton} ${isComplete ? styles.submittable : styles.notSubmittable}`}
@@ -139,6 +138,5 @@ export default function QuestionPage() {
           </button>
         </div>
       </div>
-    </div>
   );
 }

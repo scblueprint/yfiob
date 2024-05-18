@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./UsersPanel.module.css";
-
+import filterIcon from "../../assets/FilterCircle.svg";
 import pullUsers from "../../firebase/pullUsers";
+import Modal from "../Modal/Modal";
 
 function UsersPanel() {
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [showPopout, setShowPopout] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -27,26 +27,27 @@ function UsersPanel() {
 
   const selectedUser = users.find((user) => user.id === selectedUserId);
 
-  const handlePopoutButtonClick = () => {
-    setShowPopout(!showPopout); // Toggle pop-out visibility
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.filterContainer}>
         <input type="text" id="student" className={styles.search} />
-        <button
-          className={styles.popoutButton}
-          onClick={handlePopoutButtonClick}
-        >
-          Popout
-        </button>
-        {showPopout && (
-          <div className={styles.popout}>
-            {/* Content of the popout */}
-            <p>This is a pop-out!</p>
-          </div>
-        )}
+
+        <Modal defaultOpen={false}>
+          <Modal.Button asChild>
+            <button style={{ border: "none", backgroundColor: "transparent" }}>
+              <img
+                src={filterIcon}
+                alt={"Filter Icon"}
+                className={styles.filterIcon}
+              />
+            </button>
+          </Modal.Button>
+
+          <Modal.Content title={"Filter"}>
+            Content of the modal goes in here! In this case, filtering UI would
+            be in here!
+          </Modal.Content>
+        </Modal>
       </div>
       <table>
         <thead>

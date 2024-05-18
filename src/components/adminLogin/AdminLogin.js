@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfig";
-import "./AdminLogin.module.css";
+import styles from "./AdminLogin.module.css";
 
 function AdminLogin({ setUser }) {
   const [email, setEmail] = useState("");
@@ -57,43 +57,35 @@ function AdminLogin({ setUser }) {
   };
 
   return (
-    <div className="login-body">
-      <div className="login-container">
-        <h2 className="student">Admin Log In</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Email"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-          </div>
-          <button className="login-btn" type="submit">
-            Log In
-          </button>
-        </form>
-        <p>
-          Don't have an account?{" "}
-          <a className="signup-link" href="/signup">
-            Sign Up!
-          </a>
-        </p>
-      </div>
+    <div className={styles.loginContainer}>
+      <h2 className={styles.adminHeader}>Admin Log In</h2>
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </div>
+        <button className={styles.loginBtn} type="submit">
+          Log In!
+        </button>
+      </form>
     </div>
   );
 }

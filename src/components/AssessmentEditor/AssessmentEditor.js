@@ -2,15 +2,16 @@ import React, { useState} from "react";
 import getQuestions from "../../firebase/pullQuestions";
 import * as Collapsible from '@radix-ui/react-collapsible';
 import * as Form from '@radix-ui/react-form';
-import { RowSpacingIcon, Cross2Icon } from '@radix-ui/react-icons';
+import { RowSpacingIcon } from '@radix-ui/react-icons';
 
 import styles from"./AssessmentEditor.module.css";
 
 
 function AssessmentEditor() {
     const [questions, setQuestions] = useState([]);
-    const [selectedQuestion, setSelectedQuestion] = useState(0);
-    const [open, setOpen] = useState([]);
+    const [selectedQuestion] = useState([]);
+
+
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -21,18 +22,23 @@ function AssessmentEditor() {
       }, []);
     
 
+
         return (
         <div className={styles.page}>
             {questions.map((questionText, index) => {
               return (
-                <Collapsible.Root className={styles.allCollapsibles} open={open[index]} key={index} onOpenChange={console.log("opened.", {index})}>
+                <Collapsible.Root open={selectedQuestion[index]} key={index} onOpenChange={console.log("setSelectedQuestion(index)")}>
 
                   <div className={styles.allQuestionRows}>
                     <div className={styles.questionRow}>
-                      <span className={`${styles.questionRow} ${isSelected ? styles.isSelected : ""}`} key={index}>
+                      <span className={styles.questionRow} key={index}>
                         {questionText}
                         <Collapsible.Trigger asChild>
-                          <button className="IconButton">{open ? <Cross2Icon /> : <RowSpacingIcon />}</button>
+                          <div>
+                            <button>
+                              <RowSpacingIcon />
+                            </button>
+                          </div>
                         </Collapsible.Trigger>
                       </span>
                     </div>
@@ -40,7 +46,29 @@ function AssessmentEditor() {
 
                   <Collapsible.Content>
                     <div className={styles.questionRow}>
-                      <span className={styles.Text}>Edit</span>
+                      <span className={styles.questionRow}>
+                        <Form.Root>
+                          <Form.Field name="question">
+                            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
+                              <Form.Label>Question</Form.Label>
+                              <Form.Message match="valueMissing">
+                                  Please edit the question
+                              </Form.Message>
+                            </div>
+                            <Form.Control asChild>
+                              <textarea placeholder={questionText} required />
+                            </Form.Control>
+                          </Form.Field>
+                          <Form.Submit asChild>
+                            <button style={{ marginTop: 10 }}>
+                              Submit Changes
+                            </button>
+                          </Form.Submit>
+                        </Form.Root>
+
+
+                      
+                      </span>
                     </div>
                   </Collapsible.Content>
                 </Collapsible.Root>
@@ -49,27 +77,6 @@ function AssessmentEditor() {
         </div>
 
     );
-    /*
-    return (
-        <div className={styles.page}>
-            {questions.map((questionText, index) => {
-              const isSelected = false;
-              return (
-                <div className={styles.allQuestionRows}>
-                  <button
-                    className={`${styles.questionRow} ${isSelected ? styles.isSelected : ""}`}
-                    key={index}
-                    onClick={() => handleClick(index)}
-                  >
-                    {questionText}
-                  </button>
-                </div>
-              );
-            })}
-        </div>
-
-    );
-    */
 }
 
 export default AssessmentEditor;

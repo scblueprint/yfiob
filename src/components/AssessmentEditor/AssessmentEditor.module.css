@@ -4,27 +4,17 @@
     padding: 2%;
 }
 
-.allQuestionRows{
 
-    width: 1158px;
-    height: 62px;
+
+.questionRow {
+    width: 80%;
+    height: 100%;
     left: 20px;
     top: 20px;
 
-    gap: 500px;
-    display:flex;
-
-}
-
-.questionRow{
-    width: 1158px;
-    height: 62px;
-    left: 20px;
-    top: 20px;
+    display: flex;
+    padding: 1%;
 
     background: rgba(76, 120, 231, 0.3);
 
 }
-
-
-

@@ -12,14 +12,6 @@ function AssessmentEditor() {
     const [selectedQuestion, setSelectedQuestion] = useState(0);
     const [open, setOpen] = useState([]);
 
-    const handleSelect = (questionIndex) => {
-      setSelectedQuestion(questionIndex)
-    }
-
-    const isSelected = (questionIndex) => {
-      return selectedQuestion == questionIndex;
-    }
-
     React.useEffect(() => {
         const fetchData = async () => {
           const questionsData = await getQuestions();
@@ -37,7 +29,7 @@ function AssessmentEditor() {
 
                   <div className={styles.allQuestionRows}>
                     <div className={styles.questionRow}>
-                      <span className={`${styles.questionRow} ${isSelected(index) ? styles.isSelected : ""}`} key={index}>
+                      <span className={`${styles.questionRow} ${isSelected ? styles.isSelected : ""}`} key={index}>
                         {questionText}
                         <Collapsible.Trigger asChild>
                           <button className="IconButton">{open ? <Cross2Icon /> : <RowSpacingIcon />}</button>

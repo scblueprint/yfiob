@@ -4,16 +4,18 @@ import filterIcon from "../../assets/FilterCircle.svg";
 import pullUsers from "../../firebase/pullUsers";
 import Modal from "../Modal/Modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 function UsersPanel() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 7;
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const userData = await pullUsers(); // Assuming pullUsers is correctly defined
+        const userData = await pullUsers();
         setUsers(userData);
       } catch (error) {
         console.error("Error fetching user data: ", error.message);
@@ -22,14 +24,37 @@ function UsersPanel() {
     fetchUsers();
   }, []);
 
-  const handleSearch = async () => { 
+  const handleSearch = async () => {
     console.log("Search Query:", searchQuery);
     try {
-      const userData = await pullUsers({ name: searchQuery }); 
+      let userData;
+      if (searchQuery.trim() === "") {
+        userData = await pullUsers();
+      } else {
+        userData = await pullUsers({ name: searchQuery });
+      }
       setUsers(userData);
       console.log(userData);
     } catch (error) {
       console.error("Error fetching user data: ", error.message);
+    }
+  };
+
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -70,7 +95,7 @@ function UsersPanel() {
         <div className={styles.tableWrapper}>
           <table>
             <tbody>
-              {users.map((user, index) => (
+              {currentUsers.map((user, index) => (
                 <tr key={user.id}>
                   <td className={styles.index}>{index + 1}</td>
                   <td className={styles.name}>{user.firstName}</td>
@@ -84,7 +109,23 @@ function UsersPanel() {
           </table>
         </div>
       </div>
-
+      <div className={styles.pagination}>
+        <button onClick={prevPage} disabled={currentPage === 1} className={styles.arrowButton}>
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
+        {[...Array(totalPages).keys()].map((page) => (
+          <button
+            key={page + 1}
+            className={`${currentPage === page + 1 ? styles.activePage : ''}`}
+            onClick={() => setCurrentPage(page + 1)}
+          >
+            {page + 1}
+          </button>
+        ))}
+        <button onClick={nextPage} disabled={currentPage === totalPages} className={styles.arrowButton}>
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+      </div>
     </div>
   );
 }

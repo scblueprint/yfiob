@@ -1,4 +1,5 @@
 .container {
+  display: flex;
   flex-direction: column;
   height: 100vh;
 }
@@ -13,7 +14,7 @@
 
 .searchContainer {
   flex: 0 0 auto;
-  padding: 5px 10px; 
+  padding: 5px 10px;
 }
 
 .search {
@@ -26,12 +27,7 @@
 .searchButton {
   border: none;
   background-color: transparent;
-}
-
-.tableContainer table {
-  width: 100%;
-  border-collapse: collapse;
-  box-sizing: border-box;
+  font-size: 1.5em;
 }
 
 .tableContainer {
@@ -40,24 +36,53 @@
   overflow: auto;
 }
 
+.tableWrapper {
+  margin-top: 10px;
+}
+
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* Change from collapse to separate */
+  border-spacing: 10px; /* Add spacing between both rows and columns */
+}
+
+table,
+th,
+td {
+  border-radius: 10px; /* Rounded corners for the table and cells */
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+}
+
+thead th {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  text-align: left;
+}
+
+thead th.emptyHeader {
+  background-color: white;
 }
 
 table tbody tr {
-  margin-bottom: 10px !important;
-}
-
-th, td {
-  text-align: left;
-  padding: 15px 8px;
-}
-
-.name, .grade, .school, .zipcode, .email {
   background-color: #e0f2fe;
-  border-radius: 8px;
-  margin-bottom: 10px;
+}
+
+table tbody td {
+  padding: 15px 20px; /* Add padding around each cell */
+}
+
+.name,
+.grade,
+.school,
+.zipcode,
+.email {
   font-size: large;
 }
 
@@ -69,10 +94,52 @@ th, td {
   width: 20%;
 }
 
-.grade, .school, .zipcode {
+.grade,
+.school,
+.zipcode {
   width: 15%;
 }
 
 .email {
   width: 25%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.pagination button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: transparent;
+  color: #ccc;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
+}
+
+.pagination button.activePage {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination .arrowButton {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.pagination .arrowButton:disabled {
+  color: #ccc;
+  cursor: not-allowed;
 }

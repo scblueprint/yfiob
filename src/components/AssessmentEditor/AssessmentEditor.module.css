@@ -1,0 +1,20 @@
+.page {
+    overflow: auto;
+    height: 100%;
+    padding: 2%;
+}
+
+
+
+.questionRow {
+    width: 80%;
+    height: 100%;
+    left: 20px;
+    top: 20px;
+
+    display: flex;
+    padding: 1%;
+
+    background: rgba(76, 120, 231, 0.3);
+
+}

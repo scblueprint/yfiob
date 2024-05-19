@@ -1,7 +1,6 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .textHeading {
@@ -10,19 +9,42 @@
     margin: 3rem auto 2rem auto;
 }
 
+/* Filter Elements */
+
+.filterDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 4rem;
+}
+
+.filterText {
+    font-weight: 400;
+    color: #000000;
+}
+
+.filterButton {
+    border: none;
+    background-color: transparent;
+}
+
+/* Individual Modal Elements */
+
 .modalWrapper {
     display: flex;
     flex-direction:row;
     background: #ffffff;
     margin: 2rem 8rem;
-    padding: 16px 32px;
     border-radius: 10px;
 }
 
 .modalLeftContent {
     display: flex;
     flex-direction: column;
+    margin-top: 8px;
+    margin-bottom: 2px;
     margin-right: 2rem;
+    margin-left: 1rem;
 }
 
 .modalRightContent {
@@ -47,21 +69,31 @@
     color: #4c78e7;
     font-size: 1.25rem;
     margin-bottom: 1.25rem;
+    width: 340px;
 }
 
-.titleText {
-    font-weight: 300;
+.textTitle {
+    font-weight: 450;
     text-align: center;
     color: #000000;
+    font-size: large;
 }
 
 /* Career Content Elements */
 
-.textHeader {
-    font-weight: 300;
+.careerDescriptionDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    padding-right: 2rem;
+}
+
+.textDescription {
+    font-weight: 400;
     text-align: left;
     color: #000000;
-    margin: 1rem auto 2rem auto;
 }
 
 /* Career Image Elements */

@@ -1,39 +1,64 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ExploreCareersPage.module.css";
 import getCareerData from "../../firebase/pullCareerData";
+import filterIcon from "../../assets/FilterCircle.svg";
+import Modal from "../Modal/Modal";
 
 function ExploreCareersPage() {
   const [careerData, setCareerData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchCareerData () {
       const careersData = await getCareerData();
       setCareerData(careersData);
     };
-    fetchData();
+    fetchCareerData();
   }, []);
 
   return (
     <div className={styles.wrapper}>
-      <div>
-        <h1 className={styles.textHeading}>Learn About Careers</h1>
+
+      <h1 className={styles.textHeading}>Learn About Careers</h1>
+
+      <div className={styles.filterDiv}>
+        <p className={styles.filterText}>
+          Search by career types
+        </p>
+        <Modal defaultOpen={false}>
+            <Modal.Button asChild>
+              <button className={styles.filterButton}>
+                <img
+                  src={filterIcon}
+                  alt={"Filter Icon"}
+                />
+              </button>
+          </Modal.Button>
+          <Modal.Content>
+            Filtering soon
+          </Modal.Content>
+        </Modal>
       </div>
 
       {careerData.map((career, index) => (
         <div key={index} className={styles.modalWrapper}>
 
           <div className={styles.modalLeftContent}>
+
             <div className={styles.careerTitleDiv}>
               <div className={styles.careerTitleWrapper}>
-                <p className={styles.titleText}>
+                <p className={styles.textTitle}>
                   {career.id}
                 </p>
               </div>
             </div>
-            <p className={styles.textHeader}>
-              {career.description}
-            </p>
+
+            <div className={styles.careerDescriptionDiv}>
+              <p className={styles.textDescription}>
+                {career.description}
+              </p>
+            </div>
           </div>
+
           <div className={styles.modalRightContent}>
             <img className={styles.careerImage} src={career.imageUrl} alt="Career" />
           </div>

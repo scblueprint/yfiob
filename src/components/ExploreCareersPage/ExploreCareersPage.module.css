@@ -1,4 +1,63 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-  }
+    align-items: center;
+}
+
+.textHeading {
+    text-align: center;
+    font-weight: 400;
+    margin: 3rem auto 2rem auto;
+}
+
+.modalWrapper {
+    display: flex;
+    flex-direction:row;
+    background: #ffffff;
+    margin: 0 8rem;
+    padding: 16px 32px;
+    border-radius: 10px;
+}
+
+.modalLeftContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalRightContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Career Title Elements */
+
+.careerTitleDiv {
+    display: flex;
+    align-items: flex-start;
+}
+
+.careerTitleWrapper {
+    background-color: #4c78e757;
+    padding: 0.8rem 2.4rem;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #4c78e7;
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.titleText {
+    font-weight: 300;
+    text-align: center;
+    color: #000000;
+}
+
+/* Career Content Element */
+
+.textHeader {
+    font-weight: 300;
+    text-align: left;
+    color: #000000;
+    margin: 1rem auto 2rem auto;
+}

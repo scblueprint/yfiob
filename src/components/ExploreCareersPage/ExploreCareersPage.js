@@ -39,32 +39,34 @@ function ExploreCareersPage() {
         </Modal>
       </div>
 
-      {careerData.map((career, index) => (
-        <div key={index} className={styles.modalWrapper}>
+    <div className={styles.careersContainer}>
+        {careerData.map((career, index) => (
+          <div key={index} className={styles.modalWrapper}>
 
-          <div className={styles.modalLeftContent}>
+            <div className={styles.modalLeftContent}>
 
-            <div className={styles.careerTitleDiv}>
-              <div className={styles.careerTitleWrapper}>
-                <p className={styles.textTitle}>
-                  {career.id}
+              <div className={styles.careerTitleDiv}>
+                <div className={styles.careerTitleWrapper}>
+                  <p className={styles.textTitle}>
+                    {career.id}
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.careerDescriptionDiv}>
+                <p className={styles.textDescription}>
+                  {career.description}
                 </p>
               </div>
             </div>
 
-            <div className={styles.careerDescriptionDiv}>
-              <p className={styles.textDescription}>
-                {career.description}
-              </p>
+            <div className={styles.modalRightContent}>
+              <img className={styles.careerImage} src={career.imageUrl} alt="Career" />
             </div>
-          </div>
 
-          <div className={styles.modalRightContent}>
-            <img className={styles.careerImage} src={career.imageUrl} alt="Career" />
           </div>
-
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

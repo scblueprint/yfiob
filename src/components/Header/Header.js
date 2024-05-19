@@ -22,10 +22,10 @@ const Header = ({ user }) => {
         console.error("Error signing out:", error);
       });
   };
-   const handleTestButtonClick = () => {
+  //  const handleTestButtonClick = () => {
     
-     navigate('/resultsPage'); 
-   };
+  //    navigate('/resultsPage'); 
+  //  };
 
   return (
     <div className={styles.headerWrapper}>

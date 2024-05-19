@@ -4,7 +4,7 @@
 *::after {
   box-sizing: border-box;
 }
- 
+
 /* 2. Remove default margin */
 * {
   margin: 0;
@@ -19,7 +19,7 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  font-family: "Lato", sans-serif;
+  font-family: "Bitter", serif;
   background-image: url("./assets/background.png");
   background-size: cover;
   background-repeat: no-repeat;

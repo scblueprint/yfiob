@@ -6,9 +6,13 @@ async function getCareerData() {
     const querySnapshot = await getDocs(collection(db, "career data"));
     let careerDataArray = [];
     querySnapshot.forEach((doc) => {
-      /* Should be safe to use doc.data() since it
-          is never undefined for query doc snapshots */
-      careerDataArray.push(doc.data());
+      // Combine the document ID with its data
+      let docData = doc.data();
+      let docEntry = {
+        id: doc.id, // This is the name of the document
+        ...docData // All fields from the document
+      };
+      careerDataArray.push(docEntry);
     });
     return careerDataArray;
   } catch (error) {

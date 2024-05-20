@@ -13,6 +13,7 @@ import StudentSignUp2 from "./components/StudentSignup/StudentSignUp2";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import UsersPanel from "./components/UsersPanel/UsersPanel";
 import DataPage from "./components/DataPage/DataPage";
+import ExploreCareersPage from "./components/ExploreCareersPage/ExploreCareersPage";
 import React from "react";
 
 function App() {
@@ -34,8 +35,9 @@ function App() {
         <Route path="/adminPanel" element={<AdminPanel />} />
         <Route path="/usersPanel" element={<UsersPanel />} />
         <Route path="/dataPage" element={<DataPage />} />
+        <Route path="/exploreCareers" element={<ExploreCareersPage />} />
       </Routes>
-    </Router>   
+    </Router>
   );
 }
 

@@ -11,11 +11,12 @@
 
 /* Filter Elements */
 
-.filterDiv {
+.filterContainer {
     display: flex;
     align-items: center;
     flex-direction: row;
     margin-left: 4rem;
+    margin-bottom: 3rem;
 }
 
 .filterText {
@@ -28,15 +29,74 @@
     background-color: transparent;
 }
 
+/* Filter Item Elements */
+
+.filterIndustriesContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: fit-content;
+    width: fit-content;
+}
+
+.filterIndustryWrapper {
+    background-color: #4c78e757;
+    padding: 0.2rem 0.3rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.8rem;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #4c78e7;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.filterIndustryButton {
+    font-weight: 500;
+    text-align: center;
+    color: #000000;
+    font-size: small;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
 /* Individual Modal Elements */
+
+.individualCareerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.careerIndustryWrapper {
+    background-color: #4c78e757;
+    padding: 0.2rem 2rem;
+    margin-left: 8rem;
+    margin-bottom: 0;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #4c78e7;
+    width: fit-content;
+}
+
+.textCareerindustry {
+    font-weight: 450;
+    text-align: center;
+    color: #000000;
+    font-size: large;
+}
 
 .modalWrapper {
     display: flex;
     flex-direction:row;
     background: #ffffff;
     margin: 4rem 8rem;
+    margin-top: 1rem;
     border-radius: 10px;
-    height: 250px;
+    height: fit-content;
 }
 
 .modalLeftContent {
@@ -62,7 +122,7 @@
 
 /* Career Title Elements */
 
-.careerTitleDiv {
+.careerTitleContainer {
     display: flex;
     align-items: flex-start;
 }
@@ -78,7 +138,7 @@
     width: 340px;
 }
 
-.textTitle {
+.textCareerTitle {
     font-weight: 450;
     text-align: center;
     color: #000000;
@@ -87,7 +147,7 @@
 
 /* Career Content Elements */
 
-.careerDescriptionDiv {
+.careerDescriptionContainer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -96,7 +156,7 @@
     padding-right: 2rem;
 }
 
-.textDescription {
+.textCareerDescription {
     font-weight: 400;
     text-align: left;
     color: #000000;

@@ -5,19 +5,37 @@ import filterIcon from "../../assets/FilterCircle.svg";
 import Modal from "../Modal/Modal";
 
 function ExploreCareersPage() {
+  // Holds all career data
   const [careerData, setCareerData] = useState([]);
-  const [careerFilterOptions, setcareerFilterOptions] = useState([]);
+  // Holds career data that is filtered based on selected industries
+  const [filteredCareerData, setFilteredCareerData] = useState([]);
+  // Holds all unique industries from career data
+  const [careerFilterOptions, setCareerFilterOptions] = useState([]);
+  // Holds industries that are selected by the user
+  const [clickedFilterIndustries, setClickedFilterIndustries] = useState({});
 
   useEffect(() => {
-    async function fetchCareerData () {
+    async function fetchCareerData() {
+      // Get career data from Firebase
       const careersData = await getCareerData();
       setCareerData(careersData);
+      setFilteredCareerData(careersData);
       const industries = careersData.map(career => career.industry);
       const uniqueIndustries = [...new Set(industries)];
-      setcareerFilterOptions(uniqueIndustries);
+      setCareerFilterOptions(uniqueIndustries);
     };
     fetchCareerData();
   }, []);
+
+  useEffect(() => {
+    // Check if all filter options are deselected
+    const allFiltersDeselected = Object.values(clickedFilterIndustries).every(value => !value);
+    // Filter career data based on selected industries or return all data if all options are deselected
+    const filteredData = allFiltersDeselected
+      ? careerData
+      : careerData.filter(career => clickedFilterIndustries[career.industry]);
+    setFilteredCareerData(filteredData);
+  }, [clickedFilterIndustries, careerData]);
 
   return (
     <div className={styles.wrapper}>
@@ -27,33 +45,32 @@ function ExploreCareersPage() {
           Search by career types
         </p>
         <Modal defaultOpen={false}>
-            <Modal.Button asChild>
-              <button className={styles.filterButton}>
-                <img
-                  src={filterIcon}
-                  alt={"Filter Icon"}
-                />
-              </button>
+          <Modal.Button asChild>
+            <button className={styles.filterButton}>
+              <img src={filterIcon} alt={"Filter Icon"} />
+            </button>
           </Modal.Button>
           <Modal.Content title="Career Types">
             <div className={styles.filterIndustriesContainer}>
-              {careerFilterOptions.map((industry, index) => (
-                  <div key={index} className={styles.filterIndustryWrapper}>
-                    {/* TODO: Add onClick event to filter careers by industry
-                                or something to filter the career data */}
-                    <button className={styles.filterIndustryButton}>
-                      {industry}
-                    </button>
-                  </div>
-              ))
-              }
+              {careerFilterOptions.map((industry, _) => (
+                <button
+                  key={industry}
+                  className={clickedFilterIndustries[industry] ? styles.clickedFilterIndustryButton : styles.filterIndustryButton}
+                  onClick={() => setClickedFilterIndustries(prevState => ({
+                    ...prevState,
+                    [industry]: !prevState[industry]
+                  }))}
+                >
+                  {industry}
+                </button>
+              ))}
             </div>
           </Modal.Content>
         </Modal>
       </div>
 
-    <div className={styles.careersContainer}>
-        {careerData.map((career, index) => (
+      <div className={styles.careersContainer}>
+        {filteredCareerData.map((career, index) => (
           <div key={index} className={styles.individualCareerContainer}>
             <div className={styles.careerIndustryWrapper}>
               <p className={styles.textCareerindustry}>

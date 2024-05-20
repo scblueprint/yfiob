@@ -3,12 +3,13 @@ import SideNavbar from "../SideNavbar/SideNavbar";
 import Dashboard from "../Dashboard/Dashboard";
 import UsersPanel from "../UsersPanel/UsersPanel";
 import AssessmentEditor from "../AssessmentEditor/AssessmentEditor";
+import styles from "./AdminPanel.module.css";
 
 function AdminPanel() {
   const [currentPage, setCurrentPage] = useState("Data");
 
   return (
-    <div>
+    <div className={styles.container}>
       <SideNavbar selectedItem={currentPage} setSelectedItem={setCurrentPage} />
       {currentPage === "Data" ? (
         <Dashboard

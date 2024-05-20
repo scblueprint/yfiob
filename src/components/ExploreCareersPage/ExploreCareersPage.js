@@ -39,6 +39,8 @@ function ExploreCareersPage() {
             <div className={styles.filterIndustriesContainer}>
               {careerFilterOptions.map((industry, index) => (
                   <div key={index} className={styles.filterIndustryWrapper}>
+                    {/* TODO: Add onClick event to filter careers by industry
+                                or something to filter the career data */}
                     <button className={styles.filterIndustryButton}>
                       {industry}
                     </button>

@@ -7,35 +7,33 @@ import { doc, getDoc } from "firebase/firestore";
 function Slide_1() {
   const [questions, setQuestions] = useState(0);
   useEffect(() => {
-      async function getSize() {
-          try {
-              const docRef = doc(db, 'assessment data', 'questions');
-              const docSnapshot = await getDoc(docRef);
-              if (docSnapshot.exists()) {
-                  const field = docSnapshot.data().allQuestions;
-                  let size = 0;
-                  for (const key in field) {
-                      if (field.hasOwnProperty(key)) {
-                          size++;
-                      }
-                  }
-                  setQuestions(size);
-              } 
-              else {
-                  console.log("No such document!");
-              }
-          } 
-          catch (error) {
-              console.error("Error:", error);
+    async function getSize() {
+      try {
+        const docRef = doc(db, "assessment data", "questions");
+        const docSnapshot = await getDoc(docRef);
+        if (docSnapshot.exists()) {
+          const field = docSnapshot.data().allQuestions;
+          let size = 0;
+          for (const key in field) {
+            if (field.hasOwnProperty(key)) {
+              size++;
+            }
           }
+          setQuestions(size);
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-      getSize();
+    }
+    getSize();
   });
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.textHeading}>What Careers Can You Explore?</h1>
 
-      <div class={styles.modalWrapper}>
+      <div className={styles.modalWrapper}>
         <p className={styles.modalSubheading}>
           Let us help find how your interests can relate to different fields of
           work! Take this quiz to help give you ideas on what your career search
@@ -46,8 +44,8 @@ function Slide_1() {
           Quick Assessment
         </Link>
 
-        <p class={styles.assessText}>
-        {`This quick assessment consists of ${questions} questions, but will not be as
+        <p className={styles.assessText}>
+          {`This quick assessment consists of ${questions} questions, but will not be as
           representative of who you are.`}
         </p>
       </div>

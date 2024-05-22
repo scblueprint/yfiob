@@ -26,18 +26,18 @@ export default function QuestionPage() {
   const [questionsWeights, setQuestionsWeights] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   
-  const user = auth.currentUser;
-  console.log("User Display Name: " + user.displayName);
-  console.log("User ID: " + auth.currentUser.uid);
+  // const user = auth.currentUser;
+  // // console.log("User Display Name: " + user.displayName);
+  // // console.log("User ID: " + auth.currentUser.uid);
 
 
 
   const handleSelect = (questionIndex, answerIndex) => {
-    console.log("handle selected");
+    // console.log("handle selected");
     const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
     newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
     setSelectedAnswers(newSelectedAnswers); // update original selected answers array
-    console.log(selectedAnswers);
+    // console.log(selectedAnswers);
   };
 
 
@@ -46,11 +46,11 @@ export default function QuestionPage() {
     const fetchData = async () => {
       const questionsData = await getQuestions();
       setQuestions(questionsData);
-      console.log("Questions" + questionsData);
+      // console.log("Questions" + questionsData);
 
       const questionsWeightsData = await getQuestionsWeights();
       setQuestionsWeights(questionsWeightsData);
-      console.log("Question Weights" + JSON.stringify(questionsWeightsData));
+      // console.log("Question Weights" + JSON.stringify(questionsWeightsData));
 
       setSelectedAnswers(Array.from({ length: questionsData.length }, () => null)); // Initialize selectedAnswers
     };
@@ -65,6 +65,7 @@ export default function QuestionPage() {
   };
 
   const goToResults = async () => {
+    console.log("go to results called");
     if (checkFinish()) {
       try {
         const industryScores = await calculateUserScores(selectedAnswers, questionsWeights);
@@ -72,7 +73,7 @@ export default function QuestionPage() {
         
         await updateUserAssessment(auth.currentUser.uid, industryScores);
         
-        navigate('/resultsPage');
+        navigate('/ResultsPage');
       } catch (error) {
         console.error("Error in goToResults:", error);
         alert('An error occurred while calculating or updating the scores.');

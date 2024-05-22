@@ -35,7 +35,7 @@ function Slide_1() {
     <div className={styles.wrapper}>
       <h1 className={styles.textHeading}>What Careers Can You Explore?</h1>
 
-      <div class={styles.modalWrapper}>
+      <div className={styles.modalWrapper}>
         <p className={styles.modalSubheading}>
           Let us help find how your interests can relate to different fields of
           work! Take this quiz to help give you ideas on what your career search
@@ -46,7 +46,7 @@ function Slide_1() {
           Quick Assessment
         </Link>
 
-        <p class={styles.assessText}>
+        <p className={styles.assessText}>
         {`This quick assessment consists of ${questions} questions, but will not be as
           representative of who you are.`}
         </p>

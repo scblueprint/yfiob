@@ -5,6 +5,7 @@ import { db } from "./firebaseConfig";
 
 
 export const fetchUserAssessmentRef = async (userId) => {
+  console.log("Fetched user assesment Ref");
   const userDocRef = doc(db, "Users", userId);
   const assessmentsCollectionRef = collection(userDocRef, "assessments");
 

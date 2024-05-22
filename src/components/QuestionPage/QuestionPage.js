@@ -34,9 +34,9 @@ export default function QuestionPage() {
 
   const handleSelect = (questionIndex, answerIndex) => {
     // console.log("handle selected");
-    const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
-    newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
-    setSelectedAnswers(newSelectedAnswers); // update original selected answers array
+    const newSelectedAnswers = [...selectedAnswers]; 
+    newSelectedAnswers[questionIndex] = answerIndex; 
+    setSelectedAnswers(newSelectedAnswers); 
     // console.log(selectedAnswers);
   };
 
@@ -65,11 +65,11 @@ export default function QuestionPage() {
   };
 
   const goToResults = async () => {
-    console.log("go to results called");
+    // console.log("go to results called");
     if (checkFinish()) {
       try {
         const industryScores = await calculateUserScores(selectedAnswers, questionsWeights);
-        console.log("industryScores Call:" + JSON.stringify(industryScores));
+        // console.log("industryScores Call:" + JSON.stringify(industryScores));
         
         await updateUserAssessment(auth.currentUser.uid, industryScores);
         

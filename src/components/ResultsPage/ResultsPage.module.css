@@ -108,4 +108,87 @@
     color: #ffffff;
     background-color: #4c78e7;
   }
+
+  /* Frame 1 */
+.frame-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 30px;
+  gap: 10px;
+
+  position: absolute;
+  width: 909px;
+  height: 1354px;
+  left: 84px;
+  top: 260px;
+
+  background: #ECECEC;
+  border-radius: 20px;
+}
+
+/* Frame 7 */
+.frame-7 {
+  position: absolute;
+  width: 328px;
+  height: 535px;
+  left: 1087px;
+  top: 260px;
+
+  background: #ECECEC;
+  border-radius: 20px;
+}
+
+/* Rectangle 6 */
+.rectangle-6 {
+  position: absolute;
+  width: 560px;
+  height: 67px;
+  left: 84px;
+  top: 175px;
+
+  background: rgba(217, 217, 217, 0.5);
+  border-radius: 20px;
+}
+
+/* Assessment Page */
+.assessment-page {
+  position: absolute;
+  width: 152px;
+  height: 24px;
+  left: 114px;
+  top: 196px;
+
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}
+
+/* Group 13 */
+.group-13 {
+  position: absolute;
+  width: 328px;
+  height: 43px;
+  left: 1087px;
+  top: 841px;
+}
+
+/* Group 14 */
+.group-14 {
+  position: absolute;
+  width: 126px;
+  height: 43px;
+  left: 1087px;
+  top: 892px;
+}
+
+
+  
   

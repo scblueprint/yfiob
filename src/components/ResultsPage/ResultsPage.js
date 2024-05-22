@@ -13,13 +13,13 @@ export default function ResultsPage() {
 
 
         // Fetch the reference to the user's assessment document
-        console.log("User ID on Results Page: " + auth.currentUser.uid);
+        // console.log("User ID on Results Page: " + auth.currentUser.uid);
         const userAssessmentRef = await fetchUserAssessmentRef(auth.currentUser.uid);
 
         // Fetch the assessment document from Firestore
         const userAssessmentDoc = await getDoc(userAssessmentRef);
-        console.log("got the doc on results page"); 
-
+        // console.log("got the doc on results page"); 
+        //setIndustries(userAssessmentDoc.data());
         // Extract the industries map from the assessment document
         // if (userAssessmentDoc.exists()) {
           // const data = userAssessmentDoc.data();

@@ -19,32 +19,36 @@ export const fetchUserAssessmentRef = async (userId) => {
 export const updateUserAssessment = async (userId, industryScores) => {
     try {
       const assessmentDocRef = await fetchUserAssessmentRef(userId);
-      console.log("industryScores" + JSON.stringify(industryScores));
+      // console.log("industryScores" + JSON.stringify(industryScores));
       
       await updateDoc(assessmentDocRef, {
         Industries: {
-          'Agriculture & Natural Resources': industryScores['Agriculture & Natural Resources'] || 0,
-          'Energy': industryScores['Energy'] || 0,
+          'Agriculture and Natural Resources': industryScores['Agriculture and Natural Resources'] || 0,
+          'Energy and Utilities': industryScores['Energy and Utilities'] || 0,
           'Arts, Media, and Entertainment': industryScores['Arts, Media, and Entertainment'] || 0,
           'Skilled Trades': industryScores['Skilled Trades'] || 0,
-          'Engineering': industryScores['Engineering'] || 0,
-          'Education & Child Development': industryScores['Education & Child Development'] || 0,
+          'Engineering and Design Industry': industryScores['Engineering and Design Industry'] || 0,
+          'Education, Child Development, and Family Services': industryScores['Education, Child Development, and Family Services'] || 0,
           'Psychology': industryScores['Psychology'] || 0,
           'Ecology & Environmental': industryScores['Ecology & Environmental'] || 0,
           'Health Science and Medical Technology': industryScores['Health Science and Medical Technology'] || 0,
           'Research & Academia': industryScores['Research & Academia'] || 0,
           'Hospitality, Tourism, and Recreation': industryScores['Hospitality, Tourism, and Recreation'] || 0,
-          'IT, Software and Hardware Engineering': industryScores['IT, Software and Hardware Engineering'] || 0,
+          'Information Technology': industryScores['Information Technology'] || 0,
           'Manufacturing and Product Development': industryScores['Manufacturing and Product Development'] || 0,
-          'Marketing, Sales, Communications': industryScores['Marketing, Sales, Communications'] || 0,
+          'Marketing, Sales, and Service': industryScores['Marketing, Sales, and Service'] || 0,
           'Aviation': industryScores['Aviation'] || 0,
           'Supply Chain': industryScores['Supply Chain'] || 0,
           'Law, Law Enforcement': industryScores['Law, Law Enforcement'] || 0,
-          'Business Management & Development': industryScores['Business Management & Development'] || 0
+          'Finance and Business': industryScores['Finance and Business'] || 0,
+          'Public Services': industryScores['Public Services'] || 0,
+          'Fashion and Interior Design': industryScores['Fashion and Interior Design'] || 0,
+          'Building Trades and Construction': industryScores['Building Trades and Construction'] || 0,
+          'Transportation': industryScores['Transportation'] || 0
         
         }
       });
-      console.log("Assessment updated successfully.");
+      // console.log("Assessment updated successfully.");
     } catch (error) {
       console.error("Error updating assessment: ", error.message);
     }

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebaseConfig";
-import "./AdminLogin.module.css";
+import styles from "./AdminLogin.module.css";
 
 function AdminLogin({ setUser }) {
   const [email, setEmail] = useState("");
@@ -25,11 +25,7 @@ function AdminLogin({ setUser }) {
         // Admin is signed in
         console.log(admin);
         setUser(admin);
-        // ***************************************
-        // Implement once adminPanel is functional
-        //
-        // navigate("/adminPanel")
-        // ***************************************
+        navigate("/adminPanel");
       } else {
         // Admin is signed out
         setUser(null);
@@ -48,60 +44,48 @@ function AdminLogin({ setUser }) {
         const admin = userCredentials.user;
         navigate("/adminPanel");
         console.log(`${admin.email} is admins email`);
-        // ***************************************
-        // Implement once adminPanel is functional
-        //
-        // navigate("/adminPanel")
-        // ***************************************
+        navigate("/adminPanel");
       })
       .catch((error) => {
         // Handle errors
         console.log(error);
       });
 
-      // Clear form data after submission
-      setEmail("");
-      setPassword("");
+    // Clear form data after submission
+    setEmail("");
+    setPassword("");
   };
 
   return (
-    <div className="login-body">
-      <div className="login-container">
-        <h2 className="student">Admin Log In</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Email"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-          </div>
-          <button className="login-btn" type="submit">
-            Log In
-          </button>
-        </form>
-        <p>
-          Don't have an account?{" "}
-          <a className="signup-link" href="/signup">
-            Sign Up!
-          </a>
-        </p>
-      </div>
+    <div className={styles.loginContainer}>
+      <h2 className={styles.adminHeader}>Admin Log In</h2>
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </div>
+        <button className={styles.loginBtn} type="submit">
+          Log In!
+        </button>
+      </form>
     </div>
   );
 }

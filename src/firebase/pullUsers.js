@@ -1,10 +1,10 @@
 import { db } from "./firebaseConfig";
 import { collection, getDocs, where, query} from "firebase/firestore";
 
-const pullUsers = async (name, email, zipcode, grade) => {
-
+const pullUsers = async ({ name, email, zipcode, grade } = {}) => {
     try {
         let usersCollectionRef = collection(db, "Users");
+
         if (name !== undefined) {
             usersCollectionRef = query(usersCollectionRef, where('firstName', '==', name));
         }
@@ -17,6 +17,7 @@ const pullUsers = async (name, email, zipcode, grade) => {
         if (grade !== undefined) {
             usersCollectionRef = query(usersCollectionRef, where('grade', '==', grade));
         }
+
         const querySnapshot = await getDocs(usersCollectionRef);
         const usersArray = [];
 
@@ -32,4 +33,6 @@ const pullUsers = async (name, email, zipcode, grade) => {
     }
 };
 
+
 export default pullUsers;
+

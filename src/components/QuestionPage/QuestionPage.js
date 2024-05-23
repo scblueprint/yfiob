@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { auth } from "../../firebase/firebaseConfig";
 
 import styles from "./QuestionPage.module.css";
@@ -9,6 +10,7 @@ import getQuestionsWeights from "../../firebase/pullQuestionsWeights";
 import updateUserAssessment from "../../firebase/uploadResponses";
 import calculateUserScores from "./resultsCalculation";
 
+import styles from "./QuestionPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -25,19 +27,23 @@ export default function QuestionPage() {
   const [questions, setQuestions] = useState([]);
   const [questionsWeights, setQuestionsWeights] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
-  
-  // const user = auth.currentUser;
-  // // console.log("User Display Name: " + user.displayName);
-  // // console.log("User ID: " + auth.currentUser.uid);
 
-
+  const [isComplete, setComplete] = useState(false);
+  const navigate = useNavigate();
 
   const handleSelect = (questionIndex, answerIndex) => {
-    // console.log("handle selected");
-    const newSelectedAnswers = [...selectedAnswers]; 
-    newSelectedAnswers[questionIndex] = answerIndex; 
-    setSelectedAnswers(newSelectedAnswers); 
-    // console.log(selectedAnswers);
+    console.log("handle selected");
+    const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
+    newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
+    setSelectedAnswers(newSelectedAnswers); // update original selected answers array
+
+    // check all questions have been answered
+    var areAllNotNull = newSelectedAnswers.every(function (i) {
+      return i !== null;
+    });
+    // Quiz state set to complete if no question unanswered
+    setComplete(areAllNotNull);
+
   };
 
 
@@ -46,6 +52,7 @@ export default function QuestionPage() {
     const fetchData = async () => {
       const questionsData = await getQuestions();
       setQuestions(questionsData);
+
       // console.log("Questions" + questionsData);
 
       const questionsWeightsData = await getQuestionsWeights();
@@ -53,6 +60,7 @@ export default function QuestionPage() {
       // console.log("Question Weights" + JSON.stringify(questionsWeightsData));
 
       setSelectedAnswers(Array.from({ length: questionsData.length }, () => null)); // Initialize selectedAnswers
+
     };
     fetchData();
   }, []);
@@ -89,23 +97,55 @@ export default function QuestionPage() {
   };
 
   const handleNext = () => {
-    setCurrentQuestionIndex((prevIndex) =>
-      Math.min(questions.length - 1, prevIndex + 1),
-    );
+    if (currentQuestionIndex === questions.length - 1) {
+      navigate("/resultsPage"); // Navigate to the results page
+    } else {
+      setCurrentQuestionIndex((prevIndex) =>
+        Math.min(questions.length - 1, prevIndex + 1),
+      );
+    }
+  };
+
+  const handleSubmit = () => {
+    if (isComplete) {
+      console.log("Submitted");
+      // if user logged in
+      // uploadResponses(selectedAnswers)
+      navigate("/resultsPage");
+    } else {
+      console.log("Quiz not finished.");
+    }
   };
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
+      <div>
+        <h1 className={styles.textHeader}>What Careers Can You Explore?</h1>
+      </div>
+
       <div className={styles.questionModalContainer}>
         <button className={styles.arrowBtn} onClick={handlePrevious}>
           <FontAwesomeIcon className={styles.arrows} icon={faArrowLeft} />
         </button>
 
         <div className={styles.questionWrapper}>
+          <div className={styles.progressIndicator}>
+            <div className={styles.questionBar}>
+              {questions.map((_, index) => {
+                const isSelected = selectedAnswers[index] !== null;
+                return (
+                  <div
+                    key={index}
+                    className={`${styles.questionLinks} ${isSelected ? styles.isAnswered : ""}`}
+                  >
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           <p className={styles.textHeader}>
-            Don't worry about time, money, training, or education. Just think do
-            you enjoy it?
+            Don't worry about time, money, training, or education. Just think,
+            do you enjoy it?
           </p>
           {checkFinish() && (
         <button className={styles.submitButton} onClick={goToResults}>
@@ -119,7 +159,8 @@ export default function QuestionPage() {
 
           <div className={styles.responseRow}>
             {answerArray.map((value, index) => {
-              const isSelected = selectedAnswers[currentQuestionIndex] === index; // Determine if this answer is the selected one
+              const isSelected =
+                selectedAnswers[currentQuestionIndex] === index; // Determine if this answer is the selected one
               return (
                 <button
                   className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ""}`}
@@ -137,22 +178,14 @@ export default function QuestionPage() {
           <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} />
         </button>
       </div>
-
-      <div className={styles.questionGrid}>
-        {questions.map((_, index) => {
-          const isSelected = selectedAnswers[index] !== null;
-          return (
-            <button
-              key={index}
-              className={`${styles.questionLinks} ${isSelected ? styles.isAnswered : ""}`}
-              onClick={() => setCurrentQuestionIndex(index)}
-            >
-              {index + 1}
-            </button>
-          );
-        })}
+        <div>
+          <button
+            className={`${styles.submitButton} ${isComplete ? styles.submittable : styles.notSubmittable}`}
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </div>
-    </div>
   );
 }
-

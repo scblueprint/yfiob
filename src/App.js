@@ -13,8 +13,9 @@ import StudentSignUp2 from "./components/StudentSignup/StudentSignUp2";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import UsersPanel from "./components/UsersPanel/UsersPanel";
 import DataPage from "./components/DataPage/DataPage";
+import ExploreCareersPage from "./components/ExploreCareersPage/ExploreCareersPage";
 import React from "react";
- 
+
 function App() {
   const [user, setUser] = React.useState(null);
 
@@ -29,11 +30,13 @@ function App() {
         <Route path="/admin" element={<AdminLogin setUser={setUser} />} />
         <Route path="/resultsPage" element={<ResultsPage />} />
         <Route path="/questionPage" element={<QuestionPage />} />
+        <Route path="/resultsPage" element={<ResultsPage />} />
         <Route path="/signup" element={<StudentSignUp />} />
-        <Route path="/signup2" element={<StudentSignUp2 />} />  
+        <Route path="/signup2" element={<StudentSignUp2 />} />
         <Route path="/adminPanel" element={<AdminPanel />} />
         <Route path="/usersPanel" element={<UsersPanel />} />
         <Route path="/dataPage" element={<DataPage />} />
+        <Route path="/exploreCareers" element={<ExploreCareersPage />} />
       </Routes>
     </Router>
   );

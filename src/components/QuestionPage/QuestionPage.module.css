@@ -1,11 +1,11 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .textHeader {
   text-align: center;
-  font-family: Lazo, sans-serif;
   font-weight: 300;
   margin: 3rem auto 2rem auto;
 }
@@ -35,14 +35,15 @@
   flex-direction: column;
   align-items: center;
   background: #ffffff;
-  margin: 0 25px;
-  padding: 24px 32px;
+  margin: 0 25px 21px;
+  padding: 24px 0 32px;
   border-radius: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .questionNumSquare {
   text-align: center;
-  font-family: Lazo, sans-serif;
   font-size: 1.25rem;
   line-height: 1.5rem;
   padding: 4px 11px;
@@ -79,32 +80,59 @@
   background-color: darkgreen;
 }
 
-.isSelected{
+.isSelected {
   background-color: darkgreen;
 }
 
-.questionGrid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  gap: 1rem;
-}
-
 .questionLinks {
+  flex: 1;
   background-color: #4c78e74d;
   color: #4c78e7;
-  padding: 5px 57px;
+  padding: 5px 5px;
+  height: 100%;
+}
+.isAnswered {
+  color: #ffffff;
+  background-color: #4c78e7;
+}
+
+.submitButton {
+  border-radius: 15px;
+  text-align: center;
+  border-radius: 46px;
+  padding: 20px 40px;
   border: none;
-  border-radius: 8.4px;
+  opacity: 0.5;
+}
+
+.notSubmittable {
+  background-color: #ababab4d;
+  color: #545454;
+}
+
+.submittable {
+  background-color: #4c78e74d;
+  color: #4752b7;
+  opacity: 1;
   cursor: pointer;
 }
 
-.questionLinks:hover {
-  box-shadow: 0px 1px 1px black;
+.submittable:hover {
+  background-color: #1542b54d;
+  color: #1e2db8;
 }
 
-.isAnswered{
-  color: #ffffff;
-  background-color: #4c78e7;
+.progressIndicator {
+  width: 100%;
+  position: absolute;
+  border-radius: 20px;
+  top: 0;
+}
+
+.questionBar {
+  display: flex;
+  flex-direction: row;
+  height: 48px;
+  border-radius: 20px;
+  width: 100%;
 }

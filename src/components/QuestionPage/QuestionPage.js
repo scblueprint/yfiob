@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { auth } from "../../firebase/firebaseConfig";
+
 import getQuestions from "../../firebase/pullQuestions";
-//import uploadResponses from "../../firebase/uploadResponses";
+import getQuestionsWeights from "../../firebase/pullQuestionsWeights";
+import updateUserAssessment from "../../firebase/uploadResponses";
+import calculateUserScores from "./resultsCalculation";
 
 import styles from "./QuestionPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,15 +17,15 @@ const answerArray = [
   "disagree",
   "neutral",
   "agree",
-  "strongly agree",
+  "strongly agree"
 ];
 
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const [questionsWeights, setQuestionsWeights] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [isComplete, setComplete] = useState(false);
-  const navigate = useNavigate();
 
   const handleSelect = (questionIndex, answerIndex) => {
     console.log("handle selected");
@@ -41,12 +45,50 @@ export default function QuestionPage() {
     const fetchData = async () => {
       const questionsData = await getQuestions();
       setQuestions(questionsData);
-      setSelectedAnswers(
-        Array.from({ length: questionsData.length }, () => null),
-      ); // Initialize selectedAnswers
+      
+      // console.log("Questions" + questionsData);
+
+      const questionsWeightsData = await getQuestionsWeights();
+      setQuestionsWeights(questionsWeightsData);
+      // console.log("Question Weights" + JSON.stringify(questionsWeightsData));
+
+      setSelectedAnswers(Array.from({ length: questionsData.length }, () => null)); // Initialize selectedAnswers
+
+
     };
     fetchData();
   }, []);
+
+    // new stuff
+    const navigate = useNavigate();
+
+    const checkFinish = () => {
+      return selectedAnswers.every(answer => answer !== null);
+    };
+  
+    const goToResults = async () => {
+      // console.log("go to results called");
+      if (checkFinish()) {
+        try {
+          const industryScores = await calculateUserScores(selectedAnswers, questionsWeights);
+          // console.log("industryScores Call:" + JSON.stringify(industryScores));
+          
+          if (auth.currentUser){
+            await updateUserAssessment(auth.currentUser.uid, industryScores);
+          }
+          else {
+            localStorage.setItem('industryScores', JSON.stringify(industryScores));
+          }
+  
+          navigate('/ResultsPage');
+        } catch (error) {
+          console.error("Error in goToResults:", error);
+          alert('An error occurred while calculating or updating the scores.');
+        }
+      } else {
+        alert('Please answer all questions before proceeding.');
+      }
+    };
 
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
@@ -89,6 +131,11 @@ export default function QuestionPage() {
             Don't worry about time, money, training, or education. Just think,
             do you enjoy it?
           </p>
+          {checkFinish() && (
+            <button className={styles.submitButton} onClick={goToResults}>
+              Go to Results
+            </button>
+          )}
 
           <p className={styles.questionPrompt}>
             {questions[currentQuestionIndex]}

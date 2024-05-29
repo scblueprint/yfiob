@@ -7,6 +7,10 @@ import getQuestions from "../../firebase/pullQuestions";
 import styles from "./QuestionPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import puzzle from "../../assets/Jigna.svg";
+import puzzleOdd from "../../assets/Jigna Small.svg";
+import character from "../../assets/Character.svg";
+
 
 const answerArray = [
   "strongly disagree",
@@ -99,15 +103,22 @@ export default function QuestionPage() {
               })}
             </div>
           </div>
-          <p className={styles.textHeader}>
-            Don't worry about time, money, training, or education. Just think,
-            do you enjoy it?
-          </p>
+          <div className={styles.textHeader}>
+            <img 
+              className={styles.puzzleImage} 
+              src={character} 
+              alt="puzzle piece" />
+            <p>Don't worry about time, money, training, or education. Just think,
+            do you enjoy it?</p>
+          </div>
 
-          <p className={styles.questionPrompt}>
-            {questions[currentQuestionIndex]}
-          </p>
-
+          <div className={styles.questionPrompt}>
+            <span>{questions[currentQuestionIndex]}</span>
+            <img 
+              className={styles.puzzleImage} 
+              src={currentQuestionIndex % 2 === 0 ? puzzle : puzzleOdd} 
+              alt="puzzle piece" />
+          </div>
           <div className={styles.responseRow}>
             {answerArray.map((value, index) => {
               const isSelected =

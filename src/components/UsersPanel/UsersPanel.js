@@ -35,7 +35,8 @@ function UsersPanel() {
 			if (searchQuery.trim() === "") {
 				userData = await pullUsers();
 			} else {
-				userData = await pullUsers({ name: searchQuery });
+				const [firstName, lastName] = searchQuery.split(" ");
+				userData = await pullUsers({ name: firstName, lastName: lastName });
 			}
 			setUsers(userData);
 			console.log(userData);
@@ -109,7 +110,7 @@ function UsersPanel() {
 									>
 										{index + 1}
 									</td>
-									<td className={styles.name}>{user.firstName}</td>
+									<td className={styles.name}>{user.firstName} {user.lastName}</td>
 									<td className={styles.grade}>{user.grade}</td>
 									<td className={styles.school}>{user.school}</td>
 									<td className={styles.zipcode}>{user.zipcode}</td>

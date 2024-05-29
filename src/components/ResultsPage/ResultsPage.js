@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import styles from "./ResultsPage.module.css";
+import { PieChart, Pie, Cell} from 'recharts';
 import { getDoc } from "firebase/firestore"; 
 import { auth } from "../../firebase/firebaseConfig"; 
 import {fetchUserAssessmentRef } from "../../firebase/uploadResponses"; 
 
+const COLORS = ['#4C78E7', '#FF7023', '#47B749'];
+
 export default function ResultsPage() {
   const [industries, setIndustries] = useState({});
+  const [showMoreDetails, setShowMoreDetails] = useState(false);
   console.log("results page loaded");
 
   useEffect(() => {
@@ -87,31 +91,81 @@ export default function ResultsPage() {
     fetchData(); // Call the fetchData function to initiate data fetching
   }, []);
 
+  const sortedIndustries = Object.entries(industries).sort(([, a], [, b]) => b - a);
+  const pieData = sortedIndustries.map(([name, value], index) => ({
+    name,
+    value: parseFloat(value.toFixed(0)),
+  }));
+  const topThree = pieData.slice(0, 3);
+  const otherTotal = pieData.slice(3).reduce((total, entry) => total + entry.value, 0);
+  const otherData = { name: "Other", value: otherTotal };
+
+  // Create new data array with top 3 industries and Other category
+  const newData = [...topThree, otherData];
+
+  const renderCustomLabel = ({ x, y, name, value }) => {
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <foreignObject width="100%" height="100%">
+          <div className={styles.customLabel}>
+            <strong>{name}</strong>: {value}%
+          </div>
+        </foreignObject>
+      </g>
+    );
+  };
+  
+
   return (    
     <div className={styles.wrapper}>
       <h1 className={styles.textHeader}>Your Results</h1>
-      <div className={styles.questionModalContainer}>
-        <div className={styles.questionWrapper}>
-          <p className={styles.textHeader}>
-            These are the careers you matched with
-          </p>
-
-          <div className={styles.responseRow}>
-            <table className={styles.table}>
-              <tbody>
-                {Object.entries(industries).map(([industry, score]) => (
-                  <tr key={industry}>
-                    <td>{industry}</td>
-                    <td>{score.toFixed(2)}%</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      <div className={styles.chartContainer}>
+        <div className={styles.pieChart}>
+          <PieChart width={400} height={400}>
+            <Pie
+              data={newData}
+              cx={200}
+              cy={200}
+              labelLine={false}
+              innerRadius={105}
+              outerRadius={150}
+              fill="#8884d8"
+              dataKey="value"
+              nameKey="name"
+              label={renderCustomLabel}
+            >
+              {newData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={index < 3 ? COLORS[index] : '#CCCCCC'} />
+              ))}
+            </Pie>
+          </PieChart>
+        </div>
+        <div className={styles.barChart}>
+          {/* Bar chart content */}
         </div>
       </div>
-      <div className={styles.questionGrid}></div>
+      <div className={styles.moreDetails}>
+        <button onClick={() => setShowMoreDetails(!showMoreDetails)}>
+          {showMoreDetails ? 'Hide details' : 'More details'}
+        </button>
+        {showMoreDetails && (
+          <div className={styles.detailsList}>
+            <ul>
+              {sortedIndustries.map(([industry, score]) => (
+                <li key={industry}>
+                  <span>{(Math.abs(score)).toFixed(2)}%</span> ----- {industry}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      <div className={styles.shareResults}>
+        <h2>Share your results!</h2>
+        <input type="email" placeholder="enter the email" />
+        <button>Send</button>
+      </div>
     </div>
-  );
+  );  
 };
 

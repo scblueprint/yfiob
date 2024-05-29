@@ -36,14 +36,17 @@ export const calculateUserScores = async (selectedAnswers, questionWeights) => {
     Object.keys(industryScores).forEach(industry => {
         industryScores[industry] = Math.max(industryScores[industry], 0);
     });
-    
-    // Find the maximum score to use for normalization
-    const maxScore = Math.max(...Object.values(industryScores));
 
-    // Normalize the scores
+    // Calculate the sum of scores
+    const sumOfScores = Object.values(industryScores).reduce((sum, score) => sum + score, 0);
+
+    console.log("sum of scores:" + sumOfScores);
+
+    // Normalize the scores to ensure they add up to 100
     Object.keys(industryScores).forEach(industry => {
-        industryScores[industry] = (industryScores[industry] / maxScore) * 100;
+        industryScores[industry] = (industryScores[industry] / sumOfScores) * 100;
     });
+    
     console.log("Industry Scores(in file)" + JSON.stringify(industryScores));
     return industryScores;
   };

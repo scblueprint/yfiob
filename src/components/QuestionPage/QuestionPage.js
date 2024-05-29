@@ -104,17 +104,6 @@ export default function QuestionPage() {
     }
   };
 
-  const handleSubmit = () => {
-    if (isComplete) {
-      console.log("Submitted");
-      // if user logged in
-      // uploadResponses(selectedAnswers)
-      navigate("/resultsPage");
-    } else {
-      console.log("Quiz not finished.");
-    }
-  };
-
   return (
     <div className={styles.wrapper}>
       <div>
@@ -158,9 +147,11 @@ export default function QuestionPage() {
           </div>
         </div>
 
-        <button className={styles.arrowBtn} onClick={handleNext}>
-          <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} />
-        </button>
+        {currentQuestionIndex < questions.length - 1 && (
+          <button className={styles.arrowBtn} onClick={handleNext}>
+            <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} />
+          </button>
+        )}
       </div>
 
       <div className={styles.questionGrid}>
@@ -176,15 +167,6 @@ export default function QuestionPage() {
             </button>
           );
         })}
-
-        <div>
-          <button
-            className={`${styles.submitButton} ${isComplete ? styles.submittable : styles.notSubmittable}`}
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
       </div>
     </div>
   );

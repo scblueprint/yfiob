@@ -34,6 +34,7 @@ function UsersPanel() {
         userData = await pullUsers({ name: searchQuery });
       }
       setUsers(userData);
+      setCurrentPage(1);
       console.log(userData);
     } catch (error) {
       console.error("Error fetching user data: ", error.message);

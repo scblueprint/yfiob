@@ -7,31 +7,57 @@ const pullUsers = async ({ name, email, zipcode, grade } = {}) => {
         let queries = [];
 
         if (name !== undefined) {
-            queries.push(orderBy('firstName'));
-            queries.push(startAt(name));
-            queries.push(endAt(name + '\uf8ff')); // This will match any string starting with `name`
+            const nameParts = name.split(' ');
+            console.log(nameParts);
+            if (nameParts.length === 1) {
+                const searchName = nameParts[0];
+                queries.push(
+                    query(usersCollectionRef, orderBy('firstName'), startAt(searchName), endAt(searchName + '\uf8ff'))
+                );
+                queries.push(
+                    query(usersCollectionRef, orderBy('lastName'), startAt(searchName), endAt(searchName + '\uf8ff'))
+                );
+            } else if (nameParts.length > 1) {
+                const [firstName, lastName] = nameParts;
+                queries.push(
+                    query(usersCollectionRef, orderBy('firstName'), startAt(firstName), endAt(firstName + '\uf8ff'))
+                );
+                queries.push(
+                    query(usersCollectionRef, orderBy('lastName'), startAt(lastName), endAt(lastName + '\uf8ff'))
+                );
+            }
         }
         if (email !== undefined) {
-            queries.push(where('email', '==', email));
+            queries.push(query(usersCollectionRef, where('email', '==', email)));
         }
         if (zipcode !== undefined) {
-            queries.push(where('zipcode', '==', zipcode));
+            queries.push(query(usersCollectionRef, where('zipcode', '==', zipcode)));
         }
         if (grade !== undefined) {
-            queries.push(where('grade', '==', grade));
+            queries.push(query(usersCollectionRef, where('grade', '==', grade)));
         }
 
-        if (queries.length > 0) {
-            usersCollectionRef = query(usersCollectionRef, ...queries);
+        let usersArray = [];
+        let userIds = new Set(); // To avoid duplicates
+
+        if (queries.length === 0) {
+            const querySnapshot = await getDocs(usersCollectionRef);
+            querySnapshot.forEach((doc) => {
+                const userData = doc.data();
+                usersArray.push({ id: doc.id, ...userData });
+            });
+        } else {
+            for (const q of queries) {
+                const querySnapshot = await getDocs(q);
+                querySnapshot.forEach((doc) => {
+                    if (!userIds.has(doc.id)) {
+                        const userData = doc.data();
+                        usersArray.push({ id: doc.id, ...userData });
+                        userIds.add(doc.id);
+                    }
+                });
+            }
         }
-
-        const querySnapshot = await getDocs(usersCollectionRef);
-        const usersArray = [];
-
-        querySnapshot.forEach((doc) => {
-            const userData = doc.data();
-            usersArray.push({ id: doc.id, ...userData });
-        });
 
         return usersArray;
     } catch (error) {

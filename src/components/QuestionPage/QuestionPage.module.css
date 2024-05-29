@@ -5,6 +5,8 @@
 }
 
 .textHeader {
+  display: flex;
+  align-items: center;
   text-align: center;
   font-weight: 300;
   margin: 3rem auto 2rem auto;
@@ -13,6 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%; /* Ensure container takes full width */
 }
 
 .arrowBtn {
@@ -36,8 +39,10 @@
   align-items: center;
   background: #ffffff;
   margin: 0 25px 21px;
-  padding: 24px 0 32px;
+  padding: 24px 32px; 
   border-radius: 20px;
+  width: 60%; /* Set a larger width */
+  max-width: 900px; /* Ensure it doesn't get too large */
   position: relative;
   overflow: hidden;
 }
@@ -52,12 +57,14 @@
 }
 
 .questionPrompt {
+  display: flex;
+  align-items: center; /* keep image on same line */
   font-size: 2rem;
   font-weight: 700;
   text-align: center;
   padding: 35px 0;
   margin-bottom: 55px;
-  max-width: 51.8rem;
+  max-width: 100%; /* Ensure it uses full width of wrapper */
 }
 
 .responseRow {

@@ -1,5 +1,6 @@
 import React, { useState} from "react";
 import getQuestions from "../../firebase/pullQuestions";
+import updateQuestion from "../../firebase/updateQuestion";
 import * as Collapsible from '@radix-ui/react-collapsible';
 import * as Form from '@radix-ui/react-form';
 import { RowSpacingIcon } from '@radix-ui/react-icons';
@@ -19,7 +20,7 @@ function AssessmentEditor() {
           setQuestions(questionsData);
         };
         fetchData();
-      }, []);
+    }, []);
     
 
 
@@ -27,7 +28,7 @@ function AssessmentEditor() {
         <div className={styles.page}>
             {questions.map((questionText, index) => {
               return (
-                <Collapsible.Root open={selectedQuestion[index]} key={index} onOpenChange={console.log("setSelectedQuestion(index)")}>
+                <Collapsible.Root open={selectedQuestion[index]} key={index}>
 
                   <div className={styles.allQuestionRows}>
                     <div className={styles.questionRow}>
@@ -47,9 +48,23 @@ function AssessmentEditor() {
                   <Collapsible.Content>
                     <div className={styles.questionRow}>
                       <span className={styles.questionRow}>
-                        <Form.Root>
+                        <Form.Root
+                              // `onSubmit` only triggered if it passes client-side validation
+                              onSubmit={(event) => {
+                                const data = Object.fromEntries(new FormData(event.currentTarget));
+
+                                // Submit form data and catch errors in the response
+                                updateQuestion(questionText, data)
+                                  .then(() => {})
+                                  .catch((errors) => console.log(errors));
+
+                                // prevent default form submission
+                                event.preventDefault();
+                              }}
+                        
+                        >
                           <Form.Field name="question">
-                            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
+                            <div>
                               <Form.Label>Question</Form.Label>
                               <Form.Message match="valueMissing">
                                   Please edit the question
@@ -60,7 +75,7 @@ function AssessmentEditor() {
                             </Form.Control>
                           </Form.Field>
                           <Form.Submit asChild>
-                            <button style={{ marginTop: 10 }}>
+                            <button>
                               Submit Changes
                             </button>
                           </Form.Submit>

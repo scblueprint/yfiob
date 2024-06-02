@@ -8,6 +8,7 @@ import {
 	faMagnifyingGlass,
 	faChevronLeft,
 	faChevronRight,
+	faArrowUpFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
 function UsersPanel() {
@@ -144,6 +145,12 @@ function UsersPanel() {
 					className={styles.arrowButton}
 				>
 					<FontAwesomeIcon icon={faChevronRight} />
+				</button>
+			</div>
+			<div className={styles.export}>
+				<button>
+					<FontAwesomeIcon icon={faArrowUpFromBracket} />
+					<div>Export Student Data</div>
 				</button>
 			</div>
 		</div>

@@ -28,6 +28,7 @@ function App() {
         <Route path="/slide3" element={<Slide3 />} />
         <Route path="/login" element={<StudentLogin setUser={setUser} />} />
         <Route path="/admin" element={<AdminLogin setUser={setUser} />} />
+        <Route path="/resultsPage" element={<ResultsPage />} />
         <Route path="/questionPage" element={<QuestionPage />} />
         <Route path="/resultsPage" element={<ResultsPage />} />
         <Route path="/signup" element={<StudentSignUp />} />

@@ -45,7 +45,9 @@ function Slide_1() {
         </Link>
 
         <p className={styles.assessText}>
+
           {`This quick assessment consists of ${questions} questions, but will not be as
+
           representative of who you are.`}
         </p>
       </div>

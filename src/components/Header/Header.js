@@ -22,6 +22,10 @@ const Header = ({ user }) => {
         console.error("Error signing out:", error);
       });
   };
+  //  const handleTestButtonClick = () => {
+    
+  //    navigate('/resultsPage'); 
+  //  };
 
   return (
     <div className={styles.headerWrapper}>
@@ -30,8 +34,9 @@ const Header = ({ user }) => {
       </Link>
 
       <Navbar />
-      {/* <button className={styles.signOutBtn} onClick={() => updateUserAssessment(user.uid)}>
-        Test Upload
+      {/* <button className={styles.signOutBtn} onClick={handleTestButtonClick}>
+        {}
+        Test question weights
       </button> */}
 
       <div className={styles.navContainer}>

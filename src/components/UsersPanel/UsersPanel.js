@@ -28,22 +28,22 @@ function UsersPanel() {
 		fetchUsers();
 	}, []);
 
-	const handleSearch = async () => {
-		console.log("Search Query:", searchQuery);
-		try {
-			let userData;
-			if (searchQuery.trim() === "") {
-				userData = await pullUsers();
-			} else {
-				const [firstName, lastName] = searchQuery.split(" ");
-				userData = await pullUsers({ name: firstName, lastName: lastName });
-			}
-			setUsers(userData);
-			console.log(userData);
-		} catch (error) {
-			console.error("Error fetching user data: ", error.message);
-		}
-	};
+  const handleSearch = async () => {
+    console.log("Search Query:", searchQuery);
+    try {
+        let userData;
+        if (searchQuery.trim() === "") {
+            userData = await pullUsers();
+        } else {
+            userData = await pullUsers({ name: searchQuery });
+        }
+        setUsers(userData);
+        setCurrentPage(1); // Reset to the first page on new search
+        console.log("Search results:", userData);
+    } catch (error) {
+        console.error("Error fetching user data: ", error.message);
+    }
+  };
 
 	const indexOfLastUser = currentPage * usersPerPage;
 	const indexOfFirstUser = indexOfLastUser - usersPerPage;

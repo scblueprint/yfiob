@@ -25,7 +25,7 @@ const Header = ({ user }) => {
 
   return (
     <div className={styles.headerWrapper}>
-      <Link to="/">
+      <Link to="https://yfiob.org/">
         <img className={styles.yfioblogo} src={yfiobLogo} alt="YFIOB Logo" />
       </Link>
 

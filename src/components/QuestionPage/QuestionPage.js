@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import getQuestions from "../../firebase/pullQuestions";
-//import uploadResponses from "../../firebase/uploadResponses";
+import { auth } from "../../firebase/firebaseConfig";
 
 import styles from "./QuestionPage.module.css";
+
+import getQuestions from "../../firebase/pullQuestions";
+import getQuestionsWeights from "../../firebase/pullQuestionsWeights";
+import updateUserAssessment from "../../firebase/uploadResponses";
+import calculateUserScores from "./resultsCalculation";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import puzzle from "../../assets/Jigna.svg";
 import puzzleOdd from "../../assets/Jigna Small.svg";
 import character from "../../assets/Character.svg";
-
 
 const answerArray = [
   "strongly disagree",
@@ -23,9 +27,10 @@ const answerArray = [
 export default function QuestionPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const [questionsWeights, setQuestionsWeights] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+
   const [isComplete, setComplete] = useState(false);
-  const navigate = useNavigate();
 
   const handleSelect = (questionIndex, answerIndex) => {
     console.log("handle selected");
@@ -45,12 +50,50 @@ export default function QuestionPage() {
     const fetchData = async () => {
       const questionsData = await getQuestions();
       setQuestions(questionsData);
+
+      // console.log("Questions" + questionsData);
+
+      const questionsWeightsData = await getQuestionsWeights();
+      setQuestionsWeights(questionsWeightsData);
+      // console.log("Question Weights" + JSON.stringify(questionsWeightsData));
+
       setSelectedAnswers(
         Array.from({ length: questionsData.length }, () => null),
       ); // Initialize selectedAnswers
     };
     fetchData();
   }, []);
+
+  // new stuff
+  const navigate = useNavigate();
+
+  const checkFinish = () => {
+    return selectedAnswers.every((answer) => answer !== null);
+  };
+
+  // TODO: goToResults is decalared but not being used, used a console log to temporary silence the warning
+  const goToResults = async () => {
+    // console.log("go to results called");
+    if (checkFinish()) {
+      try {
+        const industryScores = await calculateUserScores(
+          selectedAnswers,
+          questionsWeights,
+        );
+        // console.log("industryScores Call:" + JSON.stringify(industryScores));
+
+        await updateUserAssessment(auth.currentUser.uid, industryScores);
+
+        navigate("/ResultsPage");
+      } catch (error) {
+        console.error("Error in goToResults:", error);
+        alert("An error occurred while calculating or updating the scores.");
+      }
+    } else {
+      alert("Please answer all questions before proceeding.");
+    }
+  };
+  console.log(goToResults);
 
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
@@ -97,27 +140,31 @@ export default function QuestionPage() {
                   <div
                     key={index}
                     className={`${styles.questionLinks} ${isSelected ? styles.isAnswered : ""}`}
-                  >
-                  </div>
+                  ></div>
                 );
               })}
             </div>
           </div>
+
           <div className={styles.textHeader}>
-            <img 
-              className={styles.puzzleImage} 
-              src={character} 
-              alt="puzzle piece" />
-            <p>Don't worry about time, money, training, or education. Just think,
-            do you enjoy it?</p>
+            <img
+              className={styles.puzzleImage}
+              src={character}
+              alt="puzzle piece"
+            />
+            <p>
+              Don't worry about time, money, training, or education. Just think,
+              do you enjoy it?
+            </p>
           </div>
 
           <div className={styles.questionPrompt}>
             <span>{questions[currentQuestionIndex]}</span>
-            <img 
-              className={styles.puzzleImage} 
-              src={currentQuestionIndex % 2 === 0 ? puzzle : puzzleOdd} 
-              alt="puzzle piece" />
+            <img
+              className={styles.puzzleImage}
+              src={currentQuestionIndex % 2 === 0 ? puzzle : puzzleOdd}
+              alt="puzzle piece"
+            />
           </div>
           <div className={styles.responseRow}>
             {answerArray.map((value, index) => {
@@ -140,14 +187,14 @@ export default function QuestionPage() {
           <FontAwesomeIcon className={styles.arrows} icon={faArrowRight} />
         </button>
       </div>
-        <div>
-          <button
-            className={`${styles.submitButton} ${isComplete ? styles.submittable : styles.notSubmittable}`}
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
+      <div>
+        <button
+          className={`${styles.submitButton} ${isComplete ? styles.submittable : styles.notSubmittable}`}
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
       </div>
+    </div>
   );
 }

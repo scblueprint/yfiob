@@ -45,7 +45,6 @@ function UsersPanel() {
     }
   };
 
-
 	const indexOfLastUser = currentPage * usersPerPage;
 	const indexOfFirstUser = indexOfLastUser - usersPerPage;
 	const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
@@ -111,7 +110,7 @@ function UsersPanel() {
 									>
 										{index + 1}
 									</td>
-									<td className={styles.name}>{user.firstName}</td>
+									<td className={styles.name}>{user.firstName} {user.lastName}</td>
 									<td className={styles.grade}>{user.grade}</td>
 									<td className={styles.school}>{user.school}</td>
 									<td className={styles.zipcode}>{user.zipcode}</td>

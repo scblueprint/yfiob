@@ -3,7 +3,7 @@ import { db } from "./firebaseConfig";
 
 const addUserToFirestore = async (userId, email, firstName, lastName) => {
   try {
-    //This line creates a documents in firebase with user information
+    // This line creates a documents in firebase with user information
     const userDocRef = doc(db, "Users", userId);
     await setDoc(userDocRef, {
       email: email,
@@ -19,24 +19,28 @@ const addUserToFirestore = async (userId, email, firstName, lastName) => {
     const assessmentDocRef = doc(assessmentsCollectionRef); 
     await setDoc(assessmentDocRef, {
         Industries: {
-          'Agriculture & Natural Resources': 0.0,
-          'Energy': 0.0,
+          'Agriculture and Natural Resources': 0.0,
+          'Energy and Utilities': 0.0,
           'Arts, Media, and Entertainment': 0.0,
           'Skilled Trades': 0.0,
-          'Engineering': 0.0,
-          'Education & Child Development': 0.0,
+          'Engineering and Design Industry': 0.0,
+          'Education, Child Development, and Family Services': 0.0,
           'Psychology': 0.0,
           'Ecology & Environmental': 0.0,
           'Health Science and Medical Technology': 0.0,
           'Research & Academia': 0.0,
           'Hospitality, Tourism, and Recreation': 0.0,
-          'IT, Software and Hardware Engineering': 0.0,
+          'Information Technology': 0.0,
           'Manufacturing and Product Development': 0.0,
-          'Marketing, Sales, Communications': 0.0,
+          'Marketing, Sales, and Service': 0.0,
           'Aviation': 0.0,
           'Supply Chain': 0.0,
           'Law, Law Enforcement': 0.0,
-          'Business Management & Development': 0.0
+          'Finance and Business': 0.0,
+          'Public Services': 0.0,
+          'Fashion and Interior Design': 0.0,
+          'Building Trades and Construction': 0.0,
+          'Transportation': 0.0
       }
       
     });

@@ -24,7 +24,6 @@
 
 .signIn {
   display: inline-block;
-  width: 107px;
   height: 57px;
   margin-right: 9px;
   font-size: 20px;
@@ -36,6 +35,8 @@
   text-align: center;
   line-height: 57px;
   color: black;
+  padding: 0 20px;
+  white-space: nowrap;
 }
 
 .signIn:hover {

@@ -41,38 +41,40 @@ function ExploreCareersPage() {
 
 	return (
 		<div className={styles.wrapper}>
-			<h1 className={styles.textHeading}>Learn About Careers</h1>
-			<div className={styles.filterContainer}>
-				<p className={styles.filterText}>Search by career types</p>
-				<Modal defaultOpen={false}>
-					<Modal.Button asChild>
-						<button className={styles.filterButton}>
-							<img src={filterIcon} alt={"Filter Icon"} />
-						</button>
-					</Modal.Button>
-					<Modal.Content title="Career Types">
-						<div className={styles.filterIndustriesContainer}>
-							{careerFilterOptions.map((industry, _) => (
-								<button
-									key={industry}
-									className={
-										clickedFilterIndustries[industry]
-											? styles.clickedFilterIndustryButton
-											: styles.filterIndustryButton
-									}
-									onClick={() =>
-										setClickedFilterIndustries((prevState) => ({
-											...prevState,
-											[industry]: !prevState[industry],
-										}))
-									}
-								>
-									{industry}
-								</button>
-							))}
-						</div>
-					</Modal.Content>
-				</Modal>
+			<div className={styles.headerContainer}>
+				<h1 className={styles.textHeading}>Learn About Careers</h1>
+				<div className={styles.filterContainer}>
+					<p className={styles.filterText}>Search by career types</p>
+					<Modal defaultOpen={false}>
+						<Modal.Button asChild>
+							<button className={styles.filterButton}>
+								<img src={filterIcon} alt={"Filter Icon"} />
+							</button>
+						</Modal.Button>
+						<Modal.Content title="Career Types">
+							<div className={styles.filterIndustriesContainer}>
+								{careerFilterOptions.map((industry, _) => (
+									<button
+										key={industry}
+										className={
+											clickedFilterIndustries[industry]
+												? styles.clickedFilterIndustryButton
+												: styles.filterIndustryButton
+										}
+										onClick={() =>
+											setClickedFilterIndustries((prevState) => ({
+												...prevState,
+												[industry]: !prevState[industry],
+											}))
+										}
+									>
+										{industry}
+									</button>
+								))}
+							</div>
+						</Modal.Content>
+					</Modal>
+				</div>
 			</div>
 
 			<div className={styles.careersContainer}>

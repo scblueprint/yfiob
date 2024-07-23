@@ -2,22 +2,30 @@ import React, { useState } from "react";
 import SideNavbar from "../SideNavbar/SideNavbar";
 import Dashboard from "../Dashboard/Dashboard";
 import UsersPanel from "../UsersPanel/UsersPanel";
+import Insights from "./Insights";
 import AssessmentEditor from "../AssessmentEditor/AssessmentEditor";
 import styles from "./AdminPanel.module.css";
 
 function AdminPanel() {
   const [currentPage, setCurrentPage] = useState("Data");
+  const assessmentStats = [
+    { title: "# of assessments taken in the last 7 days", value: 10, label: "new" },
+    { title: "total # of assessments taken", value: 100, label: "total" }
+  ];
 
   return (
     <div className={styles.container}>
       <SideNavbar selectedItem={currentPage} setSelectedItem={setCurrentPage} />
       {currentPage === "Data" ? (
         <Dashboard
-          title={"Data"}
-          subtitle={"Breakdown of students career quiz results."}
+          // title={"Data"}
+          // subtitle={"Breakdown of students career quiz results."}
         >
           {/* Dashboard content goes in here */}
-          This is the data content
+          Breakown of stuents career quiz results.
+          <Insights>
+
+          </Insights>
         </Dashboard>
       ) : (
         ""

@@ -1,196 +1,157 @@
-
 .wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .textHeader {
-    text-align: center;
-    font-family: Lazo, sans-serif;
-    font-weight: 300;
-    margin: 3rem auto 2rem auto;
-  }
-  .questionModalContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .arrowBtn {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
-  
-  .arrowBtn:hover {
-    color: red;
-  }
-  
-  .arrows {
-    width: 50px;
-    height: 30px;
-  }
-  
-  .questionWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #ffffff;
-    margin: 0 25px;
-    padding: 24px 32px;
-    border-radius: 20px;
-  }
-  
-  .questionNumSquare {
-    text-align: center;
-    font-family: Lazo, sans-serif;
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-    padding: 4px 11px;
-    background-color: #c5c5c5;
-    border-radius: 8.4px;
-  }
-  
-  .questionPrompt {
-    font-size: 2rem;
-    font-weight: 700;
-    text-align: center;
-    padding: 35px 0;
-    margin-bottom: 55px;
-    max-width: 51.8rem;
-  }
-  
-  .responseRow {
-    display: inline-flex;
-    justify-content: center;
-    gap: 0.7rem;
-    margin-bottom: 2.56rem; /* change later */
-  }
-  
-  .answerResponseSquare {
-    background-color: #47b74957;
-    color: #47b749;
-    border-radius: 20px;
-    padding: 1.06rem 2.18rem;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .answerResponseSquare:hover {
-    background-color: darkgreen;
-  }
-  
-  .isSelected{
-    background-color: darkgreen;
-  }
-  
-  .questionGrid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    gap: 1rem;
-  }
-  
-  .questionLinks {
-    background-color: #4c78e74d;
-    color: #4c78e7;
-    padding: 5px 57px;
-    border: none;
-    border-radius: 8.4px;
-    cursor: pointer;
-  }
-  
-  .questionLinks:hover {
-    box-shadow: 0px 1px 1px black;
-  }
-  
-  .isAnswered{
-    color: #ffffff;
-    background-color: #4c78e7;
-  }
+  display: flex;
+  padding: 20px;
+}
 
-  /* Frame 1 */
-.frame-1 {
+.leftHandSide {
+  flex: 0 0 35%; /* Adjust the percentage as needed (20%-30%) */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 30px;
-  gap: 10px;
-
-  position: absolute;
-  width: 909px;
-  height: 1354px;
-  left: 84px;
-  top: 260px;
-
-  background: #ECECEC;
-  border-radius: 20px;
+  gap: 20px;
+  padding: 10px;
 }
 
-/* Frame 7 */
-.frame-7 {
-  position: absolute;
-  width: 328px;
-  height: 535px;
-  left: 1087px;
-  top: 260px;
-
-  background: #ECECEC;
-  border-radius: 20px;
+.rightHandSide {
+  flex: 0 0 65%; /* Adjust the percentage as needed (70%-80%) */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
 }
 
-/* Rectangle 6 */
-.rectangle-6 {
-  position: absolute;
-  width: 560px;
-  height: 67px;
-  left: 84px;
-  top: 175px;
-
-  background: rgba(217, 217, 217, 0.5);
-  border-radius: 20px;
+.circleChart{
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-/* Assessment Page */
-.assessment-page {
-  position: absolute;
-  width: 152px;
-  height: 24px;
-  left: 114px;
-  top: 196px;
+.share {
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+}
 
-  font-family: 'Lato', sans-serif;
-  font-style: normal;
+.share h3 {
+  width: 100%;
+  margin-top: 40px;
+  font-family: Lato;
+  font-size: 36px;
+  font-style: italic;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
+  line-height: 43.2px;
+  text-align: center;
+}
+
+.share form {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center elements horizontally within the form */
+}
+
+.share input {
+  width: 376.38px;
+  height: 45.74px;
+  border-radius: 20px;
+  border: 2px solid #4C78E7;
+  margin-top: 20px;
+}
+
+.share input::placeholder {
+  font-family: Lato;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 17.99px;
+  text-align: center;
+  color: #4C78E780;
+}
+
+.share button {
+  width: 120px;
+  height: 50px;
+  border-radius: 25px;
+  box-sizing: border-box;
+  background: #4C78E780;
+  border: 1px solid #4C78E7;
+  color: #FFFFFF;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.barChart{
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.careerExploration{
+  background-color: #FFFFFF;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.percentageChart{
+  background-color: #FFFFFF;
+  padding: 20px;
+}
+
+.careerExploration h2{
+  width: 478px;
+  height: 43px;
+  top: 529px;
+  left: 557px;
+  gap: 0px;
+  opacity: 0px;
+  margin-bottom: 20px;
+
+  font-family: Lato;
+  font-size: 36px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 43.2px;
+  text-align: center;
+}
+
+.career {
+  background-color: #4C78E733;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
+}
+
+.careerTitle {
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-flex;
+  margin-top: 20px;
+  margin-left: 15px;
+  
+  align-items: center;
+  justify-content: center;
   text-align: center;
 
-  color: #000000;
+  background-color: #4C78E733;
+  ;
 }
 
-/* Group 13 */
-.group-13 {
-  position: absolute;
-  width: 328px;
-  height: 43px;
-  left: 1087px;
-  top: 841px;
+.textBox p {
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
-/* Group 14 */
-.group-14 {
-  position: absolute;
-  width: 126px;
-  height: 43px;
-  left: 1087px;
-  top: 892px;
+.textBox p:last-child {
+  margin-bottom: 20px;
 }
 
-
-  
-  
-
+.rightHandCareer {
+  margin-left: 40px;
+  margin-right: 20px;
+  width: 500px;
+  height: 200px;
+  background-color: #FFFFFF;
+}

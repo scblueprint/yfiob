@@ -32,9 +32,11 @@ function Insights() {
         {Trends.map((stat, index) => (
           <StatCard key={index} title={stat.title} value={stat.value} label={stat.label} >
             {/* {index === 0 && <TrendingSector />} */}
+            
           </StatCard>
           
         ))}
+        
       </section>
       <section className={styles.statsSection}>
 

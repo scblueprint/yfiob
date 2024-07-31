@@ -1,30 +1,424 @@
 .dashboard {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+}
+
+.assessmentSection {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 991px) {
+  .assessmentSection {
     flex-direction: column;
-    align-content: flex-start;
-    flex-wrap: wrap;
-    width: 100%;
+    align-items: stretch;
+    gap: 0;
   }
-  
-  .statsSection {
-    display: flex;
-    gap: 20px;
-    width: 100%;
+}
+
+.trendingSection {
+  margin-top: 17px;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 991px) {
+  .trendingSection {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
   }
-  
-  .trendsSection {
-    display: flex;
-    gap: 20px;
-    margin-top: 17px;
+}
+
+.assessmentCard {
+  border-radius: 5px;
+  background-color: rgba(235, 240, 255, 1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 1);
+  width: 100%;
+  padding: 23px 28px;
+}
+
+@media (max-width: 991px) {
+  .assessmentCard {
+    max-width: 100%;
+    margin-top: 16px;
     padding: 0 20px;
-    width: 100%;
   }
-  
-  @media (max-width: 991px) {
-    .statsSection,
-    .trendsSection {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 16px;
-    }
+}
+
+.cardTitle {
+  text-align: center;
+  font: 300 24px Lato, sans-serif;
+}
+
+.cardContent {
+  align-self: center;
+  display: flex;
+  margin-top: 15px;
+  gap: 10px;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+.cardCount {
+  text-align: center;
+  font: 700 64px Lato, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .cardCount {
+    font-size: 40px;
   }
+}
+
+.cardLabel {
+  margin: auto 0;
+  font: 400 48px Lato, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .cardLabel {
+    font-size: 40px;
+  }
+}
+
+.trendingChart {
+  border-radius: 5px;
+  background-color: rgba(235, 240, 255, 1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 300;
+  text-align: center;
+  margin: 0 auto;
+  padding: 22px 28px;
+}
+
+@media (max-width: 991px) {
+  .trendingChart {
+    margin-top: 16px;
+    padding: 0 20px;
+  }
+}
+
+.chartTitle {
+  font-family: Lato, sans-serif;
+  align-self: center;
+}
+
+.chartContent {
+  display: flex;
+  margin-top: 15px;
+  font-size: 36px;
+  font-weight: 700;
+  justify-content: center;
+}
+
+.topSector {
+  width: 63px;
+  height: 63px;
+  margin: auto 0;
+}
+
+.topSectorName {
+  font-family: Lato, sans-serif;
+}
+
+.chartBars {
+  background-color: rgba(255, 255, 255, 1);
+  overflow-x: auto;
+  display: flex;
+  margin-top: 15px;
+  padding-right: 21px;
+  align-items: flex-end;
+  gap: 5px;
+  font-size: 6px;
+  font-weight: 400;
+  white-space: nowrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .chartBars {
+    padding-right: 20px;
+    white-space: initial;
+  }
+}
+
+.barContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.barPercentage {
+  font-family: Lato, sans-serif;
+}
+
+.bar {
+  width: 100%;
+}
+
+.moreButton {
+  font-family: Lato, sans-serif;
+  align-self: center;
+  margin-top: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.assessmentSection {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 991px) {
+  .assessmentSection {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+}
+
+.trendingSection {
+  margin-top: 17px;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 991px) {
+  .trendingSection {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+}
+
+.assessmentCard {
+  border-radius: 5px;
+  background-color: rgba(235, 240, 255, 1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 1);
+  width: 100%;
+  padding: 23px 28px;
+}
+
+@media (max-width: 991px) {
+  .assessmentCard {
+    max-width: 100%;
+    margin-top: 16px;
+    padding: 0 20px;
+  }
+}
+
+.cardTitle {
+  text-align: center;
+  font: 300 24px Lato, sans-serif;
+}
+
+.cardContent {
+  align-self: center;
+  display: flex;
+  margin-top: 15px;
+  gap: 10px;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+.cardCount {
+  text-align: center;
+  font: 700 64px Lato, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .cardCount {
+    font-size: 40px;
+  }
+}
+
+.cardLabel {
+  margin: auto 0;
+  font: 400 48px Lato, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .cardLabel {
+    font-size: 40px;
+  }
+}
+
+.trendingChart {
+  border-radius: 5px;
+  background-color: rgba(235, 240, 255, 1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 300;
+  text-align: center;
+  margin: 0 auto;
+  padding: 22px 28px;
+}
+
+@media (max-width: 991px) {
+  .trendingChart {
+    margin-top: 16px;
+    padding: 0 20px;
+  }
+}
+
+.chartTitle {
+  font-family: Lato, sans-serif;
+  align-self: center;
+  font-weight: 50; /* Set the font weight to normal */
+}
+
+
+.chartContent {
+  display: flex;
+  margin-top: 15px;
+  font-size: 36px;
+  font-weight: 700;
+  justify-content: center;
+}
+
+.topSector {
+  width: 63px;
+  height: 63px;
+  margin: auto 0;
+}
+
+.topSectorName {
+  margin-left: 20px;
+  font-family: Lato, sans-serif;
+}
+
+.chartBars {
+  background-color: rgba(255, 255, 255, 1);
+  overflow-x: auto;
+  display: flex;
+  margin-top: 15px;
+  padding-right: 21px;
+  align-items: flex-end;
+  gap: 5px;
+  font-size: 6px;
+  font-weight: 400;
+  white-space: nowrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .chartBars {
+    padding-right: 20px;
+    white-space: initial;
+  }
+}
+
+.barContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.barPercentage {
+  font-family: Lato, sans-serif;
+}
+
+.bar {
+  width: 100%;
+}
+
+.moreButton {
+  font-family: Lato, sans-serif;
+  align-self: center;
+  margin-top: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.moreButton:hover {
+  background-color: #7ccefd; 
+  color:  #ffffff; 
+}
+
+
+.infoCard {
+  border-radius: 5px;
+  background-color: rgba(235, 240, 255, 1);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  width: 100%;
+  padding: 23px 28px;
+  max-height: 150px; 
+}
+
+@media (max-width: 991px) {
+  .infoCard {
+    margin-top: 16px;
+    padding: 0 20px;
+  }
+}
+
+.infoTitle {
+  font: 300 24px Lato, sans-serif;
+}
+
+.infoContent {
+  align-self: center;
+  margin-top: 15px;
+  font: 700 36px Lato, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.careerIcon {
+  background-color: rgba(255, 154, 100, 1);
+  width: 63px;
+  height: 63px;
+  margin-right: 10px;
+}
+
+.schoolIcon {
+  background-color: rgba(255, 255, 255, 0);
+  width: 0px;
+  height: 63px;
+ 
+}
+
+.infoText {
+  font-family: Lato, sans-serif;
+}
+
+
+

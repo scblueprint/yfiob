@@ -1,53 +1,35 @@
 import React from 'react';
-import styles from './Insights.module.css';
-import StatCard from './StatCard';
-import TrendingSector from "./TrendingSector";  
- 
-// import TrendingChart from './TrendingChart';
-// import TopTrendingItem from './TopTrendingItem';
+import styles from './Dashboard.module.css';
+import AssessmentCard from './AssessmentCard';
+import TrendingChart from './TrendingChart';
+import InfoCard from './InfoCard';
 
 function Insights() {
-  const assessmentStats = [
-    { title: "# of assessments taken in the last 7 days", value: 10, label: "new" },
-    { title: "total # of assessments taken", value: 100, label: "total" },
-  ];
-
-  const Trends = [
-    { title: "Top trending Sector" },
-    { title: "Top trending high school" },
-    { title: "Most clicked on career" },
+  const assessmentData = [
+    { title: "# of assessments taken in the last 7 days", count: 10, label: "new" },
+    { title: "Total # of assessments taken", count: 100, label: "total" }
   ];
 
   return (
     <main className={styles.dashboard}>
-      <section className={styles.statsSection}>
-        {assessmentStats.map((stat, index) => (
-          <StatCard key={index} title={stat.title} value={stat.value} label={stat.label}>
-           
-          </StatCard>
+      <section className={styles.assessmentSection}>
+        {assessmentData.map((data, index) => (
+          <AssessmentCard key={index} {...data} />
         ))}
-
       </section>
-      <section className={styles.trendsSection}>
-        {Trends.map((stat, index) => (
-          <StatCard key={index} title={stat.title} value={stat.value} label={stat.label} >
-            {/* {index === 0 && <TrendingSector />} */}
-            
-          </StatCard>
-          
-        ))}
-        
+      <section className={styles.trendingSection}>
+        <TrendingChart />
+        <InfoCard 
+          title="Top Trending School" 
+          content="East High"   
+          icon={<div className={styles.schoolIcon} />}
+          />
+        <InfoCard 
+          title="Most Clicked on Career" 
+          content="Agricultural Engineer" 
+          icon={<div className={styles.careerIcon} />}
+        />
       </section>
-      <section className={styles.statsSection}>
-
-      </section>
-      
-      {/* <TrendingChart />
-      <TopTrendingItem title="top trending school" value="East High" />
-      <TopTrendingItem 
-        title="most clicked on career" 
-        value="Agricultural Engineer" 
-        iconColor="#ff9a64"  */}
     </main>
   );
 }

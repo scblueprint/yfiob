@@ -4,6 +4,9 @@ import { getDoc } from "firebase/firestore";
 import { auth } from "../../firebase/firebaseConfig";
 import { fetchUserAssessmentRef } from "../../firebase/uploadResponses";
 
+import { Bar, Doughnut } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
+
 export default function ResultsPage() {
   // TODO: setIndustries is declared but not being used anywhere, temporary fix to silence warnings
   const [industries, setIndustries] = useState({});
@@ -59,10 +62,85 @@ export default function ResultsPage() {
     fetchData(); // Call the fetchData function to initiate data fetching
   }, []); // Empty dependency array ensures this runs only once after the initial render
 
+  const barData = {
+    labels: [
+      'Agriculture & Natural Resources', 'Building and Construction Trades', 'Arts, Media and Entertainment'
+    ],
+    datasets: [
+      {
+        data: [18, 14, 10],
+        backgroundColor: ['#40a1d9', '#f68424', '#50ba4f'],
+      },
+    ],
+  };
+
+  const barOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
+
+  const donutData = {
+    labels: [
+      'Agriculture & Natural Resources', 'Building and Construction Trades', 'Arts, Media and Entertainment'
+    ],
+    datasets: [
+      {
+        data: [18, 14, 10],
+        backgroundColor: ['#40a1d9', '#f68424', '#50ba4f'],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const donutOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom', // Position the legend at the bottom
+        align: 'start', // Align legend to the start of the container
+        labels: {
+          padding: 20, // Add padding between the chart and the legend
+          boxWidth: 20, // Adjust the box width of the legend items
+        },
+      },
+      datalabels: {
+        color: '#fff',
+        anchor: 'center',
+        align: 'center',
+        formatter: (value) => `${value}%`,
+        font: {
+          weight: 'bold',
+        },
+        padding: 10,
+      },
+    },
+    layout: {
+      padding: {
+        top: 20, // Adjust this value to add padding between the chart and the top of the container
+      },
+    },
+  };
+  
+  
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftHandSide}>
-        <div className={styles.circleChart}>circle chart</div>
+        <div className={styles.circleChart}>
+          <Doughnut data = {donutData} options = {donutOptions}/>
+        </div>
         <div className={styles.percentageChart}>percent chart</div>
 
         <div className={styles.share}>
@@ -75,7 +153,9 @@ export default function ResultsPage() {
       </div>
       
       <div className={styles.rightHandSide}>
-        <div className={styles.barChart}>bar chart</div>
+        <div className={styles.barChart}>
+          <Bar data = {barData} options = {barOptions}/>
+        </div>
         <div className={styles.careerExploration}>
           <h2>What Careers Can You Explore?</h2>
 

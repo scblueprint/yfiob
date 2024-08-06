@@ -5,11 +5,11 @@ import { auth } from "../../firebase/firebaseConfig";
 import { fetchUserAssessmentRef } from "../../firebase/uploadResponses";
 
 import { Bar, Doughnut } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
+//Michael Change: import Chart from 'chart.js/auto';
 
 export default function ResultsPage() {
   // TODO: setIndustries is declared but not being used anywhere, temporary fix to silence warnings
-  const [industries, setIndustries] = useState({});
+  // Michael Change: const [industries, setIndustries] = useState({});
   console.log(setIndustries);
   useEffect(() => {
     const fetchData = async () => {

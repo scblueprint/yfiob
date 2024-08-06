@@ -10,7 +10,7 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 export default function ResultsPage() {
   // TODO: setIndustries is declared but not being used anywhere, temporary fix to silence warnings
   // Michael Change: const [industries, setIndustries] = useState({});
-  console.log(setIndustries);
+  // Michael Change: console.log(setIndustries);
   useEffect(() => {
     const fetchData = async () => {
       try {

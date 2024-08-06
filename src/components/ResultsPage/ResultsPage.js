@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./ResultsPage.module.css";
 import { getDoc } from "firebase/firestore";
 import { auth } from "../../firebase/firebaseConfig";

@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+
+
 .buttonStack {
     width: 20%;
     height: 100%;
@@ -25,4 +29,23 @@
     height: 100%;
     background-color: white;
     background: #E9EDF5;
+}
+
+.title {
+  width: 100%;
+  font-family: 36px 'Lato', sans-serif;
+}
+
+.description {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 1);
+  font-weight: 400;
+  text-align: left;
+  padding: 0 20px;
 }

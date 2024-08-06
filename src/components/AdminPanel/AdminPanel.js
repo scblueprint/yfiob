@@ -6,12 +6,9 @@ import Insights from "./Insights";
 import AssessmentEditor from "../AssessmentEditor/AssessmentEditor";
 import styles from "./AdminPanel.module.css";
 
+
 function AdminPanel() {
   const [currentPage, setCurrentPage] = useState("Data");
-  const assessmentStats = [
-    { title: "# of assessments taken in the last 7 days", value: 10, label: "new" },
-    { title: "total # of assessments taken", value: 100, label: "total" }
-  ];
 
   return (
     <div className={styles.container}>
@@ -22,7 +19,10 @@ function AdminPanel() {
           // subtitle={"Breakdown of students career quiz results."}
         >
           {/* Dashboard content goes in here */}
-          Breakown of stuents career quiz results.
+          <section className={styles.titleContainer}>
+            <h2 className={styles.title}>Insights</h2>
+            <p className={styles.description}>Breakdown of students career quiz results.</p>
+          </section>
           <Insights>
 
           </Insights>
@@ -30,6 +30,8 @@ function AdminPanel() {
       ) : (
         ""
       )}
+
+
 
       {currentPage === "Student Accounts" ? (
         <Dashboard
@@ -55,6 +57,7 @@ function AdminPanel() {
         ""
       )}
     </div>
+    
   );
 }
 

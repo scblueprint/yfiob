@@ -15,7 +15,7 @@ ChartJS.register(
 
 function TrendingChart() {
   
-  let navigate = useNavigate();
+  // Michael Change: let navigate = useNavigate();
 
   let sectors = [
     { name: "Agriculture", percentage: 10, color: "rgba(255, 154, 100, 1)" },

@@ -56,10 +56,32 @@ function AdminLogin({ setUser }) {
     setPassword("");
   };
 
+
+
+const handleAdminLogin = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const userId = userCredential.user.uid;
+
+    const adminRef = doc(db, "admin accounts", userId);
+    const adminSnap = await getDoc(adminRef);
+
+    if (adminSnap.exists()) {
+      console.log("User is an admin.");
+      navigate("/adminPanel");
+    } else {
+      console.log("User is not an admin.");
+    }
+  } catch (error) {
+    console.error("Login failed:", error);
+  }
+};
+
+
   return (
     <div className={styles.loginContainer}>
       <h2 className={styles.adminHeader}>Admin Log In</h2>
-      <form onSubmit={handleSubmit} className={styles.loginForm}>
+      <form onSubmit={handleAdminLogin(auth, email, password)} className={styles.loginForm}>
         <div>
           <label htmlFor="email">Email</label>
           <input

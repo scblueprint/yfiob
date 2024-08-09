@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { auth } from "../../firebase/firebaseConfig";
-
 import styles from "./QuestionPage.module.css";
-
 import getQuestions from "../../firebase/pullQuestions";
 import getQuestionsWeights from "../../firebase/pullQuestionsWeights";
 import updateUserAssessment from "../../firebase/uploadResponses";
 import calculateUserScores from "./resultsCalculation";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import puzzle from "../../assets/Jigna.svg";
@@ -29,61 +25,35 @@ export default function QuestionPage() {
   const [questions, setQuestions] = useState([]);
   const [questionsWeights, setQuestionsWeights] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
-
   const [isComplete, setComplete] = useState(false);
+  const navigate = useNavigate();
 
   const handleSelect = (questionIndex, answerIndex) => {
-    console.log("handle selected");
-    const newSelectedAnswers = [...selectedAnswers]; // get current state of selectedAnswers array
-    newSelectedAnswers[questionIndex] = answerIndex; // update the "new" selected answers array with question answer
-    setSelectedAnswers(newSelectedAnswers); // update original selected answers array
-
-    // check all questions have been answered
-    var areAllNotNull = newSelectedAnswers.every(function (i) {
-      return i !== null;
-    });
-    // Quiz state set to complete if no question unanswered
+    const newSelectedAnswers = [...selectedAnswers];
+    newSelectedAnswers[questionIndex] = answerIndex;
+    setSelectedAnswers(newSelectedAnswers);
+    const areAllNotNull = newSelectedAnswers.every((i) => i !== null);
     setComplete(areAllNotNull);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       const questionsData = await getQuestions();
       setQuestions(questionsData);
-
-      // console.log("Questions" + questionsData);
-
       const questionsWeightsData = await getQuestionsWeights();
       setQuestionsWeights(questionsWeightsData);
-      // console.log("Question Weights" + JSON.stringify(questionsWeightsData));
-
-      setSelectedAnswers(
-        Array.from({ length: questionsData.length }, () => null),
-      ); // Initialize selectedAnswers
+      setSelectedAnswers(Array.from({ length: questionsData.length }, () => null));
     };
     fetchData();
   }, []);
 
-  // new stuff
-  const navigate = useNavigate();
+  const checkFinish = () => selectedAnswers.every((answer) => answer !== null);
 
-  const checkFinish = () => {
-    return selectedAnswers.every((answer) => answer !== null);
-  };
-
-  // TODO: goToResults is decalared but not being used, used a console log to temporary silence the warning
   const goToResults = async () => {
-    // console.log("go to results called");
     if (checkFinish()) {
       try {
-        const industryScores = await calculateUserScores(
-          selectedAnswers,
-          questionsWeights,
-        );
-        // console.log("industryScores Call:" + JSON.stringify(industryScores));
-
+        const industryScores = await calculateUserScores(selectedAnswers, questionsWeights);
         await updateUserAssessment(auth.currentUser.uid, industryScores);
-
         navigate("/ResultsPage");
       } catch (error) {
         console.error("Error in goToResults:", error);
@@ -93,7 +63,6 @@ export default function QuestionPage() {
       alert("Please answer all questions before proceeding.");
     }
   };
-  console.log(goToResults);
 
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
@@ -101,22 +70,21 @@ export default function QuestionPage() {
 
   const handleNext = () => {
     if (currentQuestionIndex === questions.length - 1) {
-      navigate("/resultsPage"); // Navigate to the results page
+      handleSubmit();
     } else {
-      setCurrentQuestionIndex((prevIndex) =>
-        Math.min(questions.length - 1, prevIndex + 1),
-      );
+      setCurrentQuestionIndex((prevIndex) => Math.min(questions.length - 1, prevIndex + 1));
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isComplete) {
-      console.log("Submitted");
-      // if user logged in
-      // uploadResponses(selectedAnswers)
-      navigate("/resultsPage");
+      if (auth.currentUser) {
+        await goToResults();
+      } else {
+        navigate("/ResultsPage");
+      }
     } else {
-      console.log("Quiz not finished.");
+      alert("Please answer all questions before submitting.");
     }
   };
 
@@ -147,11 +115,7 @@ export default function QuestionPage() {
           </div>
 
           <div className={styles.textHeader}>
-            <img
-              className={styles.puzzleImage}
-              src={character}
-              alt="puzzle piece"
-            />
+            <img className={styles.puzzleImage} src={character} alt="puzzle piece" />
             <p>
               Don't worry about time, money, training, or education. Just think,
               do you enjoy it?
@@ -160,16 +124,11 @@ export default function QuestionPage() {
 
           <div className={styles.questionPrompt}>
             <span>{questions[currentQuestionIndex]}</span>
-            <img
-              className={styles.puzzleImage}
-              src={currentQuestionIndex % 2 === 0 ? puzzle : puzzleOdd}
-              alt="puzzle piece"
-            />
+            <img className={styles.puzzleImage} src={currentQuestionIndex % 2 === 0 ? puzzle : puzzleOdd} alt="puzzle piece" />
           </div>
           <div className={styles.responseRow}>
             {answerArray.map((value, index) => {
-              const isSelected =
-                selectedAnswers[currentQuestionIndex] === index; // Determine if this answer is the selected one
+              const isSelected = selectedAnswers[currentQuestionIndex] === index;
               return (
                 <button
                   className={`${styles.answerResponseSquare} ${isSelected ? styles.isSelected : ""}`}

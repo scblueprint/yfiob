@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SideNavbar from "../SideNavbar/SideNavbar";
 import Dashboard from "../Dashboard/Dashboard";
 import UsersPanel from "../UsersPanel/UsersPanel";
+import AdminListPanel from "../AdminListPanel/AdminListPanel";
 import Insights from "./Insights";
 import AssessmentEditor from "../AssessmentEditor/AssessmentEditor";
 import styles from "./AdminPanel.module.css";
@@ -52,7 +53,7 @@ function AdminPanel() {
           title={"Admin Manager"}
           subtitle={"View and manage admin permissions."}
         >
-
+          <AdminListPanel />
         </Dashboard>
       ) : (
         ""

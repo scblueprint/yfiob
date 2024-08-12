@@ -41,14 +41,14 @@ function AdminLogin({ setUser }) {
         setUser(admin);
         
         const userId = admin.uid;
-        const adminRef = doc(db, "admin accounts", userId);
+        const adminRef = doc(db, "Users", userId);
         const adminSnap = await getDoc(adminRef);
         if (adminSnap.exists()) {
-          console.log("User is an admin.");
-          navigate("/adminPanel");
-        } else {
           console.log("User is not an admin.");
-          navigate("/login"); 
+          navigate("/login");
+        } else {
+          console.log("User is an admin.");
+          navigate("/adminPanel"); 
         }
       } else {
         setUser(null);

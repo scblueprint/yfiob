@@ -9,7 +9,9 @@ import {
 	faChevronLeft,
 	faChevronRight,
 	faArrowUpFromBracket,
+	faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
+import AdminModal from "./AdminModal";
 
 function AdminListPanel() {
 	const [admins, setAdmins] = useState([]);
@@ -84,18 +86,20 @@ function AdminListPanel() {
 							<button
 								style={{ border: "none", backgroundColor: "transparent" }}
 							>
-								<img
-									src={filterIcon}
+								{/* <img
+									src={faUserPlus}
 									alt={"Filter Icon"}
 									className={styles.filterIcon}
-								/>
+								/> */}
+								<FontAwesomeIcon icon={faUserPlus} />
 							</button>
 						</Modal.Button>
 
-						<Modal.Content title={"Filter"}>
+						{/* <Modal.Content title={"Add Admin"}>
 							Content of the modal goes in here! In this case, filtering UI
 							would be in here!
-						</Modal.Content>
+						</Modal.Content> */}
+						<AdminModal/>
 					</Modal>
 				</div>
 			</div>

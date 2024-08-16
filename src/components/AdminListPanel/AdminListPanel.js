@@ -103,19 +103,22 @@ function AdminListPanel() {
 				<div className={styles.tableWrapper}>
 					<table>
 						<tbody>
-							{currentAdmins.map((admin, index) => (
-								<tr key={admin.id}>
-									<td
-										className={styles.index}
-										style={{ backgroundColor: "transparent" }}
-									>
-										{index + 1}
-									</td>
-									<td className={styles.name}>{admin.firstName} {admin.lastName}</td>
-                                    <td className={styles.email}>{admin.email}</td>
-									<td className={styles.email}>{admin.accountCreationDate}</td>
-								</tr>
-							))}
+						{currentAdmins.map((admin, index) => (
+    <tr key={admin.id}>
+        <td
+            className={styles.index}
+            style={{ backgroundColor: "transparent" }}
+        >
+            {index + 1}
+        </td>
+        <td className={styles.name}>{admin.firstName} {admin.lastName}</td>
+        <td className={styles.email}>{admin.email}</td>
+        <td className={styles.date}>
+            {new Date(admin.accountCreationDate.seconds * 1000).toLocaleDateString("en-US")}
+        </td>
+    </tr>
+))}
+
 						</tbody>
 					</table>
 				</div>

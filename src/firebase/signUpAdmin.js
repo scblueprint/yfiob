@@ -20,7 +20,7 @@ async function signUpAdmin(email, password, firstName, lastName) {
     console.log('The display name is' + user.displayName );
 
 
-    await addAdminToFirestore(user.uid, email, password, firstName, lastName);
+    await addAdminToFirestore(user.uid, email, firstName, lastName);
     return user.uid;
   } catch (error) {
     console.log(`Error adding user to firestore: ${error}`);

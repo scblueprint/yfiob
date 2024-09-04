@@ -53,60 +53,60 @@ function AdminModal() {
     // };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log("Button Pressed: Submitting form with data:", formData);
-        // Form validation
-        const errors = {};
-        if (!formData.firstName.trim()) {
+      e.preventDefault();
+      console.log("Button Pressed: Submitting form with data:", formData);
+  
+      // Form validation
+      const errors = {};
+      if (!formData.firstName.trim()) {
           errors.firstName = "First name is required";
-        }
-        if (!formData.lastName.trim()) {
+      }
+      if (!formData.lastName.trim()) {
           errors.lastName = "Last name is required";
-        }
-        if (!formData.email.trim()) {
+      }
+      if (!formData.email.trim()) {
           errors.email = "Email is required";
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
           errors.email = "Email address is invalid";
-        }
-        if (!formData.password.trim()) {
+      }
+      if (!formData.password.trim()) {
           errors.password = "Password is required";
-        }
-        if (formData.password.length < 6) {
+      }
+      if (formData.password.length < 6) {
           errors.password = "Password must be greater than 5 characters";
-        }
-        if (formData.password !== formData.confirmPassword) {
-          errors.confirmPassword = "Passwords do not match";
-        }
-        setErrors(errors);
-    
-        // If not errors were present on sign in, process information
-        if (Object.keys(errors).length === 0) {
+      }
+
+      
+      // Log the errors object to the console
+      console.log("Validation Errors:", errors);
+  
+      setErrors(errors);
+  
+      // Proceed only if there are no errors
+      if (Object.keys(errors).length === 0) {
           try {
-            // Add user information to Firestore
-            await signUpAdmin(formData.email, formData.password, formData.firstName, formData.lastName).then(userID => {
-              navigate("/adminListPanel", { state: { userID: userID } });
-            })
-            .catch(error => {
-                console.error("Error on Admin Sign Up:", error);
-            });
-    
-            // Redirect to login page after successful account creation
+              // Add user information to Firestore
+              await signUpAdmin(formData.email, formData.password, formData.firstName, formData.lastName).then(userID => {
+                  console.log("Admin Signed Up");
+                  navigate("/adminPanel");
+              })
+              .catch(error => {
+                  console.error("Error on Admin Sign Up:", error);
+              });
+  
+              // Clear form data after successful submission
+              setFormData({
+                  firstName: "",
+                  lastName: "",
+                  email: "",
+                  password: ""
+              });
           } catch (error) {
-            // Handle error if unable to complete account creation
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error("Error creating user account:", errorCode, errorMessage);
+              console.error("Error creating user account:", error.code, error.message);
           }
-    
-          //Clear Form data after submission
-          setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: ""
-          });
-        }
-      };
+      }
+  };
+  
 
     return (
         <Modal.Content title={"Add New Admin"}>

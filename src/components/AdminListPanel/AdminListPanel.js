@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AdminsListPanel.module.css";
-import filterIcon from "../../assets/FilterCircle.svg";
+//import filterIcon from "../../assets/FilterCircle.svg";
 import pullAdmins from "../../firebase/pullAdmins";
 import Modal from "../Modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,9 @@ import {
 	faChevronLeft,
 	faChevronRight,
 	faArrowUpFromBracket,
-	faUserPlus
+	faUserPlus,
+	faUserTimes
+
 } from "@fortawesome/free-solid-svg-icons";
 import AdminModal from "./AdminModal";
 
@@ -120,6 +122,9 @@ function AdminListPanel() {
         <td className={styles.date}>
             {new Date(admin.accountCreationDate.seconds * 1000).toLocaleDateString("en-US")}
         </td>
+		{/* <td> */}
+		<button><FontAwesomeIcon icon={faUserTimes} /></button>
+		{/* </td> */}
     </tr>
 ))}
 

@@ -97,9 +97,7 @@
   border-radius: 10px;
 }
 
-.barChart canvas {
-  width: 100% !important;
-}
+
 
 .careerExploration{
   background-color: #FFFFFF;
@@ -108,12 +106,9 @@
 }
 
 .careerExploration h2{
-  width: 478px;
+  width: 100%;
   height: 43px;
   top: 529px;
-  left: 557px;
-  gap: 0px;
-  opacity: 0px;
   margin-bottom: 20px;
 
   font-family: Lato;

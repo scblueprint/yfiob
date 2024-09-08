@@ -27,45 +27,59 @@ export default function ResultsPage() {
     const fetchData = async () => {
       try {
         const user = auth.currentUser;
-
-        if (!user) {
-          throw new Error("User is not authenticated");
-        }
-
-        const uid = user.uid;
-        const userAssessmentRef = await fetchUserAssessmentRef(uid);
-        const userAssessmentDoc = await getDoc(userAssessmentRef);
-
-        if (userAssessmentDoc.exists()) {
-          const data = userAssessmentDoc.data();
-          const industryScores = data.Industries;
-          if (!industryScores) {
-            console.error("No industry scores found in the document!");
+        let industryScores;
+  
+        if (user) {
+          const uid = user.uid;
+          const userAssessmentRef = await fetchUserAssessmentRef(uid);
+          const userAssessmentDoc = await getDoc(userAssessmentRef);
+  
+          if (userAssessmentDoc.exists()) {
+            const data = userAssessmentDoc.data();
+            industryScores = data.Industries;
+          } else {
+            console.error("No document found for the user!");
             return;
           }
-
+        } else {
+          // For non-authenticated users, get data from localStorage
+          const localData = localStorage.getItem("guestIndustryScores");
+          if (localData) {
+            industryScores = JSON.parse(localData);
+          } else {
+            console.error("No local results for guest user!");
+            return;
+          }
+        }
+  
+        if (industryScores) {
           // Directly multiply existing score by 100
-          const industryPercentages = Object.entries(industryScores).reduce((acc, [industry, score]) => {
-            acc[industry] = (score * 100).toFixed(2); // Multiply score by 100 and round to 2 decimal places
-            return acc;
-          }, {});
-          setPercentages(industryPercentages); // Store percentages
-
+          const industryPercentages = Object.entries(industryScores).reduce(
+            (acc, [industry, score]) => {
+              acc[industry] = (score * 100).toFixed(2);
+              return acc;
+            },
+            {}
+          );
+          setPercentages(industryPercentages);
+  
           const sortedIndustries = Object.entries(industryScores)
-            .sort((a, b) => b[1] - a[1]) // Sort by score in descending order
+            .sort((a, b) => b[1] - a[1])
             .slice(0, 3);
-
-          setSortedIndustries(sortedIndustries); // Store sorted industries for rendering
-
-          const colors = ["#40a1d9", "#f68424", "#50ba4f"]; // Colors for the top 3 industries
-
-          const industryColorMap = sortedIndustries.reduce((map, [industry], index) => {
-            map[industry] = colors[index];
-            return map;
-          }, {});
-
+  
+          setSortedIndustries(sortedIndustries);
+  
+          const colors = ["#40a1d9", "#f68424", "#50ba4f"];
+          const industryColorMap = sortedIndustries.reduce(
+            (map, [industry], index) => {
+              map[industry] = colors[index];
+              return map;
+            },
+            {}
+          );
+  
           setIndustryColors(industryColorMap);
-
+  
           const newChartData = {
             labels: sortedIndustries.map(([industry]) => industry),
             datasets: [
@@ -75,29 +89,27 @@ export default function ResultsPage() {
               },
             ],
           };
-
+  
           setChartData(newChartData);
-
+  
           // Fetch career data for the top 3 industries
           const careerData = await getCareerData();
-          const topCareers = careerData.filter(career =>
+          const topCareers = careerData.filter((career) =>
             sortedIndustries.some(([industry]) => career.industry === industry)
           );
           setCareers(topCareers);
-        } else {
-          console.error("No document found for the user!");
         }
       } catch (error) {
         console.error("Error fetching industry scores:", error);
       }
     };
-
+  
     fetchData();
 
-    return () => {
-      const doughnutChart = doughnutRef.current;
-      const barChart = barRef.current;
+    const doughnutChart = doughnutRef.current;
+    const barChart = barRef.current;
 
+    return () => {
       if (doughnutChart) doughnutChart.destroy();
       if (barChart) barChart.destroy();
     };
@@ -196,7 +208,7 @@ export default function ResultsPage() {
                     {career.imageUrl ? (
                       <img
                         src={career.imageUrl}
-                        alt={`${career.id} Image`}
+                        alt={career.id}
                         className={styles.careerImage}
                       />
                     ) : (

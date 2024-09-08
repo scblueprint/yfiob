@@ -47,23 +47,6 @@ export default function QuestionPage() {
     fetchData();
   }, []);
 
-  const checkFinish = () => selectedAnswers.every((answer) => answer !== null);
-
-  const goToResults = async () => {
-    if (checkFinish()) {
-      try {
-        const industryScores = await calculateUserScores(selectedAnswers, questionsWeights);
-        await updateUserAssessment(auth.currentUser.uid, industryScores);
-        navigate("/ResultsPage");
-      } catch (error) {
-        console.error("Error in goToResults:", error);
-        alert("An error occurred while calculating or updating the scores.");
-      }
-    } else {
-      alert("Please answer all questions before proceeding.");
-    }
-  };
-
   const handlePrevious = () => {
     setCurrentQuestionIndex((prevIndex) => Math.max(0, prevIndex - 1));
   };
@@ -78,15 +61,24 @@ export default function QuestionPage() {
 
   const handleSubmit = async () => {
     if (isComplete) {
+      const industryScores = await calculateUserScores(selectedAnswers, questionsWeights);
+  
       if (auth.currentUser) {
-        await goToResults();
+        try {
+          await updateUserAssessment(auth.currentUser.uid, industryScores);
+          navigate("/ResultsPage");
+        } catch (error) {
+          console.error("Error uploading data:", error);
+        }
       } else {
+        // Save industry scores in localStorage for guest users
+        localStorage.setItem("guestIndustryScores", JSON.stringify(industryScores));
         navigate("/ResultsPage");
       }
     } else {
       alert("Please answer all questions before submitting.");
     }
-  };
+  };  
 
   return (
     <div className={styles.wrapper}>

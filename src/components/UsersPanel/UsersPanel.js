@@ -15,7 +15,7 @@ function UsersPanel() {
 	const [users, setUsers] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
-	const usersPerPage = 7;
+	const usersPerPage = 10;
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -147,12 +147,12 @@ function UsersPanel() {
 					<FontAwesomeIcon icon={faChevronRight} />
 				</button>
 			</div>
-			<div className={styles.export}>
+			{/* <div className={styles.export}>
 				<button>
 					<FontAwesomeIcon icon={faArrowUpFromBracket} />
 					<div>Export Student Data</div>
 				</button>
-			</div>
+			</div> */}
 		</div>
 	);
 }

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./AdminsListPanel.module.css";
 //import filterIcon from "../../assets/FilterCircle.svg";
 import pullAdmins from "../../firebase/pullAdmins";
+import { deleteAdmin } from '../../firebase/deleteAdmin';
+
 import Modal from "../Modal/Modal";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faMagnifyingGlass,
@@ -19,7 +22,7 @@ function AdminListPanel() {
 	const [admins, setAdmins] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
-	const adminsPerPage = 7;
+	const adminsPerPage = 10;
 
 	useEffect(() => {
 		const fetchAdmins = async () => {
@@ -68,6 +71,31 @@ function AdminListPanel() {
 		}
 	};
 
+	const updateAdminList = async () => {
+		try {
+			const adminData = await pullAdmins();
+			setAdmins(adminData);
+		} catch (error) {
+			console.error("Error updating admin data: ", error.message);
+		}
+	};
+
+	const handleDeleteAdmin = (adminId) => {
+		deleteAdmin(adminId)
+			.then(() => {
+				console.log("delete admin called in handle delete admin");
+				
+				updateAdminList();
+			})
+			.catch(error => {
+				console.error("Failed to delete admin in handle:", error);
+			});
+	};
+	
+	
+	
+	
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.searchContainer}>
@@ -101,8 +129,9 @@ function AdminListPanel() {
 							Content of the modal goes in here! In this case, filtering UI
 							would be in here!
 						</Modal.Content> */}
-						<AdminModal/>
+						<AdminModal updateList={updateAdminList} />
 					</Modal>
+					
 				</div>
 			</div>
 			<div className={styles.tableContainer}>
@@ -122,9 +151,17 @@ function AdminListPanel() {
         <td className={styles.date}>
             {new Date(admin.accountCreationDate.seconds * 1000).toLocaleDateString("en-US")}
         </td>
-		{/* <td> */}
-		<button><FontAwesomeIcon icon={faUserTimes} /></button>
-		{/* </td> */}
+		
+		<button 
+    onClick={() => handleDeleteAdmin(admin.id)} 
+    className={styles.searchButton}
+    title={`Are you sure you want to delete admin: ${admin.firstName} ${admin.lastName}`}  // Using template literals
+>
+    <FontAwesomeIcon icon={faUserTimes} />
+</button>
+
+
+		
     </tr>
 ))}
 
@@ -157,12 +194,12 @@ function AdminListPanel() {
 					<FontAwesomeIcon icon={faChevronRight} />
 				</button>
 			</div>
-			<div className={styles.export}>
+			{/* <div className={styles.export}>
 				<button>
 					<FontAwesomeIcon icon={faArrowUpFromBracket} />
 					<div>Export Admin Data</div>
 				</button>
-			</div>
+			</div> */}
 		</div>
 	);
 }

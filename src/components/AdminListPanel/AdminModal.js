@@ -4,7 +4,9 @@ import Modal from "../Modal/Modal";
 import signUpAdmin from "../../firebase/signUpAdmin";
 import { useNavigate } from "react-router-dom";
 
-function AdminModal() {
+
+
+function AdminModal(props) {
     const [formData, setFormData] = useState({
         firstName:'',
         lastName:'',
@@ -88,6 +90,7 @@ function AdminModal() {
               // Add user information to Firestore
               await signUpAdmin(formData.email, formData.password, formData.firstName, formData.lastName).then(userID => {
                   console.log("Admin Signed Up");
+                  props.updateList();
                   navigate("/adminPanel");
               })
               .catch(error => {
@@ -112,35 +115,37 @@ function AdminModal() {
         <Modal.Content title={"Add New Admin"}>
             <div className={styles.signupContainer}>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="firstName">First Name</label>
-                        <input
-                            
-                            id="firstName"
-                            name="firstName"
-                            autoComplete="off"
-                            className={styles.search}
-                            placeholder="Enter First Name"
-                            value={formData.firstName}
-                            onChange={handleChange}
-                            required
-                        />
+                <div className={styles.buttonContainer}>
+                    <div className={styles.nameContainer}>
+                        <div>
+                            <label htmlFor="firstName">First Name</label>
+                            <input
+                                id="firstName"
+                                name="firstName"
+                                autoComplete="off"
+                                className={styles.search}
+                                placeholder="Enter First Name"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                                required
+                            />
                             {errors.firstName && <p style={{ color: 'red' }}>{errors.firstName}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="lastName">Last Name</label>
+                            <input
+                                id="lastName"
+                                name="lastName"
+                                autoComplete="off"
+                                className={styles.search}
+                                placeholder="Enter Last Name"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                required
+                            />
+                            {errors.lastName && <p style={{ color: 'red' }}>{errors.lastName}</p>}
+                        </div>
                     </div>
-                    <div>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input
-
-                            id="lastName"
-                            name="lastName"
-                            autoComplete="off"
-                            className={styles.search}
-                            placeholder="Enter Last Name"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            required
-                        />
-                            {errors.firstName && <p style={{ color: 'red' }}>{errors.firstName}</p>}
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>
@@ -172,7 +177,10 @@ function AdminModal() {
                         />
                         {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
                     </div>
-                    <button type="submit" className={styles.signupBtn}>Add Admin</button>
+                    <div className={styles.buttonContainer}>
+                        <button type="submit" className={styles.signupBtn}>Add Admin</button>
+                    </div>
+
                 </form>
             </div>
         </Modal.Content>

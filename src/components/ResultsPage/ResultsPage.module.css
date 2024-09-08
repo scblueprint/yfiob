@@ -7,7 +7,7 @@
   flex: 0 0 35%; /* Adjust the percentage as needed (20%-30%) */
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   padding: 10px;
 }
 
@@ -23,6 +23,17 @@
   background-color: #FFFFFF;
   padding: 20px;
 }
+
+.percentageChart h3{
+  font-family: Lato;
+  font-size: large;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 43.2px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 
 .share {
   background-color: #FFFFFF;
@@ -97,8 +108,6 @@
   border-radius: 10px;
 }
 
-
-
 .careerExploration{
   background-color: #FFFFFF;
   padding: 20px;
@@ -109,7 +118,7 @@
   width: 100%;
   height: 43px;
   top: 529px;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 
   font-family: Lato;
   font-size: 36px;
@@ -118,6 +127,22 @@
   line-height: 43.2px;
   text-align: center;
 }
+
+.industryTitle {
+	background-color: #4c78e757;
+	padding: 10px 20px;
+  margin-top: 2rem;
+	margin-bottom: 1rem;
+	border-radius: 20px;
+	text-decoration: none;
+	width: fit-content;
+
+  font-weight: 450;
+	text-align: center;
+	color: #000000;
+	font-size: large;
+}
+
 
 .career {
   background-color: #4C78E733;
@@ -140,22 +165,32 @@
   text-align: center;
 
   background-color: #4C78E733;
-  ;
+  font-weight: 450;
+	text-align: center;
+	color: #000000;
+
 }
 
 .textBox p {
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-.textBox p:last-child {
-  margin-bottom: 20px;
+  display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-top: 2rem;
+	margin-left: 2rem;
+	padding-right: 2rem;
+  padding-bottom: 3rem;
 }
 
 .rightHandCareer {
-  margin-left: 40px;
-  margin-right: 20px;
-  width: 500px;
-  height: 200px;
-  background-color: #FFFFFF;
+  display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-left: 1rem;
+}
+
+.careerImage {
+	width: 800px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 10px;
 }

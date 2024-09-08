@@ -104,7 +104,8 @@ return (
                                 <Form.Control asChild>
                                     <textarea
                                         className={styles.formEntry} 
-                                        placeholder={questionText} 
+                                        placeholder={questionText}
+                                        required 
                                         
                                     />
                                 </Form.Control>

@@ -15,24 +15,36 @@ const updateQuestion = async (oldQuestion, newData) => {
       const questionsData = snap.data().allQuestions;
       const existingData = questionsData[oldQuestion] || {};
 
-      // Convert number fields from strings to floats and filter out zero values
+      // Filter out empty fields
       const updatedData = Object.entries(fieldsToUpdate)
-          .filter(([key, value]) => value !== '' && value !== '0')
+          .filter(([key, value]) => value !== '')
           .reduce((acc, [key, value]) => {
-              acc[key] = parseFloat(value); // Convert string to number
-              return acc;
+            acc[key] = parseFloat(value);
+            return acc;
           }, {...existingData});
 
-      if (oldQuestion !== question) {
-          await updateDoc(docRef, {
-              [`allQuestions.${oldQuestion}`]: deleteField(),
-              [`allQuestions.${question}`]: updatedData
-          });
-      } else {
-          await updateDoc(docRef, {
-              [`allQuestions.${question}`]: updatedData
-          });
+      // Determine the key for update
+      const updateKey = oldQuestion !== question ? `allQuestions.${oldQuestion}` : `allQuestions.${question}`;
+
+      // Update or move the question data
+      await updateDoc(docRef, {
+        [updateKey]: deleteField(),
+        [`allQuestions.${question}`]: updatedData
+      });
+
+      // Prepare to delete fields with zero values
+      const fieldsToDelete = Object.keys(updatedData)
+        .filter(key => updatedData[key] === 0)
+        .reduce((acc, key) => {
+          acc[`allQuestions.${question}.${key}`] = deleteField();
+          return acc;
+        }, {});
+
+      // Delete zero-value fields
+      if (Object.keys(fieldsToDelete).length > 0) {
+        await updateDoc(docRef, fieldsToDelete);
       }
+
       console.log('Document updated successfully!');
   } catch (error) {
       console.error('Error updating document: ', error);

@@ -57,7 +57,7 @@ export default function StudentSignUp() {
           navigate("/signup2", { state: { userID: userID } });
         })
         .catch(error => {
-            console.error("Error:", error);
+            console.error("Error on student sign up 1:", error);
         });
 
         // Redirect to login page after successful account creation

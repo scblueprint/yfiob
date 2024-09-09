@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SideNavbar from "../SideNavbar/SideNavbar";
 import Dashboard from "../Dashboard/Dashboard";
 import UsersPanel from "../UsersPanel/UsersPanel";
+import AdminListPanel from "../AdminListPanel/AdminListPanel";
 import Insights from "./Insights";
 import AssessmentEditor from "../AssessmentEditor/AssessmentEditor";
 import styles from "./AdminPanel.module.css";
@@ -15,30 +16,21 @@ function AdminPanel() {
       <SideNavbar selectedItem={currentPage} setSelectedItem={setCurrentPage} />
       {currentPage === "Data" ? (
         <Dashboard
-          // title={"Data"}
-          // subtitle={"Breakdown of students career quiz results."}
+           title={"Insights"}
+           subtitle={"Breakdown of students career quiz results."}
         >
-          {/* Dashboard content goes in here */}
-          <section className={styles.titleContainer}>
-            <h2 className={styles.title}>Insights</h2>
-            <p className={styles.description}>Breakdown of students career quiz results.</p>
-          </section>
-          <Insights>
-
-          </Insights>
+          <Insights></Insights>
         </Dashboard>
       ) : (
         ""
       )}
-
-
 
       {currentPage === "Student Accounts" ? (
         <Dashboard
           title={"Student Accounts"}
           subtitle={"Breakdown of students account information."}
         >
-          {/* Dashboard content goes in here */}
+
           <UsersPanel />
         </Dashboard>
       ) : (
@@ -48,10 +40,20 @@ function AdminPanel() {
       {currentPage === "Survey Questions" ? (
         <Dashboard
           title={"Survey Questions"}
+          subtitle={"Here you can add/edit all the survey questions."}
         >
-          {/* Dashboard content goes in here */}
-          Here you can add/edit all the survey questions.
           <AssessmentEditor />
+        </Dashboard>
+      ) : (
+        ""
+      )}
+
+      {currentPage === "Admin Manager" ? (
+        <Dashboard
+          title={"Admin Manager"}
+          subtitle={"View and manage admin permissions."}
+        >
+          <AdminListPanel />
         </Dashboard>
       ) : (
         ""

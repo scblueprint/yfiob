@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styles from "./UsersPanel.module.css";
-import filterIcon from "../../assets/FilterCircle.svg";
+//import filterIcon from "../../assets/FilterCircle.svg";
 import pullUsers from "../../firebase/pullUsers";
-import Modal from "../Modal/Modal";
+//import Modal from "../Modal/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faMagnifyingGlass,
 	faChevronLeft,
 	faChevronRight,
-	faArrowUpFromBracket,
+	
 } from "@fortawesome/free-solid-svg-icons";
 
 function UsersPanel() {
 	const [users, setUsers] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
-	const usersPerPage = 7;
+	const usersPerPage = 10;
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -79,7 +79,7 @@ function UsersPanel() {
 					<button onClick={handleSearch} className={styles.searchButton}>
 						<FontAwesomeIcon icon={faMagnifyingGlass} />
 					</button>
-					<Modal defaultOpen={false}>
+					{/* <Modal defaultOpen={false}>
 						<Modal.Button asChild>
 							<button
 								style={{ border: "none", backgroundColor: "transparent" }}
@@ -96,7 +96,7 @@ function UsersPanel() {
 							Content of the modal goes in here! In this case, filtering UI
 							would be in here!
 						</Modal.Content>
-					</Modal>
+					</Modal> */}
 				</div>
 			</div>
 			<div className={styles.tableContainer}>
@@ -147,12 +147,12 @@ function UsersPanel() {
 					<FontAwesomeIcon icon={faChevronRight} />
 				</button>
 			</div>
-			<div className={styles.export}>
+			{/* <div className={styles.export}>
 				<button>
 					<FontAwesomeIcon icon={faArrowUpFromBracket} />
 					<div>Export Student Data</div>
 				</button>
-			</div>
+			</div> */}
 		</div>
 	);
 }

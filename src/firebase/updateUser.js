@@ -4,7 +4,7 @@ import { db } from "./firebaseConfig";
 const updateUserToFirestore = async (userId, school, grade, zipcode) => {
   try {
     await updateDoc(doc(db, "Users", userId), {
-      schoolName: school,
+      school: school,
       grade: grade,
       zipcode: zipcode,
     });

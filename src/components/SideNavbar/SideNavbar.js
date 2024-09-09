@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./SideNavbar.module.css";
 import NavItem from "../NavItem/NavItem";
-import { faChartBar, faUsers, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faChartBar, faUsers, faQuestion, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SideNavbar = ({ selectedItem, setSelectedItem }) => {
@@ -28,6 +28,12 @@ const SideNavbar = ({ selectedItem, setSelectedItem }) => {
           icon={<FontAwesomeIcon icon={faQuestion} />}
           label="Survey Questions"
           selected={selectedItem === "Survey Questions"}
+          onItemClick={handleItemClick}
+        />
+        <NavItem
+          icon={<FontAwesomeIcon icon={faUserTie} />}
+          label="Admin Manager"
+          selected={selectedItem === "Admin Manager"}
           onItemClick={handleItemClick}
         />
       </ul>

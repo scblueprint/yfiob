@@ -1,9 +1,27 @@
 import { doc, serverTimestamp, setDoc, collection } from "firebase/firestore";
-import { db } from "./firebaseConfig";
+import { db, auth } from "./firebaseConfig";
+import {  signInWithEmailAndPassword } from "firebase/auth";
 
-const addUserToFirestore = async (userId, email, firstName, lastName) => {
+const addUserToFirestore = async (userId, email, password, firstName, lastName) => {
   try {
     // This line creates a documents in firebase with user information
+    await signInWithEmailAndPassword(auth, email, password)
+    .then(async (userCredentials) => {
+      // If successful, user is signed in
+      const user = userCredentials.user;
+      console.log(`${user.email} is users email 2`);
+      console.log(`${user.uid} is users ID 2`);
+
+    })
+    .catch((error) => {
+      // Handle errors
+ 
+     
+      console.error("Error logging in after sign up.");
+    
+    });
+
+    console.log("made it here");
     const userDocRef = doc(db, "Users", userId);
     await setDoc(userDocRef, {
       email: email,
@@ -14,7 +32,7 @@ const addUserToFirestore = async (userId, email, firstName, lastName) => {
       zipcode: null,
       grade: null
     });
-
+    console.log("made it here 2");
     const assessmentsCollectionRef = collection(userDocRef, "assessments");
     const assessmentDocRef = doc(assessmentsCollectionRef); 
     await setDoc(assessmentDocRef, {
@@ -44,6 +62,7 @@ const addUserToFirestore = async (userId, email, firstName, lastName) => {
       }
       
     });
+    console.log("made it here 3");
     console.log("User successfully added with ID: ", userId);
 
     // TODO: This code below is causing an error

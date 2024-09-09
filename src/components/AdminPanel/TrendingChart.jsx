@@ -18,21 +18,23 @@ function TrendingChart() {
   // Michael Change: let navigate = useNavigate();
 
   let sectors = [
-    { name: "Agriculture", percentage: 10, color: "rgba(255, 154, 100, 1)" },
-    { name: "Sector 2", percentage: 9, color: "rgba(93, 121, 219, 1)" },
-    { name: "Sector 3", percentage: 8, color: "rgba(145, 200, 136, 1)" },
-    { name: "Sector 4", percentage: 7, color: "rgba(221, 191, 117, 1)" },
-    { name: "Sector 5", percentage: 6, color: "rgba(214, 160, 160, 1)" },
-    { name: "Sector 6", percentage: 5, color: "rgba(218, 210, 134, 1)" },
-    { name: "Sector 7", percentage: 4, color: "rgba(239, 118, 79, 1)" },
-    { name: "Sector 8", percentage: 3, color: "rgba(134, 180, 235, 1)" },
-    { name: "Sector 9", percentage: 2, color: "rgba(209, 125, 125, 1)" },
-    { name: "Sector 10", percentage: 1, color: "rgba(248, 213, 213, 1)" },
-    { name: "Sector 11", percentage: 6, color: "rgba(208, 225, 240, 1)" },
-    { name: "Sector 12", percentage: 5, color: "rgba(227, 202, 184, 1)" },
-    { name: "Sector 13", percentage: 7, color: "rgba(71, 183, 73, 1)" },
-    { name: "Sector 14", percentage: 9, color: "rgba(99, 141, 248, 1)" },
-    { name: "Sector 15", percentage: 4, color: "rgba(143, 223, 144, 1)" },
+    { name: "Agriculture", percentage: 9.6, color: "rgba(255, 154, 100, 1)" },
+      { name: "Technology", percentage: 9.2, color: "rgba(93, 121, 219, 1)" },
+      { name: "Healthcare", percentage: 8.1, color: "rgba(145, 200, 136, 1)" },
+      { name: "Finance", percentage: 7.4, color: "rgba(221, 191, 117, 1)" },
+      { name: "Energy", percentage: 6.8, color: "rgba(214, 160, 160, 1)" },
+      { name: "Real Estate", percentage: 5.5, color: "rgba(218, 210, 134, 1)" },
+      { name: "Consumer Goods", percentage: 4.3, color: "rgba(239, 118, 79, 1)" },
+      { name: "Utilities", percentage: 3.6, color: "rgba(134, 180, 235, 1)" },
+      { name: "Transportation", percentage: 2.8, color: "rgba(209, 125, 125, 1)" },
+      { name: "Retail", percentage: 1.9, color: "rgba(248, 213, 213, 1)" },
+      { name: "Manufacturing", percentage: 6.1, color: "rgba(208, 225, 240, 1)" },
+      { name: "Construction", percentage: 5.2, color: "rgba(227, 202, 184, 1)" },
+      { name: "Education", percentage: 7.7, color: "rgba(71, 183, 73, 1)" },
+      { name: "Telecommunications", percentage: 9.4, color: "rgba(99, 141, 248, 1)" },
+      { name: "Agriculture", percentage: 4.6, color: "rgba(143, 223, 144, 1)" }
+  
+  
   ];
 
   sectors = sectors.sort((a, b) => b.percentage - a.percentage);

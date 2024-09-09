@@ -1,5 +1,5 @@
 import { db } from "./firebaseConfig";
-import { collection, query, getDocs, Timestamp } from "firebase/firestore";
+import { collection, query, getDocs} from "firebase/firestore";
 
 export async function getAssessmentsAnalytics() {
     const today = new Date();
@@ -13,7 +13,7 @@ export async function getAssessmentsAnalytics() {
         const careerSnapshot = await getDocs(careerQuery);
         
         let recentCount = 0;
-        let totalCount = querySnapshot.size; // Total number of documents
+        let totalCount = querySnapshot.size; 
         let schoolCounts = {};
         let maxVisitors = 0;
         let mostPopularCareer = "";
@@ -22,19 +22,19 @@ export async function getAssessmentsAnalytics() {
             const data = doc.data();
             const creationDate = data.accountCreationDate?.toDate();
 
-            // Count recent assessments
+            
             if (creationDate >= oneWeekAgo) {
                 recentCount++;
             }
 
-            // Aggregate school counts
-            const schoolName = data.schoolName;
+          
+            const schoolName = data.school;
             if (schoolName) {
                 schoolCounts[schoolName] = (schoolCounts[schoolName] || 0) + 1;
             }
         });
 
-        // Determine the most popular school
+       
         const mostPopularSchool = Object.keys(schoolCounts).reduce((a, b) => schoolCounts[a] > schoolCounts[b] ? a : b, '');
 
         // Determine the most popular career based on the highest visitors count

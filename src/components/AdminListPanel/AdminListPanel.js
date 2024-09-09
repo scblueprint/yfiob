@@ -11,7 +11,7 @@ import {
 	faMagnifyingGlass,
 	faChevronLeft,
 	faChevronRight,
-	faArrowUpFromBracket,
+	
 	faUserPlus,
 	faUserTimes
 

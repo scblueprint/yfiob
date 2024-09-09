@@ -410,9 +410,10 @@
 }
 
 .schoolIcon {
-  background-color: rgba(255, 255, 255, 0);
-  width: 0px;
-  height: 63px;
+  justify-content: space-between;
+  color: #1d8bcb;
+  padding-right: 10px;
+  
  
 }
 
